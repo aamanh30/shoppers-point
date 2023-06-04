@@ -1,11 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FullPageLayoutComponent } from './shared/full-page-layout/full-page-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: FullPageLayoutComponent,
     children: [
       {
         path: 'shop',

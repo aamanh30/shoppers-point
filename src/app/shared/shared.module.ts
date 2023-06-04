@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { FullPageLayoutComponent } from './full-page-layout/full-page-layout.component';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TopbarComponent } from './topbar/topbar.component';
@@ -13,13 +12,17 @@ import { PaginationComponent } from './pagination/pagination.component';
   declarations: [
     HeaderComponent,
     FooterComponent,
-    FullPageLayoutComponent,
     NavbarComponent,
     TopbarComponent,
     RatingComponent,
     PaginationComponent
   ],
   imports: [CommonModule, RouterModule],
-  exports: [FullPageLayoutComponent, RatingComponent, PaginationComponent]
+  exports: [
+    HeaderComponent,
+    FooterComponent,
+    RatingComponent,
+    PaginationComponent
+  ]
 })
 export class SharedModule {}

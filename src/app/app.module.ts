@@ -9,12 +9,14 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    NgbModule,
     StoreModule.forRoot(),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
@@ -26,7 +28,7 @@ import { environment } from '../environments/environment';
     EffectsModule.forRoot(),
     HttpClientModule,
     SharedModule,
-    NgbModule
+    UserModule
   ],
   bootstrap: [AppComponent]
 })
