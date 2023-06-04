@@ -1,0 +1,15 @@
+<div *ngIf="productDetails$ | async as product" class="container-fluid pb-5">
+  <div class="row px-xl-5">
+    <div class="col-lg-5 mb-30">
+      <shoppers-point-carousel [product]="product"></shoppers-point-carousel>
+    </div>
+
+    <div class="col-lg-7 h-auto mb-30">
+      <shoppers-point-specifications
+        [product]="product"></shoppers-point-specifications>
+    </div>
+  </div>
+  <div class="row px-xl-5">
+    <shoppers-point-reviews></shoppers-point-reviews>
+  </div>
+</div>
