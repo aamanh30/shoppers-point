@@ -2,8 +2,8 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   fetchCart,
   fetchCartSuccess,
-  updateCart,
-  updateCartSuccess
+  updateCartSuccess,
+  updateWishlistSuccess
 } from './cart.actions';
 import { CartProduct } from '../models/cart-product';
 
@@ -11,8 +11,8 @@ export const CART_KEY = 'cart';
 
 export interface CartState {
   id: number | undefined;
-  products: Map<number, CartProduct>;
-  wishList: Map<number, CartProduct>;
+  products: CartProduct[];
+  wishlist: number[];
 }
 
 export interface CartPartialState {
@@ -21,25 +21,31 @@ export interface CartPartialState {
 
 export const initialCartState: CartState = {
   id: undefined,
-  products: new Map([]),
-  wishList: new Map([])
+  products: [],
+  wishlist: []
 };
 
 export const reducer = createReducer(
   initialCartState,
   on(
     fetchCart,
-    (state): CartState => ({ ...state, id: undefined, products: new Map([]) })
+    (state): CartState => ({ ...state, id: undefined, products: [] })
   ),
   on(
     fetchCartSuccess,
     (state, { id, products }): CartState => ({ ...state, id, products })
   ),
-  on(updateCartSuccess, (state, { cart }): CartState => {
-    state.products.set(cart.id, cart);
+  on(
+    updateCartSuccess,
+    (state, { products }): CartState => ({
+      ...state,
+      products
+    })
+  ),
+  on(updateWishlistSuccess, (state, { wishlist }): CartState => {
     return {
       ...state,
-      products: state.products
+      wishlist
     };
   })
 );

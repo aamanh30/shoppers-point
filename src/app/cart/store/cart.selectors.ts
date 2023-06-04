@@ -5,20 +5,16 @@ const cartFeatureState = createFeatureSelector<CartState>(CART_KEY);
 
 export const id = createSelector(cartFeatureState, state => state.id);
 
-export const productsMap = createSelector(
+export const products = createSelector(
   cartFeatureState,
   state => state.products
 );
 
-export const products = createSelector(cartFeatureState, state =>
-  Array.from(state.products.values())
-);
-
-export const wishListMap = createSelector(
+export const wishlistMap = createSelector(
   cartFeatureState,
-  state => state.wishList
+  state => state.wishlist
 );
 
-export const wishList = createSelector(cartFeatureState, state =>
-  Array.from(state.wishList.values())
+export const wishlist = createSelector(cartFeatureState, state =>
+  Array.from(state.wishlist.values())
 );

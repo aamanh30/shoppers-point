@@ -1,4 +1,7 @@
-<shoppers-point-header [user]="user$ | async"></shoppers-point-header>
+<shoppers-point-header
+  [user]="user$ | async"
+  [wishlist]="wishlist$ | async"
+  [products]="products$ | async"></shoppers-point-header>
 
 <router-outlet></router-outlet>
 

@@ -41,14 +41,16 @@ export class ShopComponent implements OnInit {
 
   onAddToCart(productId: number): void {
     this.store.dispatch(
-      CartActions.updateCart({ productId, action: CartAction.increment })
+      CartActions.updateCart({
+        productId,
+        action: CartAction.increment,
+        quantity: 1
+      })
     );
   }
 
   onAddToWishlist(productId: number): void {
-    this.store.dispatch(
-      CartActions.updateWishList({ productId, action: CartAction.increment })
-    );
+    this.store.dispatch(CartActions.updateWishlist({ productId }));
   }
 
   onProductsPerPageChanged(productsPerPage: number): void {

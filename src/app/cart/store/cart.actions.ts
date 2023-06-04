@@ -8,14 +8,15 @@ export enum CartActionTypes {
   FetchError = '[Cart] Fetch Error',
   UpdateCart = '[Cart] Update Cart',
   UpdateCartSuccess = '[Cart] Update Cart Success',
-  UpdateWishList = '[Cart] Update Wish List'
+  UpdateWishlist = '[Cart] Update Wish List',
+  UpdateWishlistSuccess = '[Cart] Update Wish List Success'
 }
 
 export const fetchCart = createAction(CartActionTypes.FetchCart);
 
 export const fetchCartSuccess = createAction(
   CartActionTypes.FetchCartSuccess,
-  props<{ id: number; products: Map<number, CartProduct> }>()
+  props<{ id: number; products: CartProduct[] }>()
 );
 
 export const fetchError = createAction(
@@ -25,15 +26,20 @@ export const fetchError = createAction(
 
 export const updateCart = createAction(
   CartActionTypes.UpdateCart,
-  props<{ productId: number; action: CartAction }>()
+  props<{ productId: number; action: CartAction; quantity: number }>()
 );
 
 export const updateCartSuccess = createAction(
   CartActionTypes.UpdateCartSuccess,
-  props<{ cart: CartProduct }>()
+  props<{ products: CartProduct[] }>()
 );
 
-export const updateWishList = createAction(
-  CartActionTypes.UpdateWishList,
-  props<{ productId: number; action: CartAction }>()
+export const updateWishlist = createAction(
+  CartActionTypes.UpdateWishlist,
+  props<{ productId: number }>()
+);
+
+export const updateWishlistSuccess = createAction(
+  CartActionTypes.UpdateWishlistSuccess,
+  props<{ wishlist: number[] }>()
 );

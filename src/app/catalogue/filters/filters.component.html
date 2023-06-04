@@ -8,8 +8,7 @@
     <input
       type="checkbox"
       class="custom-control-input"
-      id="{{ filterId }}-{{ i }}"
-      [checked]="i === 0" />
+      id="{{ filterId }}-{{ i }}" />
     <label
       class="text-capitalize custom-control-label"
       for="{{ filterId }}-{{ i }}"
@@ -37,3 +36,9 @@
     </span>
   </div>
 </div>
+
+<form [formGroup]="form">
+  <formly-form [fields]="fields" [form]="form" [model]="model"></formly-form>
+</form>
+<pre>model: {{ model | json }}</pre>
+<pre>form: {{ form.value | json }}</pre>

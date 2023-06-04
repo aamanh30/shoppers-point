@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { concatMap, map, catchError, filter, tap } from 'rxjs/operators';
+import { concatMap, map, catchError, filter } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
   fetchCart,
   fetchCartSuccess,
   fetchError,
   updateCart,
-  updateCartSuccess
+  updateCartSuccess,
+  updateWishlist,
+  updateWishlistSuccess
 } from './cart.actions';
 import { CartService } from '../services/cart/cart.service';
-import { toCartProduct, toProducts } from './cart.aux';
 import { Store } from '@ngrx/store';
 import { UserFeature, UserSelectors } from '../../user/store';
-import { id, productsMap } from './cart.selectors';
-import { CartAction } from '../models';
+import { products } from './cart.selectors';
+import { CartAction, CartProduct } from '../models';
+import { wishlist } from './cart.selectors';
 
 @Injectable()
 export class CartEffects {
@@ -23,12 +24,9 @@ export class CartEffects {
     this.actions$.pipe(
       ofType(fetchCart),
       concatLatestFrom(() => [this.store.select(UserSelectors.user)]),
-      tap((...a) => console.log(`a`, a)),
       concatMap(([_, user]) => {
         return this.cartService.fetchCart(user?.id ?? 2).pipe(
-          map(({ id, products }) =>
-            fetchCartSuccess({ id, products: toCartProduct(products) })
-          ),
+          map(({ id, products }) => fetchCartSuccess({ id, products })),
           catchError((error: Error) => of(fetchError({ error })))
         );
       })
@@ -38,24 +36,51 @@ export class CartEffects {
   updateCart$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updateCart),
-      concatLatestFrom(() => [
-        this.store.select(productsMap),
-        this.store.select(id)
-      ]),
-      map(([{ productId, action }, productsMap, cartId]) =>
-        updateCartSuccess({
-          cart: {
-            ...productsMap.get(productId),
-            id: productsMap.get(productId)?.id ?? productId,
+      concatLatestFrom(() => [this.store.select(products)]),
+      map(([{ productId, action, quantity }, _products]) => {
+        let cartProducts = _products?.length ? [..._products] : [];
+        let product: CartProduct | undefined;
+        const idx = cartProducts.findIndex(
+          (product: CartProduct) => product.id === productId
+        );
+        if (idx < 0) {
+          product = {
+            id: productId,
+            quantity: action === CartAction.increment ? quantity : -quantity
+          };
+          cartProducts = [...cartProducts, product];
+        } else {
+          product = {
+            ...cartProducts[idx],
             quantity:
-              (productsMap.get(productId)?.quantity ?? 0) + action ===
-              CartAction.increment
-                ? 1
-                : -1
-          }
+              cartProducts[idx].quantity +
+              (action === CartAction.increment ? quantity : -quantity)
+          };
+          cartProducts[idx] = product;
+        }
+
+        if (!product.quantity || product.quantity < 0) {
+          cartProducts = cartProducts.filter(({ id }) => id !== product?.id);
+        }
+
+        return updateCartSuccess({
+          products: cartProducts
+        });
+      })
+    )
+  );
+
+  updateWishList$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateWishlist),
+      concatLatestFrom(() => [this.store.select(wishlist)]),
+      map(([{ productId }, wishlist]) =>
+        updateWishlistSuccess({
+          wishlist: wishlist.includes(productId)
+            ? wishlist.filter(id => id !== productId)
+            : [...wishlist, productId]
         })
-      ),
-      tap((...args) => console.log(`args:`, args))
+      )
     )
   );
 

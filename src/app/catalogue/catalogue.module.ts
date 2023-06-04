@@ -10,6 +10,11 @@ import { CATALOGUE_KEY, catalogueReducer } from './store/catalogue.reducer';
 import { CatalogueEffects } from './store/catalogue.effects';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyModule } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CART_KEY, cartReducer } from '../cart/store/cart.reducer';
+import { CartEffects } from '../cart/store/cart.effects';
 
 const routes: Route[] = [
   {
@@ -30,7 +35,12 @@ const routes: Route[] = [
     RouterModule.forChild(routes),
     StoreModule.forFeature(CATALOGUE_KEY, catalogueReducer),
     EffectsModule.forFeature(CatalogueEffects),
-    SharedModule
+    StoreModule.forFeature(CART_KEY, cartReducer),
+    EffectsModule.forFeature(CartEffects),
+    SharedModule,
+    ReactiveFormsModule,
+    FormlyBootstrapModule,
+    FormlyModule.forRoot()
   ]
 })
 export class CatalogueModule {}

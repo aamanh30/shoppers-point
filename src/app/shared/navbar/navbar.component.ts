@@ -8,4 +8,6 @@ import { User } from '../models';
 })
 export class NavbarComponent {
   @Input() user: User | undefined | null;
+  @Input() wishlist: number[] | undefined | null;
+  @Input() products: number[] | undefined | null;
 }
