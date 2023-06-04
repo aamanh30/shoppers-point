@@ -1,0 +1,15 @@
+.product-item {
+  .product-img {
+    img {
+      height: 25rem;
+    }
+  }
+  .rating-wrap {
+    max-width: 5rem;
+    overflow: hidden;
+    small {
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+}
