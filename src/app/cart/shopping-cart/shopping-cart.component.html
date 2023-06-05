@@ -14,10 +14,8 @@
         </thead>
         <tbody class="align-middle">
           <ng-container *ngIf="products$ | async as products">
-            <tr
-              *ngFor="let product of products"
-              (click)="onProductSlected(product.id)">
-              <td class="text-start">
+            <tr *ngFor="let product of products">
+              <td class="text-start" (click)="onProductSlected(product.id)">
                 <img
                   [src]="product.image"
                   [alt]="product.title"

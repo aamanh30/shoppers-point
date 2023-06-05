@@ -9,7 +9,6 @@ import {
 } from './catalogue.actions';
 import { Product } from '../../shared/models';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
-import { Range } from '../models';
 
 export const CATALOGUE_KEY = 'catalogue';
 

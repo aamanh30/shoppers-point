@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, concatMap, map } from 'rxjs';
 import { CartProduct } from '../../cart-state/models';
 import { CartFeature, CartSelectors } from '../../cart-state';
-import { CatalogueService } from '../../catalogue/services/catalogue/catalogue.service';
+import { CatalogueService } from '../../catalogue-state/services/catalogue/catalogue.service';
 import { Router } from '@angular/router';
 import { Product } from '../../shared/models';
 

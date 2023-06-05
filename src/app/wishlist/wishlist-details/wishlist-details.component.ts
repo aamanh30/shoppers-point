@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, concatMap, map } from 'rxjs';
 import { CartActions, CartFeature, CartSelectors } from '../../cart-state';
 import { Product } from '../../shared/models';
-import { CatalogueService } from '../../catalogue/services/catalogue/catalogue.service';
+import { CatalogueService } from '../../catalogue-state/services/catalogue/catalogue.service';
 import { CartAction } from '../../cart-state/models';
 
 @Component({

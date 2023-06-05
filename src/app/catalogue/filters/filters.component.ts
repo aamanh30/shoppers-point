@@ -1,5 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { CatalogueFilter, FilterType, Range } from '../models';
+import {
+  CatalogueFilter,
+  FilterType,
+  Range
+} from '../../catalogue-state/models';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { UntypedFormGroup } from '@angular/forms';
 

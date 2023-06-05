@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { Product } from '../../shared/models';
-import { Range } from '../models/range';
 import { Store } from '@ngrx/store';
 import {
   CatalogueActions,
   CatalogueFeature,
   CatalogueSelectors
-} from '../store';
+} from '../../catalogue-state';
 import { Router } from '@angular/router';
 import { CartActions } from '../../cart-state';
 import { CartAction } from '../../cart-state/models';
-import { FilterType } from '../models/filter-type.enum';
-import { CatalogueFilter } from '../models/catalogue-filter';
+import {
+  FilterType,
+  CatalogueFilter,
+  Range
+} from '../../catalogue-state/models';
 
 @Component({
   selector: 'shoppers-point-shop',
