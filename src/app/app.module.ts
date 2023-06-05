@@ -9,8 +9,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
-import { UserModule } from './user/user.module';
 import { CartStateModule } from './cart-state/cart-state.module';
+import { UserStateModule } from './user-state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +30,7 @@ import { CartStateModule } from './cart-state/cart-state.module';
     CartStateModule,
     HttpClientModule,
     SharedModule,
-    UserModule
+    UserStateModule
   ],
   bootstrap: [AppComponent]
 })

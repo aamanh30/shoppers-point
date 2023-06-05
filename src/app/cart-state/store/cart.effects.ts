@@ -13,7 +13,7 @@ import {
 } from './cart.actions';
 import { CartService } from '../services/cart/cart.service';
 import { Store } from '@ngrx/store';
-import { UserFeature, UserSelectors } from '../../user/store';
+import { UserFeature, UserSelectors } from '../../user-state';
 import { products } from './cart.selectors';
 import { CartAction, CartProduct } from '../models';
 import { wishlist } from './cart.selectors';

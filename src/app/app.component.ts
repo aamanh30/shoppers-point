@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserSelectors, UserFeature } from './user/store';
+import { UserSelectors, UserFeature } from './user-state';
 import { EMPTY, Observable, map } from 'rxjs';
 import { User } from './shared/models';
 import { CartFeature, CartSelectors } from './cart-state';
