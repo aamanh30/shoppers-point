@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, concatMap, map } from 'rxjs';
-import { CartProduct } from '../models';
-import { CartFeature, CartSelectors } from '../store';
+import { CartProduct } from '../../cart-state/models';
+import { CartFeature, CartSelectors } from '../../cart-state';
 import { CatalogueService } from '../../catalogue/services/catalogue/catalogue.service';
 import { Router } from '@angular/router';
+import { Product } from '../../shared/models';
 
 @Component({
   selector: 'shoppers-point-shopping-cart',
@@ -28,7 +29,7 @@ export class ShoppingCartComponent implements OnInit {
           )
         ).pipe(
           map(cartProducts => {
-            return cartProducts.map(cartProduct => ({
+            return (<Product[]>cartProducts).map(cartProduct => ({
               ...cartProduct,
               quantity: (<CartProduct>(
                 products.find(({ id }) => cartProduct.id === id)

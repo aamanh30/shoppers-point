@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { UserSelectors, UserFeature } from './user/store';
 import { EMPTY, Observable, map } from 'rxjs';
 import { User } from './shared/models';
-import { CartFeature, CartSelectors } from './cart/store';
-import { CartProduct } from './cart/models';
+import { CartFeature, CartSelectors } from './cart-state';
+import { CartProduct } from './cart-state/models';
 
 @Component({
   selector: 'shoppers-point-root',

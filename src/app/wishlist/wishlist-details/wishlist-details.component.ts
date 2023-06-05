@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, concatMap, map } from 'rxjs';
-import { CartActions, CartFeature, CartSelectors } from '../../cart/store';
+import { CartActions, CartFeature, CartSelectors } from '../../cart-state';
 import { Product } from '../../shared/models';
 import { CatalogueService } from '../../catalogue/services/catalogue/catalogue.service';
-import { CartAction } from '../../cart/models';
+import { CartAction } from '../../cart-state/models';
 
 @Component({
   selector: 'shoppers-point-wishlist-details',

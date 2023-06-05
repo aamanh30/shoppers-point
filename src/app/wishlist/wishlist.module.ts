@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Route, RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { CART_KEY, cartReducer } from '../cart/store/cart.reducer';
-import { CartEffects } from '../cart/store/cart.effects';
 import { WishlistDetailsComponent } from './wishlist-details/wishlist-details.component';
+import { CartStateModule } from '../cart-state/cart-state.module';
 
 const routes: Route[] = [
   {
@@ -16,11 +13,6 @@ const routes: Route[] = [
 
 @NgModule({
   declarations: [WishlistDetailsComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    StoreModule.forFeature(CART_KEY, cartReducer),
-    EffectsModule.forFeature(CartEffects)
-  ]
+  imports: [CommonModule, RouterModule.forChild(routes), CartStateModule]
 })
 export class WishlistModule {}

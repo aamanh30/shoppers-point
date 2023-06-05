@@ -10,8 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 import { UserModule } from './user/user.module';
-import { CART_KEY, cartReducer } from './cart/store/cart.reducer';
-import { CartEffects } from './cart/store/cart.effects';
+import { CartStateModule } from './cart-state/cart-state.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,8 +27,7 @@ import { CartEffects } from './cart/store/cart.effects';
       traceLimit: 75
     }),
     EffectsModule.forRoot(),
-    StoreModule.forFeature(CART_KEY, cartReducer),
-    EffectsModule.forFeature(CartEffects),
+    CartStateModule,
     HttpClientModule,
     SharedModule,
     UserModule

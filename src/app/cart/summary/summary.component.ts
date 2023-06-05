@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CartProduct } from '../models';
+import { CartProduct } from '../../cart-state/models';
 
 @Component({
   selector: 'shoppers-point-summary',

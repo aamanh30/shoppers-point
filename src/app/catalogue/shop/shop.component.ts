@@ -9,8 +9,8 @@ import {
   CatalogueSelectors
 } from '../store';
 import { Router } from '@angular/router';
-import { CartActions } from '../../cart/store';
-import { CartAction } from '../../cart/models';
+import { CartActions } from '../../cart-state';
+import { CartAction } from '../../cart-state/models';
 import { FilterType } from '../models/filter-type.enum';
 import { CatalogueFilter } from '../models/catalogue-filter';
 
