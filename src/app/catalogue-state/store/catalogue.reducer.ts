@@ -1,11 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
+  SearchProductsSuccess,
+  clearSearchProducts,
   fetchCategories,
   fetchCategoriesSuccess,
   fetchProductDetails,
   fetchProductDetailsSuccess,
   fetchProducts,
-  fetchProductsSuccess
+  fetchProductsSuccess,
+  searchProducts
 } from './catalogue.actions';
 import { Product } from '../../shared/models';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
@@ -15,6 +18,7 @@ export const CATALOGUE_KEY = 'catalogue';
 export interface CatalogueState extends EntityState<Product> {
   categories: string[];
   productId: number | undefined;
+  products: Product[];
 }
 
 export interface CataloguePartialState extends EntityState<Product> {
@@ -28,7 +32,8 @@ export const catalogueAdapter: EntityAdapter<Product> =
 export const initialCatalogueState: CatalogueState =
   catalogueAdapter.getInitialState({
     categories: [],
-    productId: undefined
+    productId: undefined,
+    products: []
   });
 
 export const reducer = createReducer(
@@ -62,6 +67,21 @@ export const reducer = createReducer(
   on(
     fetchCategoriesSuccess,
     (state, { categories }): CatalogueState => ({ ...state, categories })
+  ),
+  on(
+    searchProducts,
+    clearSearchProducts,
+    (state): CatalogueState => ({
+      ...state,
+      products: []
+    })
+  ),
+  on(
+    SearchProductsSuccess,
+    (state, { products }): CatalogueState => ({
+      ...state,
+      products
+    })
   )
 );
 

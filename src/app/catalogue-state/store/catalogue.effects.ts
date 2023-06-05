@@ -9,9 +9,12 @@ import {
   fetchProductDetails,
   fetchProductDetailsSuccess,
   fetchCategories,
-  fetchCategoriesSuccess
+  fetchCategoriesSuccess,
+  searchProducts,
+  SearchProductsSuccess
 } from './catalogue.actions';
 import { CatalogueService } from '../services/catalogue/catalogue.service';
+import { toSearchedProducts } from './catalogue.aux';
 
 @Injectable()
 export class CatalogueEffects {
@@ -45,6 +48,22 @@ export class CatalogueEffects {
       concatMap(() =>
         this.catalogueService.fetchCategories().pipe(
           map(categories => fetchCategoriesSuccess({ categories })),
+          catchError((error: Error) => of(fetchError({ error })))
+        )
+      )
+    )
+  );
+
+  searchProducts$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(searchProducts),
+      concatMap(({ search }) =>
+        this.catalogueService.fetchProducts().pipe(
+          map(products =>
+            SearchProductsSuccess({
+              products: toSearchedProducts(products, search)
+            })
+          ),
           catchError((error: Error) => of(fetchError({ error })))
         )
       )

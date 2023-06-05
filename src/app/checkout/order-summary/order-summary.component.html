@@ -8,7 +8,7 @@
       *ngFor="let product of products"
       class="d-flex justify-content-between products">
       <p class="product-title" [title]="product.title">{{ product.title }}</p>
-      <p class="text-end">{{ product.price }}</p>
+      <p class="text-end">{{ product.price | currency }}</p>
       <p class="text-end">{{ product.quantity }}</p>
     </div>
     <div *ngIf="!products?.length" class="d-block">
@@ -22,7 +22,7 @@
     </div>
     <div class="d-flex justify-content-between">
       <h6 class="font-weight-medium">Shipping</h6>
-      <h6 class="font-weight-medium">{{ shipping }}</h6>
+      <h6 class="font-weight-medium">{{ shipping | currency }}</h6>
     </div>
   </div>
   <div class="pt-2">
