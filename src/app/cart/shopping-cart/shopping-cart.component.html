@@ -13,166 +13,54 @@
           </tr>
         </thead>
         <tbody class="align-middle">
-          <tr>
-            <td class="align-middle">
-              <img src="img/product-1.jpg" alt="" style="width: 50px" /> Product
-              Name
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <div class="input-group quantity mx-auto" style="width: 100px">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-minus">
-                    <i class="fa fa-minus"></i>
-                  </button>
+          <ng-container *ngIf="products$ | async as products">
+            <tr *ngFor="let product of products">
+              <td class="text-start" (click)="onProductSlected(product.id)">
+                <img
+                  [src]="product.image"
+                  [alt]="product.title"
+                  style="width: 50px" />
+                {{ product.title | titlecase }}
+              </td>
+              <td class="align-middle">{{ product.price | currency }}</td>
+              <td class="align-middle">
+                <div class="input-group quantity mx-auto" style="width: 100px">
+                  <div class="input-group-btn">
+                    <button class="btn btn-sm btn-primary btn-minus">
+                      <i class="fa fa-minus"></i>
+                    </button>
+                  </div>
+                  <input
+                    type="text"
+                    class="form-control form-control-sm bg-secondary border-0 text-center"
+                    [value]="product.quantity" />
+                  <div class="input-group-btn">
+                    <button class="btn btn-sm btn-primary btn-plus">
+                      <i class="fa fa-plus"></i>
+                    </button>
+                  </div>
                 </div>
-                <input
-                  type="text"
-                  class="form-control form-control-sm bg-secondary border-0 text-center"
-                  value="1" />
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-plus">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <button class="btn btn-sm btn-danger">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="align-middle">
-              <img src="img/product-2.jpg" alt="" style="width: 50px" /> Product
-              Name
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <div class="input-group quantity mx-auto" style="width: 100px">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-minus">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                </div>
-                <input
-                  type="text"
-                  class="form-control form-control-sm bg-secondary border-0 text-center"
-                  value="1" />
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-plus">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <button class="btn btn-sm btn-danger">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="align-middle">
-              <img src="img/product-3.jpg" alt="" style="width: 50px" /> Product
-              Name
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <div class="input-group quantity mx-auto" style="width: 100px">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-minus">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                </div>
-                <input
-                  type="text"
-                  class="form-control form-control-sm bg-secondary border-0 text-center"
-                  value="1" />
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-plus">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <button class="btn btn-sm btn-danger">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="align-middle">
-              <img src="img/product-4.jpg" alt="" style="width: 50px" /> Product
-              Name
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <div class="input-group quantity mx-auto" style="width: 100px">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-minus">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                </div>
-                <input
-                  type="text"
-                  class="form-control form-control-sm bg-secondary border-0 text-center"
-                  value="1" />
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-plus">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <button class="btn btn-sm btn-danger">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td class="align-middle">
-              <img src="img/product-5.jpg" alt="" style="width: 50px" /> Product
-              Name
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <div class="input-group quantity mx-auto" style="width: 100px">
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-minus">
-                    <i class="fa fa-minus"></i>
-                  </button>
-                </div>
-                <input
-                  type="text"
-                  class="form-control form-control-sm bg-secondary border-0 text-center"
-                  value="1" />
-                <div class="input-group-btn">
-                  <button class="btn btn-sm btn-primary btn-plus">
-                    <i class="fa fa-plus"></i>
-                  </button>
-                </div>
-              </div>
-            </td>
-            <td class="align-middle">$150</td>
-            <td class="align-middle">
-              <button class="btn btn-sm btn-danger">
-                <i class="fa fa-times"></i>
-              </button>
-            </td>
+              </td>
+              <td class="align-middle">
+                {{ (product.price ?? 0) * product.quantity | currency }}
+              </td>
+              <td class="align-middle">
+                <button class="btn btn-sm btn-danger">
+                  <i class="fa fa-times"></i>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+          <tr *ngIf="!(products$ | async)?.length">
+            <td class="align-middle" [colSpan]="5">No items added to cart</td>
           </tr>
         </tbody>
       </table>
     </div>
     <div class="col-lg-4">
-      <shoppers-point-summary></shoppers-point-summary>
+      <shoppers-point-summary
+        [products]="products$ | async"
+        (checkout)="onCheckout()"></shoppers-point-summary>
     </div>
   </div>
 </div>

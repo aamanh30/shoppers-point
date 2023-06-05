@@ -1,1 +1,24 @@
-<p>main works!</p>
+<div class="container-fluid mb-3">
+  <shoppers-point-main-carousel></shoppers-point-main-carousel>
+</div>
+
+<div class="container-fluid pt-5">
+  <shoppers-point-features></shoppers-point-features>
+</div>
+
+<div class="container-fluid pt-5">
+  <shoppers-point-categories
+    [categories]="categories$ | async"></shoppers-point-categories>
+</div>
+
+<div class="container-fluid pt-5 pb-3">
+  <shoppers-point-featured-products></shoppers-point-featured-products>
+</div>
+
+<div class="container-fluid pt-5 pb-3">
+  <shoppers-point-offers></shoppers-point-offers>
+</div>
+
+<div class="container-fluid pt-5 pb-3">
+  <shoppers-point-new-arrivals></shoppers-point-new-arrivals>
+</div>

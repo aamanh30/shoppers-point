@@ -1,18 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { Product } from '../../shared/models';
-import { Range } from '../models/range';
 import { Store } from '@ngrx/store';
 import {
   CatalogueActions,
   CatalogueFeature,
   CatalogueSelectors
-} from '../store';
+} from '../../catalogue-state';
 import { Router } from '@angular/router';
-import { CartActions } from '../../cart/store';
-import { CartAction } from '../../cart/models';
-import { FilterType } from '../models/filter-type.enum';
-import { CatalogueFilter } from '../models/catalogue-filter';
+import { CartActions } from '../../cart-state';
+import { CartAction } from '../../cart-state/models';
+import {
+  FilterType,
+  CatalogueFilter,
+  Range
+} from '../../catalogue-state/models';
 
 @Component({
   selector: 'shoppers-point-shop',
@@ -41,14 +43,16 @@ export class ShopComponent implements OnInit {
 
   onAddToCart(productId: number): void {
     this.store.dispatch(
-      CartActions.updateCart({ productId, action: CartAction.increment })
+      CartActions.updateCart({
+        productId,
+        action: CartAction.increment,
+        quantity: 1
+      })
     );
   }
 
   onAddToWishlist(productId: number): void {
-    this.store.dispatch(
-      CartActions.updateWishList({ productId, action: CartAction.increment })
-    );
+    this.store.dispatch(CartActions.updateWishlist({ productId }));
   }
 
   onProductsPerPageChanged(productsPerPage: number): void {

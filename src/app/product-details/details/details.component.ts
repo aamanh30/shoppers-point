@@ -6,7 +6,7 @@ import {
   CatalogueActions,
   CatalogueFeature,
   CatalogueSelectors
-} from '../../catalogue/store';
+} from '../../catalogue-state';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
