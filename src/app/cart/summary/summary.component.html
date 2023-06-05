@@ -30,8 +30,9 @@
       <h5>{{ total + shipping | currency }}</h5>
     </div>
     <button
-      disabled
-      class="btn btn-block btn-primary font-weight-bold my-3 py-3">
+      class="btn btn-block btn-primary font-weight-bold my-3 py-3"
+      [disabled]="!products?.length"
+      (click)="onCheckout()">
       Proceed To Checkout
     </button>
   </div>

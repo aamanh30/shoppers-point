@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartProduct } from '../../cart-state/models';
 
 @Component({
@@ -7,6 +7,7 @@ import { CartProduct } from '../../cart-state/models';
   styleUrls: ['./summary.component.scss']
 })
 export class SummaryComponent {
+  @Output() checkout: EventEmitter<void> = new EventEmitter<void>();
   get products() {
     return this.#products;
   }
@@ -22,4 +23,8 @@ export class SummaryComponent {
   }
   shipping = 10;
   #products: CartProduct[] | undefined | null;
+
+  onCheckout(): void {
+    this.checkout.emit();
+  }
 }

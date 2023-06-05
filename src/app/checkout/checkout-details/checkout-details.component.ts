@@ -1,22 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, concatMap, map } from 'rxjs';
 import { CartProduct } from '../../cart-state/models';
 import { CartFeature, CartSelectors } from '../../cart-state';
 import { CatalogueService } from '../../catalogue-state/services/catalogue/catalogue.service';
-import { Router } from '@angular/router';
 import { Product } from '../../shared/models';
 
 @Component({
-  selector: 'shoppers-point-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  selector: 'shoppers-point-checkout-details',
+  templateUrl: './checkout-details.component.html',
+  styleUrls: ['./checkout-details.component.scss']
 })
-export class ShoppingCartComponent implements OnInit {
+export class CheckoutDetailsComponent {
   products$: Observable<CartProduct[] | undefined> = EMPTY;
   constructor(
     private store: Store<CartFeature.CartPartialState>,
-    private router: Router,
     private catalogueService: CatalogueService
   ) {}
 
@@ -39,13 +37,5 @@ export class ShoppingCartComponent implements OnInit {
         )
       )
     );
-  }
-
-  onProductSlected(productId: number): void {
-    this.router.navigate([`/product-details/${productId}`]);
-  }
-
-  onCheckout(): void {
-    this.router.navigate(['/checkout']);
   }
 }
