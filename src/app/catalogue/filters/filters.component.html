@@ -1,0 +1,38 @@
+<h5 class="section-title position-relative text-uppercase mb-3">
+  <span class="bg-secondary pr-3">{{ heading }}</span>
+</h5>
+<div *ngIf="filterType === FilterType.list" class="bg-light p-4 mb-30">
+  <div
+    *ngFor="let filter of filters; let i = index"
+    class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+    <input
+      type="checkbox"
+      class="custom-control-input"
+      id="{{ filterId }}-{{ i }}" />
+    <label
+      class="text-capitalize custom-control-label"
+      for="{{ filterId }}-{{ i }}"
+      [innerHTML]="filter.label"></label>
+    <span class="badge border font-weight-normal quantity-count">{{
+      filter.quantity
+    }}</span>
+  </div>
+</div>
+
+<div *ngIf="filterType === FilterType.range" class="bg-light p-4 mb-30">
+  <div
+    *ngIf="range"
+    class="custom-control custom-checkbox align-items-center justify-content-between mb-3">
+    <input
+      type="range"
+      class="form-range"
+      id="price-range"
+      step="1"
+      [min]="range.min"
+      [max]="range.max" />
+    <span class="d-flex justify-content-between mb-30">
+      <small class="font-weight-bold">${{ range.min | number }}</small>
+      <small class="font-weight-bold">${{ range.max | number }}</small>
+    </span>
+  </div>
+</div>

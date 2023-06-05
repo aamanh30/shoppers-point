@@ -1,0 +1,38 @@
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <!-- Shop Sidebar Start -->
+    <div class="col-lg-3 col-md-4">
+      <!-- Category Start -->
+      <shoppers-point-filters
+        heading="Filter by category"
+        [filters]="categories$ | async"></shoppers-point-filters>
+      <!-- Category End -->
+
+      <!-- Rating Start -->
+      <shoppers-point-filters
+        heading="Filter by rating"
+        [filters]="ratings$ | async"></shoppers-point-filters>
+      <!-- Rating End -->
+
+      <!-- Price Start -->
+      <shoppers-point-filters
+        heading="Filter by price"
+        [filterType]="FilterType.range"
+        [range]="range$ | async"></shoppers-point-filters>
+      <!-- Price End -->
+    </div>
+    <!-- Shop Sidebar End -->
+
+    <!-- Shop Product Start -->
+    <div class="col-lg-9 col-md-8">
+      <shoppers-point-products
+        [products]="(products$ | async) ?? []"
+        [productsPerPage]="productsPerPage"
+        (addToCart)="onAddToCart($event)"
+        (addToWishlist)="onAddToWishlist($event)"
+        (productsPerPageChanged)="onProductsPerPageChanged($event)"
+        (viewProduct)="onViewProduct($event)"></shoppers-point-products>
+    </div>
+    <!-- Shop Product End -->
+  </div>
+</div>

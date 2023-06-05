@@ -1,0 +1,11 @@
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-lg-8">
+      <shoppers-point-billing-form></shoppers-point-billing-form>
+    </div>
+    <div class="col-lg-4">
+      <shoppers-point-order-summary
+        [products]="products$ | async"></shoppers-point-order-summary>
+    </div>
+  </div>
+</div>

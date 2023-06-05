@@ -1,0 +1,20 @@
+<div
+  *ngIf="product"
+  id="product-carousel"
+  class="carousel slide"
+  data-ride="carousel">
+  <div class="carousel-inner bg-light">
+    <div
+      *ngFor="let index of indices"
+      class="carousel-item"
+      [ngClass]="{ active: index === activeIndex }">
+      <img class="w-100 h-100" [src]="product.image" [alt]="product.title" />
+    </div>
+  </div>
+  <a class="carousel-control-prev" data-slide="prev" (click)="onPrev()">
+    <i class="fa fa-2x fa-angle-left text-dark"></i>
+  </a>
+  <a class="carousel-control-next" data-slide="next" (click)="onNext()">
+    <i class="fa fa-2x fa-angle-right text-dark"></i>
+  </a>
+</div>
