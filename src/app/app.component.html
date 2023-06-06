@@ -1,7 +1,10 @@
 <shoppers-point-header
   [user]="user$ | async"
   [wishlist]="wishlist$ | async"
-  [products]="products$ | async"></shoppers-point-header>
+  [productQuantities]="productQuantities$ | async"
+  [products]="products$ | async"
+  (search)="onSearch($event)"
+  (selectProduct)="onSelectProduct($event)"></shoppers-point-header>
 
 <router-outlet></router-outlet>
 

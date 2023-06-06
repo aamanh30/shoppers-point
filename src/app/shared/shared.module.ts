@@ -7,6 +7,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TopbarComponent } from './topbar/topbar.component';
 import { RatingComponent } from './rating/rating.component';
 import { PaginationComponent } from './pagination/pagination.component';
+import { FormlyModule } from '@ngx-formly/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,13 @@ import { PaginationComponent } from './pagination/pagination.component';
     RatingComponent,
     PaginationComponent
   ],
-  imports: [CommonModule, RouterModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ReactiveFormsModule,
+    FormlyBootstrapModule,
+    FormlyModule.forRoot()
+  ],
   exports: [
     HeaderComponent,
     FooterComponent,
