@@ -45,3 +45,8 @@ export const range = createSelector(catalogueFeatureState, state => {
     max: Math.max(...prices)
   };
 });
+
+export const searchProducts = createSelector(
+  catalogueFeatureState,
+  state => state.products
+);

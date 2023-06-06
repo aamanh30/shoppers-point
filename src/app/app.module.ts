@@ -11,6 +11,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 import { CartStateModule } from './cart-state/cart-state.module';
 import { UserStateModule } from './user-state';
+import { CatalogueStateModule } from './catalogue-state';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { UserStateModule } from './user-state';
     }),
     EffectsModule.forRoot(),
     CartStateModule,
+    CatalogueStateModule,
     HttpClientModule,
     SharedModule,
     UserStateModule

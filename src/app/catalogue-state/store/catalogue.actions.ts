@@ -8,6 +8,9 @@ export enum CatalogueActionTypes {
   FetchProductDetailsSuccess = '[Catalogue] Fetch Product Details Success',
   FetchCategories = '[Catalogue] Fetch Categories',
   FetchCategoriesSuccess = '[Catalogue] Fetch Categories Success',
+  SearchProducts = '[Catalogue] Search Products',
+  SearchProductsSuccess = '[Catalogue] Search Products Success',
+  ClearSearchProducts = '[Catalogue] Clear Search Products',
   FetchError = '[Catalogue] Fetch Error'
 }
 
@@ -35,6 +38,20 @@ export const fetchCategories = createAction(
 export const fetchCategoriesSuccess = createAction(
   CatalogueActionTypes.FetchCategoriesSuccess,
   props<{ categories: string[] }>()
+);
+
+export const searchProducts = createAction(
+  CatalogueActionTypes.SearchProducts,
+  props<{ search: string }>()
+);
+
+export const SearchProductsSuccess = createAction(
+  CatalogueActionTypes.SearchProductsSuccess,
+  props<{ products: Product[] }>()
+);
+
+export const clearSearchProducts = createAction(
+  CatalogueActionTypes.ClearSearchProducts
 );
 
 export const fetchError = createAction(
