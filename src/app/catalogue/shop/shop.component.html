@@ -1,24 +1,36 @@
 <div class="container-fluid">
   <div class="row px-xl-5">
     <!-- Shop Sidebar Start -->
-    <div class="col-lg-3 col-md-4">
+    <div *ngIf="{ filters: filters$ | async } as ctx" class="col-lg-3 col-md-4">
       <!-- Category Start -->
       <shoppers-point-filters
         heading="Filter by category"
-        [filters]="categories$ | async"></shoppers-point-filters>
+        [filters]="ctx.filters?.categories"
+        [filterOptions]="categories$ | async"
+        (filterChanged)="
+          onFiltersChanged($event, 'categories')
+        "></shoppers-point-filters>
       <!-- Category End -->
 
       <!-- Rating Start -->
       <shoppers-point-filters
         heading="Filter by rating"
-        [filters]="ratings$ | async"></shoppers-point-filters>
+        [filters]="ctx.filters?.ratings"
+        [filterOptions]="ratings$ | async"
+        (filterChanged)="
+          onFiltersChanged($event, 'ratings')
+        "></shoppers-point-filters>
       <!-- Rating End -->
 
       <!-- Price Start -->
       <shoppers-point-filters
         heading="Filter by price"
         [filterType]="FilterType.range"
-        [range]="range$ | async"></shoppers-point-filters>
+        [filters]="ctx.filters?.range"
+        [range]="range$ | async"
+        (filterChanged)="
+          onFiltersChanged($event, 'range')
+        "></shoppers-point-filters>
       <!-- Price End -->
     </div>
     <!-- Shop Sidebar End -->

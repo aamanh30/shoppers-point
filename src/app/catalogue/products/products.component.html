@@ -2,37 +2,28 @@
   <div class="col-12 pb-1">
     <div class="d-flex align-items-center justify-content-end mb-4">
       <div class="ml-2">
-        <div class="btn-group">
-          <button
-            type="button"
-            class="btn btn-sm btn-light dropdown-toggle"
-            data-toggle="dropdown">
-            Sorting
-          </button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#">Latest</a>
-            <a class="dropdown-item" href="#">Popularity</a>
-            <a class="dropdown-item" href="#">Best Rating</a>
-          </div>
-        </div>
         <div class="btn-group ml-2">
-          <button
+          <button type="button" class="btn btn-sm btn-light" disabled>
+            Showing: {{ products ? products.length : 0 }} Products
+          </button>
+          <!-- <button
             type="button"
             class="btn btn-sm btn-light dropdown-toggle"
-            data-toggle="dropdown">
+            data-toggle="dropdown"
+            (click)="onDropdownToggle()">
             Showing: {{ productsPerPage }}
           </button>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" (change)="onProductsPerPageChanged(5)"
-              >5</a
-            >
-            <a class="dropdown-item" (change)="onProductsPerPageChanged(10)"
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            [ngClass]="{ 'd-block': expanded }">
+            <a class="dropdown-item" (click)="onProductsPerPageChanged(5)">5</a>
+            <a class="dropdown-item" (click)="onProductsPerPageChanged(10)"
               >10</a
             >
-            <a class="dropdown-item" (change)="onProductsPerPageChanged(20)"
+            <a class="dropdown-item" (click)="onProductsPerPageChanged(20)"
               >20</a
             >
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -44,9 +35,15 @@
       (addToWishlist)="onAddToWishlist($event)"
       (viewProduct)="onViewProduct($event)"></shoppers-point-product-card>
   </div>
-  <div class="col-12">
+  <div *ngIf="products?.length" class="col-12">
     <shoppers-point-pagination
       [products]="products"
       [productsPerPage]="productsPerPage"></shoppers-point-pagination>
+  </div>
+
+  <div *ngIf="!products?.length" class="col-12">
+    <h5 class="position-relative text-uppercase text-center mb-3">
+      <span>No Products Found</span>
+    </h5>
   </div>
 </div>

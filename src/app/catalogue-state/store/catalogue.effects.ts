@@ -11,7 +11,7 @@ import {
   fetchCategories,
   fetchCategoriesSuccess,
   searchProducts,
-  SearchProductsSuccess
+  searchProductsSuccess
 } from './catalogue.actions';
 import { CatalogueService } from '../services/catalogue/catalogue.service';
 import { toSearchedProducts } from './catalogue.aux';
@@ -60,7 +60,7 @@ export class CatalogueEffects {
       concatMap(({ search }) =>
         this.catalogueService.fetchProducts().pipe(
           map(products =>
-            SearchProductsSuccess({
+            searchProductsSuccess({
               products: toSearchedProducts(products, search)
             })
           ),
