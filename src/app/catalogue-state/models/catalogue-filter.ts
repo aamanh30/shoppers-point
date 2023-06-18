@@ -1,4 +1,6 @@
 export interface CatalogueFilter {
-  label: string;
+  label: string | number;
+  optionLabel: string;
   quantity: number;
+  checked?: boolean;
 }
