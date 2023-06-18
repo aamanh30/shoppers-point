@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Product } from '../../shared/models';
+import { CatalogueFilterKey } from '../models/catalogue-filter-key';
 
 export enum CatalogueActionTypes {
   FetchProducts = '[Catalogue] Fetch Products',
@@ -11,7 +12,9 @@ export enum CatalogueActionTypes {
   SearchProducts = '[Catalogue] Search Products',
   SearchProductsSuccess = '[Catalogue] Search Products Success',
   ClearSearchProducts = '[Catalogue] Clear Search Products',
-  FetchError = '[Catalogue] Fetch Error'
+  FetchError = '[Catalogue] Fetch Error',
+  SetFilters = '[Catalogue] Set Filters',
+  ClearFilters = '[Catalogue] Clear Filters'
 }
 
 export const fetchProducts = createAction(CatalogueActionTypes.FetchProducts);
@@ -45,7 +48,7 @@ export const searchProducts = createAction(
   props<{ search: string }>()
 );
 
-export const SearchProductsSuccess = createAction(
+export const searchProductsSuccess = createAction(
   CatalogueActionTypes.SearchProductsSuccess,
   props<{ products: Product[] }>()
 );
@@ -58,3 +61,15 @@ export const fetchError = createAction(
   CatalogueActionTypes.FetchError,
   props<{ error: Partial<Error> }>()
 );
+
+export const setFilters = createAction(
+  CatalogueActionTypes.SetFilters,
+  props<{
+    label: string | number;
+    key: CatalogueFilterKey;
+    checked?: boolean;
+    value?: string;
+  }>()
+);
+
+export const clearFilters = createAction(CatalogueActionTypes.ClearFilters);

@@ -15,6 +15,16 @@ export class ProductsComponent {
   @Output() productsPerPageChanged: EventEmitter<number> =
     new EventEmitter<number>();
 
+  get expanded() {
+    return this.#expanded;
+  }
+
+  set expanded(expanded: boolean) {
+    this.#expanded = expanded;
+  }
+
+  #expanded = false;
+
   onAddToCart(id: number): void {
     this.addToCart.emit(id);
   }
@@ -25,9 +35,14 @@ export class ProductsComponent {
 
   onProductsPerPageChanged(count: number): void {
     this.productsPerPageChanged.emit(count);
+    this.expanded = false;
   }
 
   onViewProduct(id: number): void {
     this.viewProduct.emit(id);
+  }
+
+  onDropdownToggle(): void {
+    this.expanded = !this.expanded;
   }
 }

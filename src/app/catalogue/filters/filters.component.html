@@ -3,16 +3,19 @@
 </h5>
 <div *ngIf="filterType === FilterType.list" class="bg-light p-4 mb-30">
   <div
-    *ngFor="let filter of filters; let i = index"
+    *ngFor="let filter of filterOptions; let i = index"
     class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
     <input
+      #checkboxElement
       type="checkbox"
       class="custom-control-input"
-      id="{{ filterId }}-{{ i }}" />
+      id="{{ filterId }}-{{ i }}"
+      [checked]="filter.checked"
+      (change)="onFilterCheck(checkboxElement, filter.label)" />
     <label
       class="text-capitalize custom-control-label"
       for="{{ filterId }}-{{ i }}"
-      [innerHTML]="filter.label"></label>
+      [innerHTML]="filter.optionLabel"></label>
     <span class="badge border font-weight-normal quantity-count">{{
       filter.quantity
     }}</span>
@@ -24,12 +27,15 @@
     *ngIf="range"
     class="custom-control custom-checkbox align-items-center justify-content-between mb-3">
     <input
+      #rangeElement
       type="range"
       class="form-range"
       id="price-range"
       step="1"
+      title="{{ filters?.[0] | currency }}"
       [min]="range.min"
-      [max]="range.max" />
+      [max]="range.max"
+      (input)="onFilterChange(rangeElement, 'range')" />
     <span class="d-flex justify-content-between mb-30">
       <small class="font-weight-bold">${{ range.min | number }}</small>
       <small class="font-weight-bold">${{ range.max | number }}</small>

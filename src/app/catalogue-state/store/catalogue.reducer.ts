@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import {
-  SearchProductsSuccess,
+  clearFilters,
   clearSearchProducts,
   fetchCategories,
   fetchCategoriesSuccess,
@@ -8,10 +8,13 @@ import {
   fetchProductDetailsSuccess,
   fetchProducts,
   fetchProductsSuccess,
-  searchProducts
+  searchProducts,
+  searchProductsSuccess,
+  setFilters
 } from './catalogue.actions';
 import { Product } from '../../shared/models';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { CatalogueFilterKey, CatalogueFilters } from '../models';
 
 export const CATALOGUE_KEY = 'catalogue';
 
@@ -19,6 +22,7 @@ export interface CatalogueState extends EntityState<Product> {
   categories: string[];
   productId: number | undefined;
   products: Product[];
+  filters: CatalogueFilters | undefined;
 }
 
 export interface CataloguePartialState extends EntityState<Product> {
@@ -33,7 +37,8 @@ export const initialCatalogueState: CatalogueState =
   catalogueAdapter.getInitialState({
     categories: [],
     productId: undefined,
-    products: []
+    products: [],
+    filters: undefined
   });
 
 export const reducer = createReducer(
@@ -77,10 +82,48 @@ export const reducer = createReducer(
     })
   ),
   on(
-    SearchProductsSuccess,
+    searchProductsSuccess,
     (state, { products }): CatalogueState => ({
       ...state,
       products
+    })
+  ),
+  on(setFilters, (state, { label, key, checked, value }): CatalogueState => {
+    if (checked !== undefined && checked !== null) {
+      return {
+        ...state,
+        filters: checked
+          ? {
+              ...state.filters,
+              [key]: Array.from(
+                new Set([
+                  ...((state.filters ?? {})[<CatalogueFilterKey>key] ?? []),
+                  label
+                ])
+              )
+            }
+          : {
+              ...state.filters,
+              [key]: [
+                ...((state.filters ?? {})[<CatalogueFilterKey>key] ?? [])
+              ].filter(filterLabel => filterLabel !== label)
+            }
+      };
+    }
+
+    return {
+      ...state,
+      filters: {
+        ...state.filters,
+        [key]: [value]
+      }
+    };
+  }),
+  on(
+    clearFilters,
+    (state): CatalogueState => ({
+      ...state,
+      filters: undefined
     })
   )
 );
