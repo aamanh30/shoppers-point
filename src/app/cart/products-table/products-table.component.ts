@@ -9,6 +9,7 @@ import { CartProduct } from '../../cart-state/models';
 export class ProductsTableComponent {
   @Input() products: CartProduct[] = [];
   @Output() productSelected: EventEmitter<number> = new EventEmitter<number>();
+  @Output() productRemoved: EventEmitter<number> = new EventEmitter<number>();
   @Output() updateCartQuantity: EventEmitter<CartProduct> =
     new EventEmitter<CartProduct>();
 
@@ -28,5 +29,9 @@ export class ProductsTableComponent {
       id: this.products[index].id,
       quantity: this.products[index].quantity + 1
     });
+  }
+
+  onProductRemoved(id: number): void {
+    this.productRemoved.emit(id);
   }
 }

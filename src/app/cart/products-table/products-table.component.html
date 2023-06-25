@@ -47,7 +47,9 @@
           {{ (product.price ?? 0) * product.quantity | currency }}
         </td>
         <td class="align-middle">
-          <button class="btn btn-sm btn-danger">
+          <button
+            class="btn btn-sm btn-danger"
+            (click)="onProductRemoved(product.id)">
             <i class="fa fa-times"></i>
           </button>
         </td>

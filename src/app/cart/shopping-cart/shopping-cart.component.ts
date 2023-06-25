@@ -45,4 +45,8 @@ export class ShoppingCartComponent implements OnInit {
   onUpdateCartQuantity(product: CartProduct): void {
     this.store.dispatch(CartActions.updateProductQuantity(product));
   }
+
+  onProductRemoved(id: number): void {
+    this.store.dispatch(CartActions.removeProduct({ id }));
+  }
 }

@@ -4,6 +4,7 @@
       <shoppers-point-products-table
         [products]="(products$ | async) ?? []"
         (productSelected)="onProductSelected($event)"
+        (productRemoved)="onProductRemoved($event)"
         (updateCartQuantity)="
           onUpdateCartQuantity($event)
         "></shoppers-point-products-table>

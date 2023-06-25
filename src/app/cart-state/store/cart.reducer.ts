@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   fetchCart,
   fetchCartSuccess,
+  removeProduct,
   updateCartSuccess,
   updateProductQuantity,
   updateWishlistSuccess
@@ -67,7 +68,14 @@ export const reducer = createReducer(
       ...state,
       wishlist
     };
-  })
+  }),
+  on(
+    removeProduct,
+    (state, { id }): CartState => ({
+      ...state,
+      products: state.products.filter(product => product.id !== id)
+    })
+  )
 );
 
 export const cartReducer = (state: CartState | undefined, action: Action) =>

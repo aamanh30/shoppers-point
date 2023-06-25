@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, map } from 'rxjs';
@@ -17,7 +17,8 @@ import { SelectOption } from '../../shared/models';
 @Component({
   selector: 'shoppers-point-checkout-details',
   templateUrl: './checkout-details.component.html',
-  styleUrls: ['./checkout-details.component.scss']
+  styleUrls: ['./checkout-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckoutDetailsComponent {
   products$: Observable<CartProduct[] | undefined> = EMPTY;
