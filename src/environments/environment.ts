@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BASE_PATH: 'https://fakestoreapi.com/'
+  BASE_PATH: '/assets/data/'
 };
 
 /*
