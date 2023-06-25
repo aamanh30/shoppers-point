@@ -319,3 +319,9 @@ h6 {
     transform: translateY(-15px);
   }
 }
+
+.form-label {
+  span[aria-hidden='true'] {
+    color: #ff0000;
+  }
+}
