@@ -45,6 +45,11 @@ export const products = createSelector(catalogueFeatureState, state => {
   return products;
 });
 
+export const allProductsLookUp = createSelector(
+  catalogueFeatureState,
+  selectEntities
+);
+
 export const productDetails = createSelector(catalogueFeatureState, state => {
   const entities = selectEntities(state);
   return state.productId && entities ? entities[state.productId] : undefined;

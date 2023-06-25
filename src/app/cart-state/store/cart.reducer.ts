@@ -2,7 +2,9 @@ import { Action, createReducer, on } from '@ngrx/store';
 import {
   fetchCart,
   fetchCartSuccess,
+  removeProduct,
   updateCartSuccess,
+  updateProductQuantity,
   updateWishlistSuccess
 } from './cart.actions';
 import { CartProduct } from '../models/cart-product';
@@ -42,12 +44,38 @@ export const reducer = createReducer(
       products
     })
   ),
+  on(updateProductQuantity, (state, { id, quantity }): CartState => {
+    const productIndex = state.products.findIndex(product => product.id === id);
+    if (productIndex >= 0) {
+      const products = [...state.products];
+      products[productIndex] = {
+        id,
+        quantity
+      };
+
+      return {
+        ...state,
+        products
+      };
+    }
+    return {
+      ...state,
+      products: [...state.products, { id, quantity }]
+    };
+  }),
   on(updateWishlistSuccess, (state, { wishlist }): CartState => {
     return {
       ...state,
       wishlist
     };
-  })
+  }),
+  on(
+    removeProduct,
+    (state, { id }): CartState => ({
+      ...state,
+      products: state.products.filter(product => product.id !== id)
+    })
+  )
 );
 
 export const cartReducer = (state: CartState | undefined, action: Action) =>
