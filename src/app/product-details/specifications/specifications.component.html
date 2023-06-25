@@ -14,21 +14,27 @@
       <div class="input-group-btn">
         <button
           class="btn btn-primary btn-minus"
-          (click)="onRemove(product.id)">
+          [disabled]="quantity <= 1"
+          (click)="onRemove()">
           <i class="fa fa-minus"></i>
         </button>
       </div>
       <input
-        type="text"
+        #productQuantity
+        type="number"
         class="form-control bg-secondary border-0 text-center"
-        value="1" />
+        [value]="quantity"
+        (keyup)="onKeyUp(productQuantity.value)" />
       <div class="input-group-btn">
-        <button class="btn btn-primary btn-plus" (click)="onAdd(product.id)">
+        <button class="btn btn-primary btn-plus" (click)="onAdd()">
           <i class="fa fa-plus"></i>
         </button>
       </div>
     </div>
-    <button class="btn btn-primary px-3">
+    <button
+      class="btn btn-primary px-3"
+      [disabled]="quantity < 1"
+      (click)="onUpdateCart()">
       <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
     </button>
   </div>
