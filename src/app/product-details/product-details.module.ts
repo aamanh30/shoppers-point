@@ -8,6 +8,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { CatalogueModule } from '../catalogue/catalogue.module';
 import { SharedModule } from '../shared/shared.module';
+import { CartStateModule } from '../cart-state';
 
 const routes: Route[] = [
   {
@@ -28,7 +29,8 @@ const routes: Route[] = [
     CommonModule,
     RouterModule.forChild(routes),
     CatalogueModule,
-    SharedModule
+    SharedModule,
+    CartStateModule
   ]
 })
 export class ProductDetailsModule {}
