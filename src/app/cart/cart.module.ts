@@ -5,6 +5,7 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { SummaryComponent } from './summary/summary.component';
 import { CartStateModule } from '../cart-state';
 import { UserStateModule } from '../user-state';
+import { ProductsTableComponent } from './products-table/products-table.component';
 
 const routes: Route[] = [
   {
@@ -14,7 +15,7 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  declarations: [ShoppingCartComponent, SummaryComponent],
+  declarations: [ShoppingCartComponent, SummaryComponent, ProductsTableComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
