@@ -3,25 +3,25 @@ import { Store } from '@ngrx/store';
 import { UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '../../auth-state';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { getSignInFieldsConfig } from './sign-in-fields';
+import { getForgotPasswordFieldsConfig } from './forgot-password-fields';
 
 @Component({
-  selector: 'shoppers-point-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+  selector: 'shoppers-point-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.scss']
 })
-export class SignInComponent {
+export class ForgotPasswordComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});
   model: AuthForm | undefined;
-  fields: FormlyFieldConfig[] = getSignInFieldsConfig(
-    this.onSignUp.bind(this),
+  fields: FormlyFieldConfig[] = getForgotPasswordFieldsConfig(
+    this.onForgotPassword.bind(this),
     this.onReset.bind(this)
   );
 
   constructor(private store: Store) {}
 
-  onSignUp(request: AuthForm): void {
-    this.store.dispatch(AuthActions.signIn(request));
+  onForgotPassword(request: AuthForm): void {
+    this.store.dispatch(AuthActions.forgotPassword(request));
   }
 
   onReset(): void {
