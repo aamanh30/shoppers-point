@@ -19,7 +19,7 @@ export class AuthEffects {
   signUp$ = createEffect(() =>
     this.actions$.pipe(
       ofType(signUp),
-      concatMap(form =>
+      concatMap(({ type: _, ...form }) =>
         this.authService.signUp(form).pipe(
           map(() => signUpSuccess()),
           catchError(error => of(authError({ error })))

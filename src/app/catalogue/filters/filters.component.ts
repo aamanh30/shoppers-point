@@ -5,8 +5,6 @@ import {
   FilterType,
   Range
 } from '../../catalogue-state/models';
-import { FormlyFieldConfig } from '@ngx-formly/core';
-import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'shoppers-point-filters',
@@ -37,9 +35,6 @@ export class FiltersComponent {
   get filterId() {
     return this.heading.toLowerCase().split(' ').join('-');
   }
-  fields: FormlyFieldConfig[] = [];
-  model: any = {};
-  form: UntypedFormGroup = new UntypedFormGroup({});
   readonly FilterType = FilterType;
   #filters: number[] | string[] = [];
   #filterOptions: CatalogueFilter[] | undefined | null = [];
@@ -56,18 +51,5 @@ export class FiltersComponent {
 
   onFilterChange({ value }: HTMLInputElement, label: string | number): void {
     this.filterChanged.emit({ label, value });
-  }
-
-  _getFieldsConfig(): FormlyFieldConfig[] {
-    return [
-      {
-        key: 'category',
-        type: 'checkbox',
-        props: { label: this.heading },
-        expressions: {
-          'props.disabled': 'formState.awesomeIsForced'
-        }
-      }
-    ];
   }
 }
