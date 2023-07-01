@@ -12,6 +12,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { TypeButtonComponent } from './formly-types/type-button/type-button.component';
 import { types } from './formly-types-config';
+import { TypeTextareaComponent } from './formly-types/type-textarea/type-textarea.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { types } from './formly-types-config';
     TopbarComponent,
     RatingComponent,
     PaginationComponent,
-    TypeButtonComponent
+    TypeButtonComponent,
+    TypeTextareaComponent
   ],
   imports: [
     CommonModule,
