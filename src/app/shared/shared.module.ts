@@ -30,7 +30,7 @@ import { TypeTextareaComponent } from './formly-types/type-textarea/type-textare
     RouterModule,
     ReactiveFormsModule,
     FormlyBootstrapModule,
-    FormlyModule.forRoot({
+    FormlyModule.forChild({
       types
     })
   ],

@@ -1,6 +1,12 @@
-<label *ngIf="props.label">{{ props.label }}</label>
+<label *ngIf="props['showLabel']" class="form-label" [for]="props['id']">{{
+  props.label
+}}</label>
 <textarea
   class="form-control"
-  [id]="props['id'] ?? props['key']"
+  [id]="props['id']"
   [placeholder]="props.placeholder"
-  [rows]="props.rows ?? 8"></textarea>
+  [rows]="props.rows ?? 8"
+  [formControl]="formControl"
+  [formlyAttributes]="field"
+  (change)="onChange($event)"
+  (keyup)="onKeyUp($event)"></textarea>

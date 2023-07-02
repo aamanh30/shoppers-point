@@ -1,15 +1,16 @@
-<ng-container *ngIf="product">
+<ng-container *ngIf="rating">
   <div class="text-primary mr-2">
-    <ng-container *ngFor="let rating of ratings">
+    <ng-container *ngFor="let ratingItem of ratings">
       <small
         class="fa-star"
         [ngClass]="{
-          far: isFar(rating),
-          fas: isFas(rating),
-          'fa-star-half-alt': isFaStarHalf(rating)
+          far: isFar(ratingItem),
+          fas: isFas(ratingItem),
+          'fa-star-half-alt': isFaStarHalf(ratingItem)
         }"
-        [title]="product.rating?.rate"></small>
+        [title]="rating.rate"
+        (click)="onClick(ratingItem)"></small>
     </ng-container>
   </div>
-  <small class="pt-1">({{ product.rating?.count }} Reviews)</small>
+  <small *ngIf="!hideRating" class="pt-1">({{ rating.count }} Reviews)</small>
 </ng-container>
