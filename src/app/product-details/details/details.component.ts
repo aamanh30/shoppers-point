@@ -7,7 +7,7 @@ import {
   map,
   takeUntil
 } from 'rxjs';
-import { Product } from '../../shared/models';
+import { Product, Review } from '../../shared/models';
 import { Store } from '@ngrx/store';
 import {
   CatalogueActions,
@@ -62,6 +62,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.isDestroyed$.next();
     this.isDestroyed$.complete();
+  }
+
+  onSubmitReview(id: number, review: Review): void {
+    this.store.dispatch(
+      CatalogueActions.updateProductReview({ ...review, id })
+    );
   }
 
   onUpdateCart({ id, quantity }: CartProduct): void {

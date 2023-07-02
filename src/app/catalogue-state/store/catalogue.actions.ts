@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Product } from '../../shared/models';
+import { Product, Review } from '../../shared/models';
 import { CatalogueFilterKey } from '../models/catalogue-filter-key';
 
 export enum CatalogueActionTypes {
@@ -14,7 +14,8 @@ export enum CatalogueActionTypes {
   ClearSearchProducts = '[Catalogue] Clear Search Products',
   FetchError = '[Catalogue] Fetch Error',
   SetFilters = '[Catalogue] Set Filters',
-  ClearFilters = '[Catalogue] Clear Filters'
+  ClearFilters = '[Catalogue] Clear Filters',
+  UpdateProductReview = '[Catalogue] Update Product Review'
 }
 
 export const fetchProducts = createAction(CatalogueActionTypes.FetchProducts);
@@ -73,3 +74,8 @@ export const setFilters = createAction(
 );
 
 export const clearFilters = createAction(CatalogueActionTypes.ClearFilters);
+
+export const updateProductReview = createAction(
+  CatalogueActionTypes.UpdateProductReview,
+  props<Review & { id: number }>()
+);
