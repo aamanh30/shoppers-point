@@ -43,13 +43,17 @@ const routes: Routes = [
           import('./product-details/product-details.module').then(
             m => m.ProductDetailsModule
           )
-      },
-      {
-        path: '**',
-        redirectTo: 'home',
-        pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'error',
+    loadChildren: () => import('./error/error.module').then(m => m.ErrorModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'error/404',
+    pathMatch: 'full'
   }
 ];
 
