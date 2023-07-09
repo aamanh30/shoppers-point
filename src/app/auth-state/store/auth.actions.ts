@@ -10,6 +10,8 @@ export enum AuthActionTypes {
   ForgotPasswordSuccess = '[Auth] Forgot Password Success',
   ResetPassword = '[Auth] Reset Password',
   ResetPasswordSuccess = '[Auth] Reset Password Success',
+  SignOut = '[Auth] Sign Out',
+  FetchUser = '[Auth] Fetch User',
   AuthError = '[Auth] Auth Error'
 }
 
@@ -48,3 +50,7 @@ export const authError = createAction(
     error: Partial<Error>;
   }>()
 );
+
+export const signOut = createAction(AuthActionTypes.SignOut);
+
+export const fetchUser = createAction(AuthActionTypes.FetchUser);

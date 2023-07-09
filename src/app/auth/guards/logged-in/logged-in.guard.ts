@@ -1,11 +1,11 @@
 import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateChildFn, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map, tap } from 'rxjs';
 import { UserSelectors } from '../../../user-state';
 import { environment } from '../../../../environments/environment';
 
-export const loggedInGuard: CanActivateFn = () => {
+export const loggedInGuard: CanActivateChildFn = () => {
   const store = inject(Store);
   const router = inject(Router);
 
