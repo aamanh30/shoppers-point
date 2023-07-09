@@ -20,8 +20,11 @@ export class SignInComponent {
 
   constructor(private store: Store) {}
 
-  onSignUp(request: AuthForm): void {
-    this.store.dispatch(AuthActions.signIn(request));
+  onSignUp(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    this.store.dispatch(AuthActions.signIn(this.form.value));
   }
 
   onReset(): void {

@@ -20,8 +20,11 @@ export class ResetPasswordComponent {
 
   constructor(private store: Store) {}
 
-  onResetPassword(request: AuthForm & { oldPassword: string }): void {
-    this.store.dispatch(AuthActions.resetPassword(request));
+  onResetPassword(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    this.store.dispatch(AuthActions.resetPassword(this.form.value));
   }
 
   onReset(): void {

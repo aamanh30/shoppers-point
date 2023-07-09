@@ -20,8 +20,11 @@ export class ForgotPasswordComponent {
 
   constructor(private store: Store) {}
 
-  onForgotPassword(request: AuthForm): void {
-    this.store.dispatch(AuthActions.forgotPassword(request));
+  onForgotPassword(): void {
+    if (this.form.invalid) {
+      return;
+    }
+    this.store.dispatch(AuthActions.forgotPassword(this.form.value));
   }
 
   onReset(): void {

@@ -6,41 +6,7 @@ export const getSignUpFieldsConfig = (
     fieldGroupClassName: 'row',
     fieldGroup: [
       {
-        className: 'col-md-6 form-group',
-        fieldGroup: [
-          {
-            key: 'firstName',
-            type: 'input',
-            props: {
-              label: 'First Name',
-              placeholder: 'John',
-              className: 'form-control',
-              required: true
-            }
-          }
-        ]
-      },
-      {
-        className: 'col-md-6 form-group',
-        fieldGroup: [
-          {
-            key: 'lastName',
-            type: 'input',
-            props: {
-              label: 'Last Name',
-              placeholder: 'Doe',
-              className: 'form-control'
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    fieldGroupClassName: 'row',
-    fieldGroup: [
-      {
-        className: 'col-md-6 form-group',
+        className: 'col form-group',
         fieldGroup: [
           {
             key: 'email',
@@ -53,20 +19,6 @@ export const getSignUpFieldsConfig = (
             }
           }
         ]
-      },
-      {
-        className: 'col-md-6 form-group',
-        fieldGroup: [
-          {
-            key: 'phone',
-            type: 'input',
-            props: {
-              label: 'Mobile No.',
-              placeholder: '+91-9876543210',
-              className: 'form-control'
-            }
-          }
-        ]
       }
     ]
   },
@@ -74,7 +26,7 @@ export const getSignUpFieldsConfig = (
     fieldGroupClassName: 'row',
     fieldGroup: [
       {
-        className: 'col-md-6 form-group',
+        className: 'col form-group',
         fieldGroup: [
           {
             key: 'password',
@@ -88,9 +40,14 @@ export const getSignUpFieldsConfig = (
             }
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    fieldGroupClassName: 'row',
+    fieldGroup: [
       {
-        className: 'col-md-6 form-group',
+        className: 'col form-group',
         fieldGroup: [
           {
             key: 'confirmPassword',
