@@ -34,7 +34,8 @@ export const getForgotPasswordFieldsConfig = (
               text: 'Submit',
               btnType: 'submit',
               btnClass: 'btn-primary',
-              onClick: onSubmit
+              onClick: onSubmit,
+              disabled: true
             }
           },
           {
