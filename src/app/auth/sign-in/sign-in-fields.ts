@@ -36,7 +36,8 @@ export const getSignInFieldsConfig = (
               label: 'Password',
               placeholder: '***',
               className: 'form-control',
-              required: true
+              required: true,
+              minLength: 6
             }
           }
         ]
