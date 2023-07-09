@@ -1,12 +1,21 @@
-import { Address } from './address';
-import { Name } from './name';
+import { StsTokenManager } from './sts-token-manager';
+import { UserMetaData } from './user-meta-data';
 
 export interface User {
-  address: Address;
-  id: number;
+  accessToken: string;
+  displayName: string;
   email: string;
-  username: string;
-  password: string;
-  name: Name;
-  phone: string;
+  emailVerified: boolean;
+  isAnonymous: boolean;
+  metadata: UserMetaData;
+  phoneNumber: string;
+  photoURL: string | undefined;
+  providerData: unknown[];
+  providerId: string;
+  reloadListener: unknown;
+  reloadUserInfo: unknown;
+  stsTokenManager: StsTokenManager;
+  tenantId: string | undefined;
+  uid: string;
+  refreshToken: string;
 }

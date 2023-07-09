@@ -11,7 +11,7 @@ import { CartProduct } from '../../models/cart-product';
 export class CartService {
   constructor(private httpClient: HttpClient) {}
 
-  fetchCart(userId: number): Observable<Cart> {
+  fetchCart(userId: number | string): Observable<Cart> {
     return this.httpClient.get<Cart>(
       `${environment.BASE_PATH}carts/user/${userId}`
     );
