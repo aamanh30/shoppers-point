@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../../../shared/models';
-import { environment } from '../../../../environments/environment';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private afAuth: AngularFireAuth) {}
 
-  fetchUser(id: number): Observable<User> {
-    return this.httpClient.get<User>(`${environment.BASE_PATH}users/${id}`);
+  fetchUser(): Observable<unknown> {
+    return from(this.afAuth.currentUser);
   }
 }
