@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export const getSignUpFieldsConfig = (
   onSubmit: Function,
   onReset: Function
@@ -36,7 +38,8 @@ export const getSignUpFieldsConfig = (
               label: 'Password',
               placeholder: '***',
               className: 'form-control',
-              required: true
+              required: true,
+              minLength: 6
             }
           }
         ]
@@ -56,7 +59,16 @@ export const getSignUpFieldsConfig = (
               type: 'password',
               label: 'Confirm Password',
               placeholder: '***',
-              className: 'form-control'
+              className: 'form-control',
+              required: true,
+              minLength: 6
+            },
+            validators: {
+              passwordValidator: {
+                expression: (control: FormControl) =>
+                  control?.value &&
+                  control?.value === control?.parent?.value?.password
+              }
             }
           }
         ]
