@@ -1,3 +1,5 @@
+import { FormControl } from '@angular/forms';
+
 export const getSignUpFieldsConfig = (
   onSubmit: Function,
   onReset: Function
@@ -6,41 +8,7 @@ export const getSignUpFieldsConfig = (
     fieldGroupClassName: 'row',
     fieldGroup: [
       {
-        className: 'col-md-6 form-group',
-        fieldGroup: [
-          {
-            key: 'firstName',
-            type: 'input',
-            props: {
-              label: 'First Name',
-              placeholder: 'John',
-              className: 'form-control',
-              required: true
-            }
-          }
-        ]
-      },
-      {
-        className: 'col-md-6 form-group',
-        fieldGroup: [
-          {
-            key: 'lastName',
-            type: 'input',
-            props: {
-              label: 'Last Name',
-              placeholder: 'Doe',
-              className: 'form-control'
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    fieldGroupClassName: 'row',
-    fieldGroup: [
-      {
-        className: 'col-md-6 form-group',
+        className: 'col form-group',
         fieldGroup: [
           {
             key: 'email',
@@ -53,17 +21,25 @@ export const getSignUpFieldsConfig = (
             }
           }
         ]
-      },
+      }
+    ]
+  },
+  {
+    fieldGroupClassName: 'row',
+    fieldGroup: [
       {
-        className: 'col-md-6 form-group',
+        className: 'col form-group',
         fieldGroup: [
           {
-            key: 'phone',
+            key: 'password',
             type: 'input',
             props: {
-              label: 'Mobile No.',
-              placeholder: '+91-9876543210',
-              className: 'form-control'
+              type: 'password',
+              label: 'Password',
+              placeholder: '***',
+              className: 'form-control',
+              required: true,
+              minLength: 6
             }
           }
         ]
@@ -74,23 +50,7 @@ export const getSignUpFieldsConfig = (
     fieldGroupClassName: 'row',
     fieldGroup: [
       {
-        className: 'col-md-6 form-group',
-        fieldGroup: [
-          {
-            key: 'password',
-            type: 'input',
-            props: {
-              type: 'password',
-              label: 'Password',
-              placeholder: '***',
-              className: 'form-control',
-              required: true
-            }
-          }
-        ]
-      },
-      {
-        className: 'col-md-6 form-group',
+        className: 'col form-group',
         fieldGroup: [
           {
             key: 'confirmPassword',
@@ -99,7 +59,16 @@ export const getSignUpFieldsConfig = (
               type: 'password',
               label: 'Confirm Password',
               placeholder: '***',
-              className: 'form-control'
+              className: 'form-control',
+              required: true,
+              minLength: 6
+            },
+            validators: {
+              passwordValidator: {
+                expression: (control: FormControl) =>
+                  control?.value &&
+                  control?.value === control?.parent?.value?.password
+              }
             }
           }
         ]

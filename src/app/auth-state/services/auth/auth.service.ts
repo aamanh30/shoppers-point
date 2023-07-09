@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, from, map, of } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthForm } from '../../models/auth-form';
-import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private afAuth: AngularFireAuth) {}
 
-  signUp(data: AuthForm): Observable<any> {
-    return this.httpClient.post(`${environment.BASE_PATH}sign-up`, data);
+  signUp({ email, password }: AuthForm): Observable<any> {
+    return from(this.afAuth.createUserWithEmailAndPassword(email, password));
   }
 
-  signIn(data: Partial<AuthForm>): Observable<any> {
-    return this.httpClient.post(`${environment.BASE_PATH}sign-in`, data);
+  signIn({ email, password }: Partial<AuthForm>): Observable<any> {
+    return from(
+      this.afAuth.signInWithEmailAndPassword(<string>email, <string>password)
+    );
   }
 
   forgotPassword(): Observable<any> {
@@ -24,5 +25,13 @@ export class AuthService {
 
   resetPassword(): Observable<any> {
     return of({});
+  }
+
+  signOut(): Observable<void> {
+    return from(this.afAuth.signOut());
+  }
+
+  fetchUser(): Observable<any> {
+    return this.afAuth.user;
   }
 }

@@ -1,5 +1,6 @@
 <button
   class="btn"
+  [disabled]="!!props['disabled']"
   [type]="props['btnType']"
   [ngClass]="props['btnClass']"
   (click)="onClick($event)">

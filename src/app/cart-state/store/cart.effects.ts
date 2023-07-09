@@ -25,7 +25,7 @@ export class CartEffects {
       ofType(fetchCart),
       concatLatestFrom(() => [this.store.select(UserSelectors.user)]),
       concatMap(([_, user]) => {
-        return this.cartService.fetchCart(user?.id ?? 2).pipe(
+        return this.cartService.fetchCart(user?.uid ?? 2).pipe(
           map(({ id, products }) => fetchCartSuccess({ id, products })),
           catchError((error: Error) => of(fetchError({ error })))
         );

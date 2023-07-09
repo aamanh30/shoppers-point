@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../models/user';
 
 @Component({
@@ -8,6 +8,9 @@ import { User } from '../models/user';
 })
 export class FooterComponent {
   @Input() user: User | undefined | null;
+  @Output() signout: EventEmitter<void> = new EventEmitter<void>();
 
-  onLogOut(): void {}
+  onSignOut(): void {
+    this.signout.emit();
+  }
 }

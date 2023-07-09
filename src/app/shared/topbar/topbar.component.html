@@ -12,12 +12,18 @@
         <button
           type="button"
           class="btn btn-sm btn-light dropdown-toggle"
-          data-toggle="dropdown">
+          (click)="onToggle()">
           My Account
         </button>
-        <div class="dropdown-menu dropdown-menu-right">
-          <button class="dropdown-item" type="button">My Account</button>
-          <button class="dropdown-item" type="button">Log Out</button>
+        <div
+          class="dropdown-menu dropdown-menu-right"
+          [ngClass]="{ show: expanded }">
+          <button class="dropdown-item" type="button" [disabled]="true">
+            Hi, {{ user.displayName || user.email }}
+          </button>
+          <button class="dropdown-item" type="button" (click)="onSignOut()">
+            Sign Out
+          </button>
         </div>
       </div>
       <div *ngIf="!user" class="d-inline-flex align-items-center h-100">
