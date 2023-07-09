@@ -34,8 +34,14 @@ export class CatalogueEffects {
     this.actions$.pipe(
       ofType(fetchProductDetails),
       concatMap(({ id }) =>
-        this.catalogueService.fetchProductDetails(id).pipe(
-          map(product => fetchProductDetailsSuccess({ product })),
+        this.catalogueService.fetchProductDetails(id.toString()).pipe(
+          map(product =>
+            product
+              ? fetchProductDetailsSuccess({ product })
+              : fetchError({
+                  error: new Error(`Product with id = ${id} not found`)
+                })
+          ),
           catchError((error: Error) => of(fetchError({ error })))
         )
       )

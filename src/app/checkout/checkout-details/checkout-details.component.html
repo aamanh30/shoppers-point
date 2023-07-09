@@ -1,11 +1,43 @@
 <div class="container-fluid">
   <div class="row px-xl-5">
     <div class="col-lg-8">
-      <shoppers-point-billing-form></shoppers-point-billing-form>
+      <shoppers-point-address-form
+        heading="Billing Address"
+        [countries]="(countries$ | async) ?? []"
+        [form]="billingForm"
+        [model]="model.billingAddress"></shoppers-point-address-form>
+
+      <div class="row p-30">
+        <div class="col-md-12">
+          <div class="form-check">
+            <input
+              id="shippingAddressRequired"
+              type="checkbox"
+              class="form-check-input"
+              (change)="onShippingAddressChanged($event)" />
+            <label class="form-check-label">Ship to different address</label>
+          </div>
+        </div>
+      </div>
+
+      <shoppers-point-address-form
+        *ngIf="model.shippingAddressRequired"
+        heading="Shipping Address"
+        [countries]="(countries$ | async) ?? []"
+        [form]="shippingForm"
+        [model]="model.shippingAddress"></shoppers-point-address-form>
     </div>
     <div class="col-lg-4">
       <shoppers-point-order-summary
-        [products]="products$ | async"></shoppers-point-order-summary>
+        [formValid]="
+          billingForm.valid && shippingForm.valid && summaryForm.valid
+        "
+        [paymentOptions]="paymentOptions"
+        [products]="products$ | async"
+        [form]="summaryForm"
+        [model]="model.summary"
+        (updateSummary)="onUpdateSummary($event)"
+        (placeOrder)="onPlaceOrder()"></shoppers-point-order-summary>
     </div>
   </div>
 </div>

@@ -10,6 +10,9 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { TypeButtonComponent } from './formly-types/type-button/type-button.component';
+import { types } from './formly-types-config';
+import { TypeTextareaComponent } from './formly-types/type-textarea/type-textarea.component';
 
 @NgModule({
   declarations: [
@@ -18,14 +21,18 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
     NavbarComponent,
     TopbarComponent,
     RatingComponent,
-    PaginationComponent
+    PaginationComponent,
+    TypeButtonComponent,
+    TypeTextareaComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     ReactiveFormsModule,
     FormlyBootstrapModule,
-    FormlyModule.forRoot()
+    FormlyModule.forChild({
+      types
+    })
   ],
   exports: [
     HeaderComponent,

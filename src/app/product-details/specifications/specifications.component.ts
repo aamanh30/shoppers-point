@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../shared/models';
+import { CartProduct } from '../../cart-state/models';
 
 @Component({
   selector: 'shoppers-point-specifications',
@@ -8,8 +9,33 @@ import { Product } from '../../shared/models';
 })
 export class SpecificationsComponent {
   @Input() product: Product | undefined;
+  @Input() quantity = 1;
+  @Output() updateCart: EventEmitter<CartProduct> =
+    new EventEmitter<CartProduct>();
 
-  onAdd(id: number): void {}
+  onAdd(): void {
+    this.quantity += 1;
+  }
 
-  onRemove(id: number): void {}
+  onKeyUp(productQty: string): void {
+    const quantity = Number(productQty);
+    if (isNaN(quantity)) {
+      return;
+    }
+    this.quantity = quantity;
+  }
+
+  onRemove(): void {
+    this.quantity -= 1;
+  }
+
+  onUpdateCart(): void {
+    if (!this.product || this.quantity <= 0) {
+      return;
+    }
+    this.updateCart.emit({
+      ...this.product,
+      quantity: this.quantity
+    });
+  }
 }

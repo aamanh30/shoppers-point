@@ -1,0 +1,18 @@
+<div *ngIf="{ error: error$ | async } as ctx" id="error-details">
+  <div class="error-details text-center">
+    <div class="error-details-code">
+      <h2 class="error-heading">ERROR {{ ctx.error?.status }}</h2>
+    </div>
+    <h2>SOMETHING WENT WRONG</h2>
+    <p>
+      The page you are looking for might have been removed had its name changed
+      or is temporarily unavailable.
+    </p>
+    <a
+      class="btn btn-primary home-link"
+      routerLinkActive="active"
+      [routerLink]="['/shop']"
+      >SHOP</a
+    >
+  </div>
+</div>

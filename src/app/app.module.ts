@@ -12,6 +12,11 @@ import { environment } from '../environments/environment';
 import { CartStateModule } from './cart-state/cart-state.module';
 import { UserStateModule } from './user-state';
 import { CatalogueStateModule } from './catalogue-state';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AuthStateModule } from './auth-state/auth-state.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,8 +36,16 @@ import { CatalogueStateModule } from './catalogue-state';
     CartStateModule,
     CatalogueStateModule,
     HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, {
+      name: 'shoppers-point',
+      automaticDataCollectionEnabled: true
+    }),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
     SharedModule,
-    UserStateModule
+    UserStateModule,
+    AuthStateModule
   ],
   bootstrap: [AppComponent]
 })

@@ -4,7 +4,8 @@
   </h2>
   <div class="row px-xl-5">
     <div class="col-lg-7 mb-5">
-      <shoppers-point-contact-form></shoppers-point-contact-form>
+      <shoppers-point-contact-form
+        (contactQuery)="onContactQuery($event)"></shoppers-point-contact-form>
     </div>
     <div class="col-lg-5 mb-5">
       <shoppers-point-address></shoppers-point-address>

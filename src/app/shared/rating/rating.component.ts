@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../models/product';
+import { Rating } from '../models/rating';
 
 @Component({
   selector: 'shoppers-point-rating',
@@ -7,21 +8,26 @@ import { Product } from '../models/product';
   styleUrls: ['./rating.component.scss']
 })
 export class RatingComponent {
-  @Input() product: Product | undefined;
+  @Input() rating: Rating | undefined;
+  @Input() hideRating = false;
+  @Output() ratingChange: EventEmitter<number> = new EventEmitter<number>();
   readonly ratings: number[] = [1, 2, 3, 4, 5];
 
   isFar(rating: number): boolean {
-    return Math.floor(this.product?.rating?.rate ?? 0) < rating - 1;
+    return Math.floor(this.rating?.rate ?? 0) <= rating - 1;
   }
 
   isFas(rating: number): boolean {
     return (
-      Math.floor(this.product?.rating?.rate ?? 0) >= rating ||
-      this.isFaStarHalf(rating)
+      Math.floor(this.rating?.rate ?? 0) >= rating || this.isFaStarHalf(rating)
     );
   }
 
   isFaStarHalf(rating: number): boolean {
-    return Math.ceil(this.product?.rating?.rate ?? 0) === rating;
+    return Math.ceil(this.rating?.rate ?? 0) === rating;
+  }
+
+  onClick(rating: number): void {
+    this.ratingChange.emit(rating);
   }
 }

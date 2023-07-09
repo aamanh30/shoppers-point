@@ -10,7 +10,8 @@ import {
   fetchProductsSuccess,
   searchProducts,
   searchProductsSuccess,
-  setFilters
+  setFilters,
+  updateProductReview
 } from './catalogue.actions';
 import { Product } from '../../shared/models';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
@@ -125,6 +126,38 @@ export const reducer = createReducer(
       ...state,
       filters: undefined
     })
+  ),
+  on(
+    updateProductReview,
+    (state, { id, rating, message, name, email }): CatalogueState => {
+      if (state.productId !== id || !state.entities[state.productId]) {
+        return { ...state };
+      }
+
+      return catalogueAdapter.updateOne(
+        {
+          id,
+          changes: {
+            ...state.entities[state.productId],
+            id,
+            rating: {
+              rate:
+                ((state.entities[state.productId]?.rating?.rate ??
+                  0 * (state.entities[state.productId]?.rating?.count ?? 0)) +
+                  rating.rate) /
+                  (state.entities[state.productId]?.rating?.count ?? 0) +
+                1,
+              count: (state.entities[state.productId]?.rating?.count ?? 0) + 1
+            },
+            reviews: [
+              ...(state.entities[state.productId]?.reviews ?? []),
+              { message, name, email, rating }
+            ]
+          }
+        },
+        state
+      );
+    }
   )
 );
 

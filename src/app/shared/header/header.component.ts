@@ -15,6 +15,7 @@ export class HeaderComponent {
   @Input() products: Product[] | null | undefined;
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
   @Output() selectProduct: EventEmitter<number> = new EventEmitter<number>();
+  @Output() signOut: EventEmitter<void> = new EventEmitter<void>();
   form: UntypedFormGroup = new UntypedFormGroup({});
   model: Filter = {
     search: ''
@@ -36,6 +37,10 @@ export class HeaderComponent {
     this.selectProduct.emit(productId);
     this.products = [];
     this.form.reset();
+  }
+
+  onSignOut(): void {
+    this.signOut.emit();
   }
 
   #onSearch(field: FormlyFieldConfig): void {

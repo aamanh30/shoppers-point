@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { authGuard } from './auth/guards/auth/auth.guard';
+import { loggedInGuard } from './auth/guards/logged-in/logged-in.guard';
 
 const routes: Routes = [
   {
@@ -16,6 +18,7 @@ const routes: Routes = [
       },
       {
         path: 'checkout',
+        canActivate: [authGuard],
         loadChildren: () =>
           import('./checkout/checkout.module').then(m => m.CheckoutModule)
       },
@@ -30,6 +33,7 @@ const routes: Routes = [
       },
       {
         path: 'auth',
+        canActivateChild: [loggedInGuard],
         loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
       },
       {
@@ -45,11 +49,20 @@ const routes: Routes = [
           )
       },
       {
-        path: '**',
+        path: '',
         redirectTo: 'home',
         pathMatch: 'full'
       }
     ]
+  },
+  {
+    path: 'error',
+    loadChildren: () => import('./error/error.module').then(m => m.ErrorModule)
+  },
+  {
+    path: '**',
+    redirectTo: 'error/404',
+    pathMatch: 'full'
   }
 ];
 

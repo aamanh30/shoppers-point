@@ -1,0 +1,8 @@
+<h5 *ngIf="heading" class="section-title position-relative text-uppercase mb-3">
+  <span class="bg-secondary pr-3">{{ heading }}</span>
+</h5>
+<div class="bg-light p-30">
+  <form [formGroup]="form">
+    <formly-form [fields]="fields" [form]="form" [model]="model"></formly-form>
+  </form>
+</div>

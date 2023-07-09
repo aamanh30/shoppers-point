@@ -9,7 +9,9 @@ export enum CartActionTypes {
   UpdateCart = '[Cart] Update Cart',
   UpdateCartSuccess = '[Cart] Update Cart Success',
   UpdateWishlist = '[Cart] Update Wish List',
-  UpdateWishlistSuccess = '[Cart] Update Wish List Success'
+  UpdateWishlistSuccess = '[Cart] Update Wish List Success',
+  UpdateProductQuantity = '[Cart] Update Product Quantity',
+  RemoveProduct = '[Cart] Remove Product'
 }
 
 export const fetchCart = createAction(CartActionTypes.FetchCart);
@@ -34,6 +36,11 @@ export const updateCartSuccess = createAction(
   props<{ products: CartProduct[] }>()
 );
 
+export const updateProductQuantity = createAction(
+  CartActionTypes.UpdateProductQuantity,
+  props<CartProduct>()
+);
+
 export const updateWishlist = createAction(
   CartActionTypes.UpdateWishlist,
   props<{ productId: number }>()
@@ -42,4 +49,9 @@ export const updateWishlist = createAction(
 export const updateWishlistSuccess = createAction(
   CartActionTypes.UpdateWishlistSuccess,
   props<{ wishlist: number[] }>()
+);
+
+export const removeProduct = createAction(
+  CartActionTypes.RemoveProduct,
+  props<{ id: number }>()
 );

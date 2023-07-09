@@ -15,6 +15,7 @@ import { CartFeature, CartSelectors } from './cart-state';
 import { CartProduct } from './cart-state/models';
 import { CatalogueActions, CatalogueSelectors } from './catalogue-state';
 import { Router } from '@angular/router';
+import { AuthActions } from './auth-state';
 
 @Component({
   selector: 'shoppers-point-root',
@@ -44,6 +45,7 @@ export class AppComponent implements OnDestroy {
           (products ?? []).map(product => product.quantity)
         )
       );
+    this.store.dispatch(AuthActions.fetchUser());
 
     this.searchProducts$
       .pipe(
@@ -59,6 +61,10 @@ export class AppComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.isDestroyed$.next();
     this.isDestroyed$.complete();
+  }
+
+  onSignOut(): void {
+    this.store.dispatch(AuthActions.signOut());
   }
 
   onSearch(search: string | undefined = ''): void {

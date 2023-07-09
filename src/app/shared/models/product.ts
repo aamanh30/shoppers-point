@@ -1,4 +1,5 @@
 import { Rating } from './rating';
+import { Review } from './review';
 
 export interface Product {
   id: number;
@@ -8,4 +9,5 @@ export interface Product {
   category?: string;
   image?: string;
   rating?: Rating;
+  reviews?: Partial<Review>[];
 }
