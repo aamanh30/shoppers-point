@@ -4,46 +4,19 @@ import {
   CatalogueState,
   catalogueAdapter
 } from './catalogue.reducer';
-import { toRatingLabel } from './catalogue.aux';
-import { CatalogueFilters } from '../models';
+import { toFilteredProducts, toRatingLabel } from './catalogue.aux';
 
 const catalogueFeatureState =
   createFeatureSelector<CatalogueState>(CATALOGUE_KEY);
 
 const { selectEntities, selectAll } = catalogueAdapter.getSelectors();
 
-export const products = createSelector(catalogueFeatureState, state => {
-  const products = selectAll(state);
-  if (
-    state.filters &&
-    (state.filters.categories?.length ||
-      state.filters.ratings?.length ||
-      state.filters.range?.length)
-  ) {
-    return products.filter(product => {
-      const { categories, ratings, range } = <CatalogueFilters>state.filters;
-      let isCategory = true;
-      let isRating = true;
-      let isRange = true;
-      if (categories?.length) {
-        isCategory = categories.includes(product.category ?? '');
-      }
-      if (ratings?.length) {
-        isRating = ratings.includes(Math.floor(product.rating?.rate ?? 0));
-      }
-      if (range?.length) {
-        isRange = (product?.price ?? 0) <= range[0];
-      }
-
-      return (
-        (state.filters?.categories?.length ? isCategory : true) &&
-        (state.filters?.ratings?.length ? isRating : true) &&
-        (state.filters?.range?.length ? isRange : true)
-      );
-    });
-  }
-  return products;
-});
+export const products = createSelector(catalogueFeatureState, state =>
+  toFilteredProducts(selectAll(state), state.filters).slice(
+    (state.page - 1) * state.productsPerPage,
+    state.page * state.productsPerPage
+  )
+);
 
 export const allProductsLookUp = createSelector(
   catalogueFeatureState,
@@ -93,4 +66,27 @@ export const searchProducts = createSelector(
 export const filters = createSelector(
   catalogueFeatureState,
   state => state.filters
+);
+
+export const page = createSelector(catalogueFeatureState, state => state.page);
+
+export const productsPerPage = createSelector(
+  catalogueFeatureState,
+  state => state.productsPerPage
+);
+
+export const productsPerPageOptions = createSelector(
+  catalogueFeatureState,
+  _state => [5, 10, 15, 20]
+);
+
+export const pages = createSelector(catalogueFeatureState, state =>
+  Array.from(
+    new Array(
+      Math.ceil(
+        toFilteredProducts(selectAll(state), state.filters).length /
+          state.productsPerPage
+      )
+    )
+  ).map((_, i) => i + 1)
 );

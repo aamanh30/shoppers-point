@@ -15,7 +15,9 @@ export enum CatalogueActionTypes {
   FetchError = '[Catalogue] Fetch Error',
   SetFilters = '[Catalogue] Set Filters',
   ClearFilters = '[Catalogue] Clear Filters',
-  UpdateProductReview = '[Catalogue] Update Product Review'
+  UpdateProductReview = '[Catalogue] Update Product Review',
+  UpdatePage = '[Catalogue] Update Page',
+  UpdateProductsPerPage = '[Catalogue] Update Products Per Page'
 }
 
 export const fetchProducts = createAction(CatalogueActionTypes.FetchProducts);
@@ -78,4 +80,14 @@ export const clearFilters = createAction(CatalogueActionTypes.ClearFilters);
 export const updateProductReview = createAction(
   CatalogueActionTypes.UpdateProductReview,
   props<Review & { id: number }>()
+);
+
+export const updatePage = createAction(
+  CatalogueActionTypes.UpdatePage,
+  props<{ page: number }>()
+);
+
+export const updateProductsPerPage = createAction(
+  CatalogueActionTypes.UpdateProductsPerPage,
+  props<{ productsPerPage: number }>()
 );
