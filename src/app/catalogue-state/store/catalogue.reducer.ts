@@ -17,14 +17,23 @@ const {
   searchProducts,
   searchProductsSuccess,
   setFilters,
-  updateProductReview
-} = CatalogueActions;
+  updatePage,
+  updateProductReview,
+  updateProductsPerPage
+} from './catalogue.actions';
+import { Product } from '../../shared/models';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { CatalogueFilterKey, CatalogueFilters } from '../models';
+
+export const CATALOGUE_KEY = 'catalogue';
 
 export interface CatalogueState extends EntityState<Product> {
   categories: string[];
   productId: number | undefined;
   products: Product[];
   filters: CatalogueFilters | undefined;
+  page: number;
+  productsPerPage: number;
 }
 
 export interface CataloguePartialState extends EntityState<Product> {
@@ -40,7 +49,9 @@ export const initialCatalogueState: CatalogueState =
     categories: [],
     productId: undefined,
     products: [],
-    filters: undefined
+    filters: undefined,
+    page: 1,
+    productsPerPage: 5
   });
 
 export const reducer = createReducer(
@@ -94,6 +105,7 @@ export const reducer = createReducer(
     if (checked !== undefined && checked !== null) {
       return {
         ...state,
+        page: 1,
         filters: checked
           ? {
               ...state.filters,
@@ -115,6 +127,7 @@ export const reducer = createReducer(
 
     return {
       ...state,
+      page: 1,
       filters: {
         ...state.filters,
         [key]: [value]
@@ -159,6 +172,21 @@ export const reducer = createReducer(
         state
       );
     }
+  ),
+  on(
+    updatePage,
+    (state, { page }): CatalogueState => ({
+      ...state,
+      page
+    })
+  ),
+  on(
+    updateProductsPerPage,
+    (state, { productsPerPage }): CatalogueState => ({
+      ...state,
+      page: 1,
+      productsPerPage
+    })
   )
 );
 
