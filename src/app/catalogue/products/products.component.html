@@ -3,10 +3,7 @@
     <div class="d-flex align-items-center justify-content-end mb-4">
       <div class="ml-2">
         <div class="btn-group ml-2">
-          <button type="button" class="btn btn-sm btn-light" disabled>
-            Showing: {{ products ? products.length : 0 }} Products
-          </button>
-          <!-- <button
+          <button
             type="button"
             class="btn btn-sm btn-light dropdown-toggle"
             data-toggle="dropdown"
@@ -16,14 +13,13 @@
           <div
             class="dropdown-menu dropdown-menu-right"
             [ngClass]="{ 'd-block': expanded }">
-            <a class="dropdown-item" (click)="onProductsPerPageChanged(5)">5</a>
-            <a class="dropdown-item" (click)="onProductsPerPageChanged(10)"
-              >10</a
+            <a
+              *ngFor="let productsPerPageOption of productsPerPageOptions"
+              class="dropdown-item"
+              (click)="onProductsPerPageChanged(productsPerPageOption)"
+              >{{ productsPerPageOption }}</a
             >
-            <a class="dropdown-item" (click)="onProductsPerPageChanged(20)"
-              >20</a
-            >
-          </div> -->
+          </div>
         </div>
       </div>
     </div>
@@ -37,8 +33,9 @@
   </div>
   <div *ngIf="products?.length" class="col-12">
     <shoppers-point-pagination
-      [products]="products"
-      [productsPerPage]="productsPerPage"></shoppers-point-pagination>
+      [currentPage]="currentPage"
+      [pages]="pages"
+      (pageChanged)="onPageChanged($event)"></shoppers-point-pagination>
   </div>
 
   <div *ngIf="!products?.length" class="col-12">

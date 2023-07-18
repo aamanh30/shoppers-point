@@ -10,4 +10,9 @@ export class NavbarComponent {
   @Input() user: User | undefined | null;
   @Input() wishlist: number[] | undefined | null;
   @Input() productQuantities: number[] | undefined | null;
+  collapseNavbar = true;
+
+  onNavbarCollapseChanged(): void {
+    this.collapseNavbar = !this.collapseNavbar;
+  }
 }

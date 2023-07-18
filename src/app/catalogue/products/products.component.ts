@@ -8,12 +8,16 @@ import { Product } from '../../shared/models';
 })
 export class ProductsComponent {
   @Input() products: Product[] = [];
-  @Input() productsPerPage: number = 20;
+  @Input() pages: number[] = [];
+  @Input() currentPage: number = 1;
+  @Input() productsPerPage: number = 5;
+  @Input() productsPerPageOptions: number[] = [];
   @Output() addToCart: EventEmitter<number> = new EventEmitter<number>();
   @Output() addToWishlist: EventEmitter<number> = new EventEmitter<number>();
   @Output() viewProduct: EventEmitter<number> = new EventEmitter<number>();
   @Output() productsPerPageChanged: EventEmitter<number> =
     new EventEmitter<number>();
+  @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
 
   get expanded() {
     return this.#expanded;
@@ -44,5 +48,9 @@ export class ProductsComponent {
 
   onDropdownToggle(): void {
     this.expanded = !this.expanded;
+  }
+
+  onPageChanged(page: number): void {
+    this.pageChanged.emit(page);
   }
 }
