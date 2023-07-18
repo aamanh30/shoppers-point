@@ -38,12 +38,16 @@
     <!-- Shop Product Start -->
     <div class="col-lg-9 col-md-8">
       <shoppers-point-products
+        [productsPerPageOptions]="(productsPerPageOptions$ | async) ?? []"
         [products]="(products$ | async) ?? []"
-        [productsPerPage]="productsPerPage"
+        [pages]="(pages$ | async) ?? []"
+        [currentPage]="(page$ | async) ?? 0"
+        [productsPerPage]="(productsPerPage$ | async) ?? 0"
         (addToCart)="onAddToCart($event)"
         (addToWishlist)="onAddToWishlist($event)"
         (productsPerPageChanged)="onProductsPerPageChanged($event)"
-        (viewProduct)="onViewProduct($event)"></shoppers-point-products>
+        (viewProduct)="onViewProduct($event)"
+        (pageChanged)="onPageChanged($event)"></shoppers-point-products>
     </div>
     <!-- Shop Product End -->
   </div>

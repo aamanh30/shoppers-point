@@ -31,7 +31,10 @@ export class ShopComponent implements OnInit {
   ratings$: Observable<CatalogueFilter[]> = EMPTY;
   range$: Observable<Range> = EMPTY;
   filters$: Observable<CatalogueFilters | undefined> = EMPTY;
-  productsPerPage = 5;
+  page$: Observable<number> = EMPTY;
+  productsPerPage$: Observable<number> = EMPTY;
+  pages$: Observable<number[]> = EMPTY;
+  productsPerPageOptions$: Observable<number[]> = EMPTY;
   constructor(
     private store: Store<CatalogueFeature.CataloguePartialState>,
     private router: Router
@@ -43,6 +46,14 @@ export class ShopComponent implements OnInit {
     this.ratings$ = this.store.select(CatalogueSelectors.ratings);
     this.range$ = this.store.select(CatalogueSelectors.range);
     this.filters$ = this.store.select(CatalogueSelectors.filters);
+    this.page$ = this.store.select(CatalogueSelectors.page);
+    this.pages$ = this.store.select(CatalogueSelectors.pages);
+    this.productsPerPage$ = this.store.select(
+      CatalogueSelectors.productsPerPage
+    );
+    this.productsPerPageOptions$ = this.store.select(
+      CatalogueSelectors.productsPerPageOptions
+    );
     this.store.dispatch(CatalogueActions.fetchProducts());
   }
 
@@ -61,7 +72,9 @@ export class ShopComponent implements OnInit {
   }
 
   onProductsPerPageChanged(productsPerPage: number): void {
-    this.productsPerPage = productsPerPage;
+    this.store.dispatch(
+      CatalogueActions.updateProductsPerPage({ productsPerPage })
+    );
   }
 
   onViewProduct(productId: number): void {
@@ -80,5 +93,9 @@ export class ShopComponent implements OnInit {
         key
       })
     );
+  }
+
+  onPageChanged(page: number): void {
+    this.store.dispatch(CatalogueActions.updatePage({ page }));
   }
 }

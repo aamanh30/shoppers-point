@@ -12,13 +12,13 @@
         <button
           type="button"
           class="navbar-toggler"
-          data-toggle="collapse"
-          data-target="#navbarCollapse">
+          (click)="onNavbarCollapseChanged()">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div
-          class="collapse navbar-collapse justify-content-between"
-          id="navbarCollapse">
+          class="navbar-collapse justify-content-between"
+          id="navbarCollapse"
+          [ngClass]="{ collapse: collapseNavbar }">
           <div class="navbar-nav mr-auto py-0">
             <a
               class="nav-item nav-link"
