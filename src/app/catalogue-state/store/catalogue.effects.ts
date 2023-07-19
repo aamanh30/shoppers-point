@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { concatMap, map, catchError } from 'rxjs/operators';
+import { concatMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
   fetchProducts,
@@ -11,10 +11,12 @@ import {
   fetchCategories,
   fetchCategoriesSuccess,
   searchProducts,
-  searchProductsSuccess
+  searchProductsSuccess,
+  CatalogueActionTypes
 } from './catalogue.actions';
 import { CatalogueService } from '../services/catalogue/catalogue.service';
 import { toSearchedProducts } from './catalogue.aux';
+import { ProgressType } from 'src/app/progress-state';
 
 @Injectable()
 export class CatalogueEffects {
@@ -23,8 +25,25 @@ export class CatalogueEffects {
       ofType(fetchProducts),
       concatMap(() =>
         this.catalogueService.fetchProducts().pipe(
-          map(products => fetchProductsSuccess({ products })),
-          catchError((error: Error) => of(fetchError({ error })))
+          concatMap(products => [
+            fetchCategories({
+              progressType: ProgressType.start
+            }),
+            fetchProductsSuccess({
+              products,
+              progressType: ProgressType.stop,
+              triggerAction: CatalogueActionTypes.FetchProducts
+            })
+          ]),
+          catchError((error: Error) =>
+            of(
+              fetchError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: CatalogueActionTypes.FetchProducts
+              })
+            )
+          )
         )
       )
     )
@@ -37,12 +56,26 @@ export class CatalogueEffects {
         this.catalogueService.fetchProductDetails(id.toString()).pipe(
           map(product =>
             product
-              ? fetchProductDetailsSuccess({ product })
+              ? fetchProductDetailsSuccess({
+                  product,
+                  progressType: ProgressType.stop,
+                  triggerAction: CatalogueActionTypes.FetchProductDetails
+                })
               : fetchError({
-                  error: new Error(`Product with id = ${id} not found`)
+                  error: new Error(`Product with id = ${id} not found`),
+                  progressType: ProgressType.stop,
+                  triggerAction: CatalogueActionTypes.FetchProductDetails
                 })
           ),
-          catchError((error: Error) => of(fetchError({ error })))
+          catchError((error: Error) =>
+            of(
+              fetchError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: CatalogueActionTypes.FetchProductDetails
+              })
+            )
+          )
         )
       )
     )
@@ -50,11 +83,25 @@ export class CatalogueEffects {
 
   fetchCategories$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fetchProducts, fetchCategories),
+      ofType(fetchCategories),
       concatMap(() =>
         this.catalogueService.fetchCategories().pipe(
-          map(categories => fetchCategoriesSuccess({ categories })),
-          catchError((error: Error) => of(fetchError({ error })))
+          map(categories =>
+            fetchCategoriesSuccess({
+              categories,
+              progressType: ProgressType.stop,
+              triggerAction: CatalogueActionTypes.FetchCategories
+            })
+          ),
+          catchError((error: Error) =>
+            of(
+              fetchError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: CatalogueActionTypes.FetchCategories
+              })
+            )
+          )
         )
       )
     )
@@ -67,10 +114,20 @@ export class CatalogueEffects {
         this.catalogueService.fetchProducts().pipe(
           map(products =>
             searchProductsSuccess({
-              products: toSearchedProducts(products, search)
+              products: toSearchedProducts(products, search),
+              progressType: ProgressType.stop,
+              triggerAction: CatalogueActionTypes.SearchProducts
             })
           ),
-          catchError((error: Error) => of(fetchError({ error })))
+          catchError((error: Error) =>
+            of(
+              fetchError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: CatalogueActionTypes.SearchProducts
+              })
+            )
+          )
         )
       )
     )

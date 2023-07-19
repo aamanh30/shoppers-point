@@ -16,7 +16,8 @@ import {
 } from '../../catalogue-state';
 import { ActivatedRoute } from '@angular/router';
 import { CartActions, CartFeature, CartSelectors } from '../../cart-state';
-import { CartProduct } from 'src/app/cart-state/models';
+import { CartProduct } from '../../cart-state/models';
+import { ProgressType } from '../../progress-state';
 
 @Component({
   selector: 'shoppers-point-details',
@@ -55,7 +56,12 @@ export class DetailsComponent implements OnInit, OnDestroy {
       if (!id || isNaN(Number(id))) {
         return;
       }
-      this.store.dispatch(CatalogueActions.fetchProductDetails({ id }));
+      this.store.dispatch(
+        CatalogueActions.fetchProductDetails({
+          id,
+          progressType: ProgressType.start
+        })
+      );
     });
   }
 

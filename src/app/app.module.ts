@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthStateModule } from './auth-state/auth-state.module';
+import { ProgressStateModule } from './progress-state/progress-state.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -45,7 +46,8 @@ import { AuthStateModule } from './auth-state/auth-state.module';
     AngularFireDatabaseModule,
     SharedModule,
     UserStateModule,
-    AuthStateModule
+    AuthStateModule,
+    ProgressStateModule
   ],
   bootstrap: [AppComponent]
 })

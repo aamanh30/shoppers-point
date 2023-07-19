@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Product, Review } from '../../shared/models';
 import { CatalogueFilterKey } from '../models/catalogue-filter-key';
+import { ProgressDecorators } from '../../progress-state/models';
 
 export enum CatalogueActionTypes {
   FetchProducts = '[Catalogue] Fetch Products',
@@ -20,40 +21,44 @@ export enum CatalogueActionTypes {
   UpdateProductsPerPage = '[Catalogue] Update Products Per Page'
 }
 
-export const fetchProducts = createAction(CatalogueActionTypes.FetchProducts);
+export const fetchProducts = createAction(
+  CatalogueActionTypes.FetchProducts,
+  props<ProgressDecorators>()
+);
 
 export const fetchProductsSuccess = createAction(
   CatalogueActionTypes.FetchProductsSuccess,
-  props<{ products: Product[] }>()
+  props<{ products: Product[] } & ProgressDecorators>()
 );
 
 export const fetchProductDetails = createAction(
   CatalogueActionTypes.FetchProductDetails,
-  props<{ id: number | string }>()
+  props<{ id: number | string } & ProgressDecorators>()
 );
 
 export const fetchProductDetailsSuccess = createAction(
   CatalogueActionTypes.FetchProductDetailsSuccess,
-  props<{ product: Product }>()
+  props<{ product: Product } & ProgressDecorators>()
 );
 
 export const fetchCategories = createAction(
-  CatalogueActionTypes.FetchCategories
+  CatalogueActionTypes.FetchCategories,
+  props<ProgressDecorators>()
 );
 
 export const fetchCategoriesSuccess = createAction(
   CatalogueActionTypes.FetchCategoriesSuccess,
-  props<{ categories: string[] }>()
+  props<{ categories: string[] } & ProgressDecorators>()
 );
 
 export const searchProducts = createAction(
   CatalogueActionTypes.SearchProducts,
-  props<{ search: string }>()
+  props<{ search: string } & ProgressDecorators>()
 );
 
 export const searchProductsSuccess = createAction(
   CatalogueActionTypes.SearchProductsSuccess,
-  props<{ products: Product[] }>()
+  props<{ products: Product[] } & ProgressDecorators>()
 );
 
 export const clearSearchProducts = createAction(
@@ -62,7 +67,7 @@ export const clearSearchProducts = createAction(
 
 export const fetchError = createAction(
   CatalogueActionTypes.FetchError,
-  props<{ error: Partial<Error> }>()
+  props<{ error: Partial<Error> } & ProgressDecorators>()
 );
 
 export const setFilters = createAction(

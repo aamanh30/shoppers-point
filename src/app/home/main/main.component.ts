@@ -7,6 +7,7 @@ import {
   CatalogueSelectors
 } from '../../catalogue-state';
 import { CatalogueFilter } from '../../catalogue-state/models';
+import { ProgressType } from '../../progress-state';
 
 @Component({
   selector: 'shoppers-point-main',
@@ -19,6 +20,10 @@ export class MainComponent {
 
   ngOnInit(): void {
     this.categories$ = this.store.select(CatalogueSelectors.categories);
-    this.store.dispatch(CatalogueActions.fetchProducts());
+    this.store.dispatch(
+      CatalogueActions.fetchProducts({
+        progressType: ProgressType.start
+      })
+    );
   }
 }
