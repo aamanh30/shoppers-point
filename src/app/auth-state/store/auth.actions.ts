@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { AuthForm } from '../models/auth-form';
+import { ProgressDecorators } from '../../progress-state/models';
 
 export enum AuthActionTypes {
   SignUp = '[Auth] Sign Up',
@@ -15,20 +16,29 @@ export enum AuthActionTypes {
   AuthError = '[Auth] Auth Error'
 }
 
-export const signUp = createAction(AuthActionTypes.SignUp, props<AuthForm>());
+export const signUp = createAction(
+  AuthActionTypes.SignUp,
+  props<AuthForm & ProgressDecorators>()
+);
 
-export const signUpSuccess = createAction(AuthActionTypes.SignUpSuccess);
+export const signUpSuccess = createAction(
+  AuthActionTypes.SignUpSuccess,
+  props<ProgressDecorators>()
+);
 
 export const signIn = createAction(
   AuthActionTypes.SignIn,
-  props<Partial<AuthForm>>()
+  props<Partial<AuthForm> & ProgressDecorators>()
 );
 
-export const signInSuccess = createAction(AuthActionTypes.SignInSuccess);
+export const signInSuccess = createAction(
+  AuthActionTypes.SignInSuccess,
+  props<ProgressDecorators>()
+);
 
 export const forgotPassword = createAction(
   AuthActionTypes.ForgotPassword,
-  props<{ email: string }>()
+  props<{ email: string } & ProgressDecorators>()
 );
 
 export const forgotPasswordSuccess = createAction(
@@ -37,18 +47,27 @@ export const forgotPasswordSuccess = createAction(
 
 export const resetPassword = createAction(
   AuthActionTypes.ResetPassword,
-  props<{ email: string; oldPassword: string; password: string }>()
+  props<
+    {
+      email: string;
+      oldPassword: string;
+      password: string;
+    } & ProgressDecorators
+  >()
 );
 
 export const resetPasswordSuccess = createAction(
-  AuthActionTypes.ResetPasswordSuccess
+  AuthActionTypes.ResetPasswordSuccess,
+  props<ProgressDecorators>()
 );
 
 export const authError = createAction(
   AuthActionTypes.AuthError,
-  props<{
-    error: Partial<Error>;
-  }>()
+  props<
+    {
+      error: Partial<Error>;
+    } & ProgressDecorators
+  >()
 );
 
 export const signOut = createAction(AuthActionTypes.SignOut);

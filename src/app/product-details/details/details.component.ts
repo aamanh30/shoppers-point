@@ -17,7 +17,11 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CartActions, CartFeature, CartSelectors } from '../../cart-state';
 import { CartProduct } from '../../cart-state/models';
-import { ProgressType } from '../../progress-state';
+import {
+  ProgressFeature,
+  ProgressSelectors,
+  ProgressType
+} from '../../progress-state';
 
 @Component({
   selector: 'shoppers-point-details',
@@ -27,17 +31,25 @@ import { ProgressType } from '../../progress-state';
 export class DetailsComponent implements OnInit, OnDestroy {
   productDetails$: Observable<Product | undefined> = EMPTY;
   quantity$: Observable<number> = EMPTY;
+  productDetailsLoading$: Observable<boolean> = EMPTY;
 
   readonly isDestroyed$: Subject<void> = new Subject<void>();
   constructor(
     private store: Store<
-      CatalogueFeature.CataloguePartialState & CartFeature.CartPartialState
+      CatalogueFeature.CataloguePartialState &
+        CartFeature.CartPartialState &
+        ProgressFeature.ProgressPartialState
     >,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     this.productDetails$ = this.store.select(CatalogueSelectors.productDetails);
+    this.productDetailsLoading$ = this.store.select(
+      ProgressSelectors.hasSpecificActionInProgress(
+        CatalogueActions.CatalogueActionTypes.FetchProductDetails
+      )
+    );
     this.quantity$ = combineLatest([
       this.store.select(CartSelectors.products),
       this.productDetails$

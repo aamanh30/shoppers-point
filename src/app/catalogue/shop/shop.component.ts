@@ -18,6 +18,11 @@ import {
   FilterEvent,
   CatalogueFilterKey
 } from '../../catalogue-state/models';
+import {
+  ProgressFeature,
+  ProgressSelectors,
+  ProgressType
+} from '../../progress-state';
 
 @Component({
   selector: 'shoppers-point-shop',
@@ -35,8 +40,12 @@ export class ShopComponent implements OnInit {
   productsPerPage$: Observable<number> = EMPTY;
   pages$: Observable<number[]> = EMPTY;
   productsPerPageOptions$: Observable<number[]> = EMPTY;
+  productsLoading$: Observable<boolean> = EMPTY;
   constructor(
-    private store: Store<CatalogueFeature.CataloguePartialState>,
+    private store: Store<
+      CatalogueFeature.CataloguePartialState &
+        ProgressFeature.ProgressPartialState
+    >,
     private router: Router
   ) {}
 
@@ -54,7 +63,16 @@ export class ShopComponent implements OnInit {
     this.productsPerPageOptions$ = this.store.select(
       CatalogueSelectors.productsPerPageOptions
     );
-    this.store.dispatch(CatalogueActions.fetchProducts());
+    this.productsLoading$ = this.store.select(
+      ProgressSelectors.hasSpecificActionInProgress(
+        CatalogueActions.CatalogueActionTypes.FetchProducts
+      )
+    );
+    this.store.dispatch(
+      CatalogueActions.fetchProducts({
+        progressType: ProgressType.start
+      })
+    );
   }
 
   onAddToCart(productId: number): void {

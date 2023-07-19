@@ -16,6 +16,8 @@ import {
 import { catchError, concatMap, map, of } from 'rxjs';
 import { AuthService } from '../services/auth/auth.service';
 import { UserActions } from '../../user-state';
+import { ProgressType } from '../../progress-state';
+import { AuthActions } from '../../auth-state';
 
 @Injectable()
 export class AuthEffects {
@@ -28,9 +30,14 @@ export class AuthEffects {
             UserActions.fetchUserSuccess(
               JSON.parse(JSON.stringify(user.multiFactor.user))
             ),
-            signUpSuccess()
+            signUpSuccess({
+              progressType: ProgressType.stop,
+              triggerAction: AuthActions.AuthActionTypes.SignUp
+            })
           ]),
-          catchError(error => of(authError({ error })))
+          catchError(error =>
+            of(authError({ error, progressType: ProgressType.stop }))
+          )
         )
       )
     )
@@ -46,13 +53,26 @@ export class AuthEffects {
                 UserActions.fetchUserSuccess(
                   JSON.parse(JSON.stringify(user.multiFactor.user))
                 ),
-                signInSuccess()
+                signInSuccess({
+                  progressType: ProgressType.stop,
+                  triggerAction: AuthActions.AuthActionTypes.SignIn
+                })
               ]),
-              catchError(error => of(authError({ error })))
+              catchError(error =>
+                of(
+                  authError({
+                    error,
+                    progressType: ProgressType.stop,
+                    triggerAction: AuthActions.AuthActionTypes.SignIn
+                  })
+                )
+              )
             )
           : of(
               authError({
-                error: new Error('Email and Password are mandatory')
+                error: new Error('Email and Password are mandatory'),
+                progressType: ProgressType.stop,
+                triggerAction: AuthActions.AuthActionTypes.SignIn
               })
             )
       )
@@ -65,7 +85,15 @@ export class AuthEffects {
       concatMap(() =>
         this.authService.forgotPassword().pipe(
           map(() => forgotPasswordSuccess()),
-          catchError(error => of(authError({ error })))
+          catchError(error =>
+            of(
+              authError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: AuthActions.AuthActionTypes.ForgotPassword
+              })
+            )
+          )
         )
       )
     )
@@ -76,8 +104,21 @@ export class AuthEffects {
       ofType(resetPassword),
       concatMap(() =>
         this.authService.resetPassword().pipe(
-          map(() => resetPasswordSuccess()),
-          catchError(error => of(authError({ error })))
+          map(() =>
+            resetPasswordSuccess({
+              progressType: ProgressType.stop,
+              triggerAction: AuthActions.AuthActionTypes.ResetPassword
+            })
+          ),
+          catchError(error =>
+            of(
+              authError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: AuthActions.AuthActionTypes.ResetPassword
+              })
+            )
+          )
         )
       )
     )
@@ -89,7 +130,15 @@ export class AuthEffects {
       concatMap(() =>
         this.authService.signOut().pipe(
           map(() => UserActions.clearUser()),
-          catchError(error => of(authError({ error })))
+          catchError(error =>
+            of(
+              authError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: AuthActions.AuthActionTypes.SignOut
+              })
+            )
+          )
         )
       )
     )
@@ -107,9 +156,23 @@ export class AuthEffects {
                     JSON.parse(JSON.stringify(user.multiFactor.user))
                   )
                 ]
-              : [authError({ error: new Error('User Details not found') })]
+              : [
+                  authError({
+                    error: new Error('User Details not found'),
+                    progressType: ProgressType.stop,
+                    triggerAction: AuthActions.AuthActionTypes.FetchUser
+                  })
+                ]
           ),
-          catchError(error => of(authError({ error })))
+          catchError(error =>
+            of(
+              authError({
+                error,
+                progressType: ProgressType.stop,
+                triggerAction: AuthActions.AuthActionTypes.FetchUser
+              })
+            )
+          )
         )
       )
     )
