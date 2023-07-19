@@ -1,21 +1,28 @@
-<div *ngIf="productDetails$ | async as product" class="container-fluid pb-5">
-  <div class="row px-xl-5">
-    <div class="col-lg-5 mb-30">
-      <shoppers-point-carousel [product]="product"></shoppers-point-carousel>
-    </div>
+<div
+  class="container-fluid pb-5"
+  [ngClass]="{
+    'shoppers-point-spinner': (productDetailsLoading$ | async)
+  }">
+  <ng-container *ngIf="productDetails$ | async as product">
+    <section class="row px-xl-5">
+      <div class="col-lg-5 mb-30">
+        <shoppers-point-carousel [product]="product"></shoppers-point-carousel>
+      </div>
 
-    <div class="col-lg-7 h-auto mb-30">
-      <shoppers-point-specifications
+      <div class="col-lg-7 h-auto mb-30">
+        <shoppers-point-specifications
+          [product]="product"
+          [quantity]="(quantity$ | async) ?? 1"
+          (updateCart)="onUpdateCart($event)"></shoppers-point-specifications>
+      </div>
+    </section>
+
+    <section class="row px-xl-5">
+      <shoppers-point-reviews
         [product]="product"
-        [quantity]="(quantity$ | async) ?? 1"
-        (updateCart)="onUpdateCart($event)"></shoppers-point-specifications>
-    </div>
-  </div>
-  <div class="row px-xl-5">
-    <shoppers-point-reviews
-      [product]="product"
-      (submitReview)="
-        onSubmitReview(product.id, $event)
-      "></shoppers-point-reviews>
-  </div>
+        (submitReview)="
+          onSubmitReview(product.id, $event)
+        "></shoppers-point-reviews>
+    </section>
+  </ng-container>
 </div>

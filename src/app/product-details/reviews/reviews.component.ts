@@ -15,7 +15,7 @@ export class ReviewsComponent {
   @Input() model: Review = getDefaultReview();
   @Output() submitReview: EventEmitter<Review> = new EventEmitter<Review>();
   fields: FormlyFieldConfig[] = this.#getReviewFieldsConfig();
-  activeId = 3;
+  activeId = 1;
 
   onRatingChanged(rate: number): void {
     this.form.patchValue({

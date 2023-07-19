@@ -325,3 +325,20 @@ h6 {
     color: #ff0000;
   }
 }
+
+.shoppers-point-spinner {
+  position: relative;
+  &::before {
+    content: '';
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    top: 7.5%;
+    left: 50%;
+    z-index: 100;
+    border: 0.25rem solid $dark;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border 0.75s linear infinite;
+  }
+}

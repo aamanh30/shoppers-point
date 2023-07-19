@@ -36,7 +36,11 @@
     <!-- Shop Sidebar End -->
 
     <!-- Shop Product Start -->
-    <div class="col-lg-9 col-md-8">
+    <div
+      class="col-lg-9 col-md-8"
+      [ngClass]="{
+        'shoppers-point-spinner': (productsLoading$ | async)
+      }">
       <shoppers-point-products
         [productsPerPageOptions]="(productsPerPageOptions$ | async) ?? []"
         [products]="(products$ | async) ?? []"
