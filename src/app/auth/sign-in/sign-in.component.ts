@@ -4,6 +4,7 @@ import { UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '../../auth-state';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getSignInFieldsConfig } from './sign-in-fields';
+import { ProgressType } from '../../progress-state';
 
 @Component({
   selector: 'shoppers-point-sign-in',
@@ -24,7 +25,12 @@ export class SignInComponent {
     if (this.form.invalid) {
       return;
     }
-    this.store.dispatch(AuthActions.signIn(this.form.value));
+    this.store.dispatch(
+      AuthActions.signIn({
+        ...this.form.value,
+        progressType: ProgressType.start
+      })
+    );
   }
 
   onReset(): void {
