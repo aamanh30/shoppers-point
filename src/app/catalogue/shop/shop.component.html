@@ -42,6 +42,7 @@
         'shoppers-point-spinner': (productsLoading$ | async)
       }">
       <shoppers-point-products
+        *ngIf="!(productsLoading$ | async)"
         [productsPerPageOptions]="(productsPerPageOptions$ | async) ?? []"
         [products]="(products$ | async) ?? []"
         [pages]="(pages$ | async) ?? []"
