@@ -1,2 +1,2 @@
-export * as AuthActions from './store/auth.actions';
+export * from './store/auth.actions';
 export * from './models';
