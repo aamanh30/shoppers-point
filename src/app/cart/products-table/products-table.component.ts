@@ -17,7 +17,7 @@ export class ProductsTableComponent {
     this.productSelected.emit(id);
   }
 
-  onRemove(index: number): void {
+  onReduce(index: number): void {
     this.updateCartQuantity.emit({
       id: this.products[index].id,
       quantity: this.products[index].quantity - 1
@@ -31,7 +31,7 @@ export class ProductsTableComponent {
     });
   }
 
-  onProductRemoved(id: number): void {
+  onRemove(id: number): void {
     this.productRemoved.emit(id);
   }
 }
