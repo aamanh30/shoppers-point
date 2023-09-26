@@ -10,26 +10,18 @@ import { products } from './cart.selectors';
 import { CartAction, CartProduct } from '../models';
 import { wishlist } from './cart.selectors';
 
-const {
-  fetchCart,
-  fetchCartSuccess,
-  fetchError,
-  updateCart,
-  updateCartSuccess,
-  updateWishlist,
-  updateWishlistSuccess
-} = CartActions;
-
 @Injectable()
 export class CartEffects {
   fetchCart$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(fetchCart),
+      ofType(CartActions.fetchCart),
       concatLatestFrom(() => [this.store.select(UserSelectors.user)]),
       concatMap(([_, user]) => {
         return this.cartService.fetchCart(user?.uid ?? 2).pipe(
-          map(({ id, products }) => fetchCartSuccess({ id, products })),
-          catchError((error: Error) => of(fetchError({ error })))
+          map(({ id, products }) =>
+            CartActions.fetchCartSuccess({ id, products })
+          ),
+          catchError((error: Error) => of(CartActions.fetchError({ error })))
         );
       })
     )
@@ -37,7 +29,7 @@ export class CartEffects {
 
   updateCart$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(updateCart),
+      ofType(CartActions.updateCart),
       concatLatestFrom(() => [this.store.select(products)]),
       map(([{ productId, action, quantity }, _products]) => {
         let cartProducts = _products?.length ? [..._products] : [];
@@ -65,7 +57,7 @@ export class CartEffects {
           cartProducts = cartProducts.filter(({ id }) => id !== product?.id);
         }
 
-        return updateCartSuccess({
+        return CartActions.updateCartSuccess({
           products: cartProducts
         });
       })
@@ -74,10 +66,10 @@ export class CartEffects {
 
   updateWishList$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(updateWishlist),
+      ofType(CartActions.updateWishlist),
       concatLatestFrom(() => [this.store.select(wishlist)]),
       map(([{ productId }, wishlist]) =>
-        updateWishlistSuccess({
+        CartActions.updateWishlistSuccess({
           wishlist: wishlist.includes(productId)
             ? wishlist.filter(id => id !== productId)
             : [...wishlist, productId]
