@@ -1,10 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import {
-  CATALOGUE_KEY,
-  CatalogueState,
-  catalogueAdapter
-} from './catalogue.reducer';
 import { toFilteredProducts, toRatingLabel } from './catalogue.aux';
+import { CatalogueState, catalogueAdapter } from './catalogue.reducer';
+import { CATALOGUE_KEY } from './catalogue-key';
 
 const catalogueFeatureState =
   createFeatureSelector<CatalogueState>(CATALOGUE_KEY);
