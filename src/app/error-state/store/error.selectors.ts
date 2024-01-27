@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { ERROR_KEY, ErrorState } from './error.reducer';
+import { ErrorState } from './error.reducer';
+import { ERROR_KEY } from './error-key';
 
 const errorFeatureState = createFeatureSelector<ErrorState>(ERROR_KEY);
 
