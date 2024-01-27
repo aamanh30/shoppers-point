@@ -1,8 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { clearUser, fetchUser, fetchUserSuccess } from './user.actions';
+import { UserActions } from './user.actions';
 import { User } from '../../shared/models/user';
+import { USER_KEY } from './user-key';
 
-export const USER_KEY = 'userInfo';
+const { clearUser, fetchUser, fetchUserSuccess } = UserActions;
 
 export interface UserState {
   user: User | undefined;
