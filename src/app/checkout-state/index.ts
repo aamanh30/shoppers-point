@@ -1,4 +1,4 @@
-export * as CheckoutActions from './store/checkout.actions';
+export * from './store/checkout.actions';
 export * as CheckoutFeature from './store/checkout.reducer';
 export * as CheckoutSelectors from './store/checkout.selectors';
 

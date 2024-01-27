@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
-import { CHECKOUT_KEY, checkoutReducer } from './store/checkout.reducer';
+import { checkoutReducer } from './store/checkout.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CatalogueEffects } from './store/checkout.effects';
+import { CHECKOUT_KEY } from './store/checkout-key';
 
 @NgModule({
   imports: [

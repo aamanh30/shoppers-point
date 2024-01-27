@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import {
-  fetchCountries,
-  fetchCountriesSuccess,
-  fetchError,
-  placeOrder
-} from './checkout.actions';
+import { CheckoutActions } from './checkout.actions';
 import { CheckoutService } from '../services/checkout/checkout.service';
 import { toSelectOption } from './checkout.aux';
+
+const { fetchCountries, fetchCountriesSuccess, fetchError, placeOrder } =
+  CheckoutActions;
 
 @Injectable()
 export class CatalogueEffects {
