@@ -1,10 +1,10 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { clearError, loadError } from './error.actions';
+import { ErrorActions } from './error.actions';
 import { CustomError } from '../models/custom-error';
-import { HttpStatusCode } from '@angular/common/http';
 import { toErrorStatus } from './error.aux';
+import { ERROR_KEY } from './error-key';
 
-export const ERROR_KEY = 'error';
+const { clearError, loadError } = ErrorActions;
 
 export interface ErrorState {
   error: CustomError | undefined;

@@ -1,13 +1,15 @@
-import { createAction, props } from '@ngrx/store';
+import {
+  createAction,
+  createActionGroup,
+  emptyProps,
+  props
+} from '@ngrx/store';
+import { ERROR_KEY } from './error-key';
 
-export enum ErrorActionTypes {
-  LoadError = '[Error] Load Error',
-  ClearError = '[Error] Clear Error'
-}
-
-export const loadError = createAction(
-  ErrorActionTypes.LoadError,
-  props<{ path: string; message?: string }>()
-);
-
-export const clearError = createAction(ErrorActionTypes.ClearError);
+export const ErrorActions = createActionGroup({
+  source: ERROR_KEY,
+  events: {
+    loadError: props<{ path: string; message?: string }>(),
+    clearError: emptyProps()
+  }
+});
