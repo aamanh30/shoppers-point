@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { User } from '../models';
 
 @Component({
@@ -8,4 +8,15 @@ import { User } from '../models';
 })
 export class TopbarComponent {
   @Input() user: User | undefined | null;
+  @Output() signOut: EventEmitter<void> = new EventEmitter<void>();
+  expanded = false;
+
+  onSignOut(): void {
+    this.expanded = false;
+    this.signOut.emit();
+  }
+
+  onToggle(): void {
+    this.expanded = !this.expanded;
+  }
 }

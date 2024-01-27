@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import {
+import { CatalogueActions } from './catalogue.actions';
+import { CatalogueService } from '../services/catalogue/catalogue.service';
+import { toSearchedProducts } from './catalogue.aux';
+
+const {
   fetchProducts,
   fetchError,
   fetchProductsSuccess,
@@ -12,9 +16,7 @@ import {
   fetchCategoriesSuccess,
   searchProducts,
   searchProductsSuccess
-} from './catalogue.actions';
-import { CatalogueService } from '../services/catalogue/catalogue.service';
-import { toSearchedProducts } from './catalogue.aux';
+} = CatalogueActions;
 
 @Injectable()
 export class CatalogueEffects {
@@ -34,8 +36,14 @@ export class CatalogueEffects {
     this.actions$.pipe(
       ofType(fetchProductDetails),
       concatMap(({ id }) =>
-        this.catalogueService.fetchProductDetails(id).pipe(
-          map(product => fetchProductDetailsSuccess({ product })),
+        this.catalogueService.fetchProductDetails(id.toString()).pipe(
+          map(product =>
+            product
+              ? fetchProductDetailsSuccess({ product })
+              : fetchError({
+                  error: new Error(`Product with id = ${id} not found`)
+                })
+          ),
           catchError((error: Error) => of(fetchError({ error })))
         )
       )

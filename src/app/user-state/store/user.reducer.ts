@@ -1,8 +1,9 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { fetchUser, fetchUserSuccess } from './user.actions';
+import { UserActions } from './user.actions';
 import { User } from '../../shared/models/user';
+import { USER_KEY } from './user-key';
 
-export const USER_KEY = 'user';
+const { clearUser, fetchUser, fetchUserSuccess } = UserActions;
 
 export interface UserState {
   user: User | undefined;
@@ -19,7 +20,11 @@ export const initialUserState: UserState = {
 export const reducer = createReducer(
   initialUserState,
   on(fetchUser, (state): UserState => ({ ...state, user: undefined })),
-  on(fetchUserSuccess, (state, { user }): UserState => ({ ...state, user }))
+  on(
+    fetchUserSuccess,
+    (state, { type, ...user }): UserState => ({ ...state, user })
+  ),
+  on(clearUser, (): UserState => initialUserState)
 );
 
 export const userReducer = (state: UserState | undefined, action: Action) =>

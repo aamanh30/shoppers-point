@@ -1,0 +1,10 @@
+:host::ng-deep .btn-row {
+  formly-group {
+    display: flex;
+    formly-field {
+      :first-child {
+        margin-right: 0.25rem;
+      }
+    }
+  }
+}

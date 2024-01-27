@@ -6,10 +6,16 @@
 
     <div class="col-lg-7 h-auto mb-30">
       <shoppers-point-specifications
-        [product]="product"></shoppers-point-specifications>
+        [product]="product"
+        [quantity]="(quantity$ | async) ?? 1"
+        (updateCart)="onUpdateCart($event)"></shoppers-point-specifications>
     </div>
   </div>
   <div class="row px-xl-5">
-    <shoppers-point-reviews [product]="product"></shoppers-point-reviews>
+    <shoppers-point-reviews
+      [product]="product"
+      (submitReview)="
+        onSubmitReview(product.id, $event)
+      "></shoppers-point-reviews>
   </div>
 </div>

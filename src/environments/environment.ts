@@ -4,7 +4,17 @@
 
 export const environment = {
   production: false,
-  BASE_PATH: 'https://fakestoreapi.com/'
+  BASE_PATH: '/assets/data/',
+  assessTokenKey: 'shoppers-point-token',
+  firebaseConfig: {
+    apiKey: 'APIKEY',
+    authDomain: 'AUTH_DOMAIN',
+    projectId: 'PROJECT_ID',
+    storageBucket: 'STORAGE_BUCKET',
+    messagingSenderId: 'MESSAGING_SENDER_ID',
+    appId: 'APP_ID',
+    measurementId: 'MEASUREMENT_ID'
+  }
 };
 
 /*

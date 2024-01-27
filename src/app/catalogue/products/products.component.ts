@@ -8,7 +8,7 @@ import { Product } from '../../shared/models';
 })
 export class ProductsComponent {
   @Input() products: Product[] = [];
-  @Input() productsPerPage: number = 5;
+  @Input() productsPerPage: number = 20;
   @Output() addToCart: EventEmitter<number> = new EventEmitter<number>();
   @Output() addToWishlist: EventEmitter<number> = new EventEmitter<number>();
   @Output() viewProduct: EventEmitter<number> = new EventEmitter<number>();

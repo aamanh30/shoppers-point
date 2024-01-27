@@ -7,6 +7,12 @@ import { SpecificationsComponent } from './specifications/specifications.compone
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { CatalogueModule } from '../catalogue/catalogue.module';
+import { CartStateModule } from '../cart-state';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import { FormlyModule } from '@ngx-formly/core';
+import { types } from '../shared/formly-types-config';
 import { SharedModule } from '../shared/shared.module';
 
 const routes: Route[] = [
@@ -27,7 +33,12 @@ const routes: Route[] = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    NgbNavModule,
     CatalogueModule,
+    CartStateModule,
+    ReactiveFormsModule,
+    FormlyBootstrapModule,
+    FormlyModule.forRoot(),
     SharedModule
   ]
 })
