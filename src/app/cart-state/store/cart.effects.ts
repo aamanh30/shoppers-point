@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { concatMap, map, catchError, filter } from 'rxjs/operators';
+import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import {
+import { CartActions } from './cart.actions';
+import { CartService } from '../services/cart/cart.service';
+import { Store } from '@ngrx/store';
+import { UserFeature, UserSelectors } from '../../user-state';
+import { products } from './cart.selectors';
+import { CartAction, CartProduct } from '../models';
+import { wishlist } from './cart.selectors';
+
+const {
   fetchCart,
   fetchCartSuccess,
   fetchError,
@@ -10,13 +18,7 @@ import {
   updateCartSuccess,
   updateWishlist,
   updateWishlistSuccess
-} from './cart.actions';
-import { CartService } from '../services/cart/cart.service';
-import { Store } from '@ngrx/store';
-import { UserFeature, UserSelectors } from '../../user-state';
-import { products } from './cart.selectors';
-import { CartAction, CartProduct } from '../models';
-import { wishlist } from './cart.selectors';
+} = CartActions;
 
 @Injectable()
 export class CartEffects {

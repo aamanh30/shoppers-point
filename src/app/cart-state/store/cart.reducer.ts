@@ -1,15 +1,16 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {
+import { CartActions } from './cart.actions';
+import { CartProduct } from '../models/cart-product';
+import { CART_KEY } from './cart-key';
+
+const {
   fetchCart,
   fetchCartSuccess,
   removeProduct,
   updateCartSuccess,
   updateProductQuantity,
   updateWishlistSuccess
-} from './cart.actions';
-import { CartProduct } from '../models/cart-product';
-
-export const CART_KEY = 'cart';
+} = CartActions;
 
 export interface CartState {
   id: number | undefined;
