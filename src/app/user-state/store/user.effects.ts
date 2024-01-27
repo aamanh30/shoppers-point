@@ -3,10 +3,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { fetchError, fetchUser, fetchUserSuccess } from './user.actions';
+import { UserActions } from './user.actions';
 import { UserService } from '../services/user/user.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../shared/models';
+
+const { fetchError, fetchUser, fetchUserSuccess } = UserActions;
 
 @Injectable()
 export class UserEffects {
