@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { concatMap, map, catchError, filter } from 'rxjs/operators';
+import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CartActions } from './cart.actions';
 import { CartService } from '../services/cart/cart.service';
@@ -10,18 +10,26 @@ import { products } from './cart.selectors';
 import { CartAction, CartProduct } from '../models';
 import { wishlist } from './cart.selectors';
 
+const {
+  fetchCart,
+  fetchCartSuccess,
+  fetchError,
+  updateCart,
+  updateCartSuccess,
+  updateWishlist,
+  updateWishlistSuccess
+} = CartActions;
+
 @Injectable()
 export class CartEffects {
   fetchCart$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CartActions.fetchCart),
+      ofType(fetchCart),
       concatLatestFrom(() => [this.store.select(UserSelectors.user)]),
       concatMap(([_, user]) => {
         return this.cartService.fetchCart(user?.uid ?? 2).pipe(
-          map(({ id, products }) =>
-            CartActions.fetchCartSuccess({ id, products })
-          ),
-          catchError((error: Error) => of(CartActions.fetchError({ error })))
+          map(({ id, products }) => fetchCartSuccess({ id, products })),
+          catchError((error: Error) => of(fetchError({ error })))
         );
       })
     )
@@ -29,7 +37,7 @@ export class CartEffects {
 
   updateCart$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CartActions.updateCart),
+      ofType(updateCart),
       concatLatestFrom(() => [this.store.select(products)]),
       map(([{ productId, action, quantity }, _products]) => {
         let cartProducts = _products?.length ? [..._products] : [];
@@ -57,7 +65,7 @@ export class CartEffects {
           cartProducts = cartProducts.filter(({ id }) => id !== product?.id);
         }
 
-        return CartActions.updateCartSuccess({
+        return updateCartSuccess({
           products: cartProducts
         });
       })
@@ -66,10 +74,10 @@ export class CartEffects {
 
   updateWishList$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(CartActions.updateWishlist),
+      ofType(updateWishlist),
       concatLatestFrom(() => [this.store.select(wishlist)]),
       map(([{ productId }, wishlist]) =>
-        CartActions.updateWishlistSuccess({
+        updateWishlistSuccess({
           wishlist: wishlist.includes(productId)
             ? wishlist.filter(id => id !== productId)
             : [...wishlist, productId]
