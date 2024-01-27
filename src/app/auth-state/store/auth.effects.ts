@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import {
+import { AuthActions } from './auth.actions';
+import { catchError, concatMap, map, of } from 'rxjs';
+import { AuthService } from '../services/auth/auth.service';
+import { UserActions } from '../../user-state';
+
+const {
   authError,
   fetchUser,
   forgotPassword,
@@ -12,10 +17,7 @@ import {
   signOut,
   signUp,
   signUpSuccess
-} from './auth.actions';
-import { catchError, concatMap, map, of } from 'rxjs';
-import { AuthService } from '../services/auth/auth.service';
-import { UserActions } from '../../user-state';
+} = AuthActions;
 
 @Injectable()
 export class AuthEffects {
