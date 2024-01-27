@@ -1,5 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import {
+import { CatalogueActions } from './catalogue.actions';
+import { Product } from '../../shared/models';
+import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
+import { CatalogueFilterKey, CatalogueFilters } from '../models';
+import { CATALOGUE_KEY } from './catalogue-key';
+
+const {
   clearFilters,
   clearSearchProducts,
   fetchCategories,
@@ -12,12 +18,7 @@ import {
   searchProductsSuccess,
   setFilters,
   updateProductReview
-} from './catalogue.actions';
-import { Product } from '../../shared/models';
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
-import { CatalogueFilterKey, CatalogueFilters } from '../models';
-
-export const CATALOGUE_KEY = 'catalogue';
+} = CatalogueActions;
 
 export interface CatalogueState extends EntityState<Product> {
   categories: string[];

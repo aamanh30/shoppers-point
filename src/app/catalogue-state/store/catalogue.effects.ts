@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import {
+import { CatalogueActions } from './catalogue.actions';
+import { CatalogueService } from '../services/catalogue/catalogue.service';
+import { toSearchedProducts } from './catalogue.aux';
+
+const {
   fetchProducts,
   fetchError,
   fetchProductsSuccess,
@@ -12,9 +16,7 @@ import {
   fetchCategoriesSuccess,
   searchProducts,
   searchProductsSuccess
-} from './catalogue.actions';
-import { CatalogueService } from '../services/catalogue/catalogue.service';
-import { toSearchedProducts } from './catalogue.aux';
+} = CatalogueActions;
 
 @Injectable()
 export class CatalogueEffects {

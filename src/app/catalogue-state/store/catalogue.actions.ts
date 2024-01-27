@@ -1,81 +1,28 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Product, Review } from '../../shared/models';
 import { CatalogueFilterKey } from '../models/catalogue-filter-key';
+import { CATALOGUE_KEY } from './catalogue-key';
 
-export enum CatalogueActionTypes {
-  FetchProducts = '[Catalogue] Fetch Products',
-  FetchProductsSuccess = '[Catalogue] Fetch Products Success',
-  FetchProductDetails = '[Catalogue] Fetch Product Details',
-  FetchProductDetailsSuccess = '[Catalogue] Fetch Product Details Success',
-  FetchCategories = '[Catalogue] Fetch Categories',
-  FetchCategoriesSuccess = '[Catalogue] Fetch Categories Success',
-  SearchProducts = '[Catalogue] Search Products',
-  SearchProductsSuccess = '[Catalogue] Search Products Success',
-  ClearSearchProducts = '[Catalogue] Clear Search Products',
-  FetchError = '[Catalogue] Fetch Error',
-  SetFilters = '[Catalogue] Set Filters',
-  ClearFilters = '[Catalogue] Clear Filters',
-  UpdateProductReview = '[Catalogue] Update Product Review'
-}
-
-export const fetchProducts = createAction(CatalogueActionTypes.FetchProducts);
-
-export const fetchProductsSuccess = createAction(
-  CatalogueActionTypes.FetchProductsSuccess,
-  props<{ products: Product[] }>()
-);
-
-export const fetchProductDetails = createAction(
-  CatalogueActionTypes.FetchProductDetails,
-  props<{ id: number | string }>()
-);
-
-export const fetchProductDetailsSuccess = createAction(
-  CatalogueActionTypes.FetchProductDetailsSuccess,
-  props<{ product: Product }>()
-);
-
-export const fetchCategories = createAction(
-  CatalogueActionTypes.FetchCategories
-);
-
-export const fetchCategoriesSuccess = createAction(
-  CatalogueActionTypes.FetchCategoriesSuccess,
-  props<{ categories: string[] }>()
-);
-
-export const searchProducts = createAction(
-  CatalogueActionTypes.SearchProducts,
-  props<{ search: string }>()
-);
-
-export const searchProductsSuccess = createAction(
-  CatalogueActionTypes.SearchProductsSuccess,
-  props<{ products: Product[] }>()
-);
-
-export const clearSearchProducts = createAction(
-  CatalogueActionTypes.ClearSearchProducts
-);
-
-export const fetchError = createAction(
-  CatalogueActionTypes.FetchError,
-  props<{ error: Partial<Error> }>()
-);
-
-export const setFilters = createAction(
-  CatalogueActionTypes.SetFilters,
-  props<{
-    label: string | number;
-    key: CatalogueFilterKey;
-    checked?: boolean;
-    value?: string;
-  }>()
-);
-
-export const clearFilters = createAction(CatalogueActionTypes.ClearFilters);
-
-export const updateProductReview = createAction(
-  CatalogueActionTypes.UpdateProductReview,
-  props<Review & { id: number }>()
-);
+export const CatalogueActions = createActionGroup({
+  source: CATALOGUE_KEY,
+  events: {
+    fetchProducts: emptyProps(),
+    fetchProductsSuccess: props<{ products: Product[] }>(),
+    fetchProductDetails: props<{ id: number | string }>(),
+    fetchProductDetailsSuccess: props<{ product: Product }>(),
+    fetchCategories: emptyProps(),
+    fetchCategoriesSuccess: props<{ categories: string[] }>(),
+    searchProducts: props<{ search: string }>(),
+    searchProductsSuccess: props<{ products: Product[] }>(),
+    clearSearchProducts: emptyProps(),
+    fetchError: props<{ error: Partial<Error> }>(),
+    setFilters: props<{
+      label: string | number;
+      key: CatalogueFilterKey;
+      checked?: boolean;
+      value?: string;
+    }>(),
+    clearFilters: emptyProps(),
+    updateProductReview: props<Review & { id: number }>()
+  }
+});
