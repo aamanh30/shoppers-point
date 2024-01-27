@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "shoppers-point:build:production"
+              "buildTarget": "shoppers-point:build:production"
             },
             "development": {
-              "browserTarget": "shoppers-point:build:development"
+              "buildTarget": "shoppers-point:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "shoppers-point:build"
+            "buildTarget": "shoppers-point:build"
           }
         },
         "test": {
