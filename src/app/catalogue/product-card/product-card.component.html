@@ -1,9 +1,6 @@
 <div *ngIf="product" class="product-item bg-light p-4 mb-4">
   <div class="product-img position-relative overflow-hidden">
-    <img
-      class="img-fluid w-100"
-      src="{{ product.image }}"
-      alt="{{ product.title }}" />
+    <img class="img-fluid w-100" [src]="product.image" [alt]="product.title" />
     <div class="product-action">
       <a
         class="btn btn-outline-dark btn-square"
@@ -23,9 +20,7 @@
     </div>
   </div>
   <div class="text-center pt-4">
-    <p
-      class="h6 text-decoration-none text-truncate"
-      title="{{ product.title }}">
+    <p class="h6 text-decoration-none text-truncate" [title]="product.title">
       {{ product.title }}
     </p>
     <div class="d-flex align-items-center justify-content-center mt-2">
