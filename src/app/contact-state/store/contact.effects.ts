@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { contactError, placeQuery, placeQuerySuccess } from './contact.actions';
+import { ContactActions } from './contact.actions';
 import { ContactService } from '../services/contact/contact.service';
+
+const { contactError, placeQuery, placeQuerySuccess } = ContactActions;
 
 @Injectable()
 export class ContactEffects {
