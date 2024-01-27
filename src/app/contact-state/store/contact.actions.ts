@@ -1,22 +1,12 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { ContactForm } from '../models/contact-form';
+import { CONTACT_KEY } from './contact-key';
 
-export enum ContactActionTypes {
-  PlaceQuery = '[Contact] Place Query',
-  PlaceQuerySuccess = '[Contact] Place Query Success',
-  ContactError = '[Contact] Contact Error'
-}
-
-export const placeQuery = createAction(
-  ContactActionTypes.PlaceQuery,
-  props<ContactForm>()
-);
-
-export const placeQuerySuccess = createAction(
-  ContactActionTypes.PlaceQuerySuccess
-);
-
-export const contactError = createAction(
-  ContactActionTypes.ContactError,
-  props<{ error: Partial<Error> }>()
-);
+export const ContactActions = createActionGroup({
+  source: CONTACT_KEY,
+  events: {
+    placeQuery: props<ContactForm>(),
+    placeQuerySuccess: emptyProps(),
+    contactError: props<{ error: Partial<Error> }>()
+  }
+});
