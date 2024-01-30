@@ -8,7 +8,7 @@ import { UserService } from '../services/user/user.service';
 import { environment } from '../../../environments/environment';
 import { User } from '../../shared/models';
 
-const { fetchError, fetchUser, fetchUserSuccess } = UserActions;
+const { clearUser, fetchError, fetchUser, fetchUserSuccess } = UserActions;
 
 @Injectable()
 export class UserEffects {

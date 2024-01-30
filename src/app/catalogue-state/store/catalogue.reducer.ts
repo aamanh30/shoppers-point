@@ -17,7 +17,9 @@ const {
   searchProducts,
   searchProductsSuccess,
   setFilters,
-  updateProductReview
+  updatePage,
+  updateProductReview,
+  updateProductsPerPage
 } = CatalogueActions;
 
 export interface CatalogueState extends EntityState<Product> {

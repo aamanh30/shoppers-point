@@ -65,7 +65,7 @@ export class ShopComponent implements OnInit {
     );
     this.productsLoading$ = this.store.select(
       ProgressSelectors.hasSpecificActionInProgress(
-        CatalogueActions.CatalogueActionTypes.FetchProducts
+        CatalogueActions.fetchProducts.type
       )
     );
     this.store.dispatch(

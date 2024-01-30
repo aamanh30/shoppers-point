@@ -47,7 +47,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.productDetails$ = this.store.select(CatalogueSelectors.productDetails);
     this.productDetailsLoading$ = this.store.select(
       ProgressSelectors.hasSpecificActionInProgress(
-        CatalogueActions.CatalogueActionTypes.FetchProductDetails
+        CatalogueActions.fetchProductDetails.type
       )
     );
     this.quantity$ = combineLatest([
