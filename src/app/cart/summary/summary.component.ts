@@ -11,7 +11,7 @@ export class SummaryComponent {
   get products() {
     return this.#products;
   }
-  @Input() set products(products: CartProduct[] | undefined | null) {
+  @Input() set products(products: CartProduct[]) {
     this.shipping = this.products?.length ? 10 : 0;
     this.#products = products;
   }
@@ -22,9 +22,16 @@ export class SummaryComponent {
     );
   }
   shipping = 10;
-  #products: CartProduct[] | undefined | null;
+  #products: CartProduct[] = [];
 
   onCheckout(): void {
     this.checkout.emit();
+  }
+
+  getTotal(): number {
+    return this.products.reduce(
+      (total, { price, quantity }) => (total += price * quantity),
+      0
+    );
   }
 }
