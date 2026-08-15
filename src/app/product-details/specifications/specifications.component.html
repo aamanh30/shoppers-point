@@ -1,58 +1,60 @@
-<div *ngIf="product" class="h-100 bg-light p-30">
-  <h3>{{ product.title }}</h3>
-  <div class="d-flex mb-3">
-    <shoppers-point-rating [rating]="product.rating"></shoppers-point-rating>
-  </div>
-  <h3 class="font-weight-semi-bold mb-4">
-    {{ product.price | currency }}
-  </h3>
-  <p class="mb-4">
-    {{ product.description }}
-  </p>
-  <div class="d-flex align-items-center mb-4 pt-2">
-    <div class="input-group quantity mr-3" style="width: 130px">
-      <div class="input-group-btn">
-        <button
-          class="btn btn-primary btn-minus"
-          [disabled]="quantity <= 1"
-          (click)="onRemove()">
-          <i class="fa fa-minus"></i>
-        </button>
+@if (product) {
+  <div class="h-100 bg-light p-30">
+    <h3>{{ product.title }}</h3>
+    <div class="d-flex mb-3">
+      <shoppers-point-rating [rating]="product.rating"></shoppers-point-rating>
+    </div>
+    <h3 class="font-weight-semi-bold mb-4">
+      {{ product.price | currency }}
+    </h3>
+    <p class="mb-4">
+      {{ product.description }}
+    </p>
+    <div class="d-flex align-items-center mb-4 pt-2">
+      <div class="input-group quantity mr-3" style="width: 130px">
+        <div class="input-group-btn">
+          <button
+            class="btn btn-primary btn-minus"
+            [disabled]="quantity <= 1"
+            (click)="onRemove()">
+            <i class="fa fa-minus"></i>
+          </button>
+        </div>
+        <input
+          #productQuantity
+          type="number"
+          class="form-control bg-secondary border-0 text-center"
+          [value]="quantity"
+          (keyup)="onKeyUp(productQuantity.value)" />
+        <div class="input-group-btn">
+          <button class="btn btn-primary btn-plus" (click)="onAdd()">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
       </div>
-      <input
-        #productQuantity
-        type="number"
-        class="form-control bg-secondary border-0 text-center"
-        [value]="quantity"
-        (keyup)="onKeyUp(productQuantity.value)" />
-      <div class="input-group-btn">
-        <button class="btn btn-primary btn-plus" (click)="onAdd()">
-          <i class="fa fa-plus"></i>
-        </button>
+      <button
+        class="btn btn-primary px-3"
+        [disabled]="quantity < 1"
+        (click)="onUpdateCart()">
+        <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
+      </button>
+    </div>
+    <div class="d-flex pt-2">
+      <strong class="text-dark mr-2">Share on:</strong>
+      <div class="d-inline-flex">
+        <a class="text-dark px-2" href="">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+        <a class="text-dark px-2" href="">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a class="text-dark px-2" href="">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a class="text-dark px-2" href="">
+          <i class="fab fa-pinterest"></i>
+        </a>
       </div>
     </div>
-    <button
-      class="btn btn-primary px-3"
-      [disabled]="quantity < 1"
-      (click)="onUpdateCart()">
-      <i class="fa fa-shopping-cart mr-1"></i> Add To Cart
-    </button>
   </div>
-  <div class="d-flex pt-2">
-    <strong class="text-dark mr-2">Share on:</strong>
-    <div class="d-inline-flex">
-      <a class="text-dark px-2" href="">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a class="text-dark px-2" href="">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a class="text-dark px-2" href="">
-        <i class="fab fa-linkedin-in"></i>
-      </a>
-      <a class="text-dark px-2" href="">
-        <i class="fab fa-pinterest"></i>
-      </a>
-    </div>
-  </div>
-</div>
+}

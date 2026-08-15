@@ -1,38 +1,38 @@
 <div class="container-fluid">
   <div class="row px-xl-5">
     <!-- Shop Sidebar Start -->
-    <div *ngIf="{ filters: filters$ | async } as ctx" class="col-lg-3 col-md-4">
-      <!-- Category Start -->
-      <shoppers-point-filters
-        heading="Filter by category"
-        [filters]="ctx.filters?.categories"
-        [filterOptions]="categories$ | async"
+    @if ({ filters: filters$ | async }; as ctx) {
+      <div class="col-lg-3 col-md-4">
+        <!-- Category Start -->
+        <shoppers-point-filters
+          heading="Filter by category"
+          [filters]="ctx.filters?.categories"
+          [filterOptions]="categories$ | async"
         (filterChanged)="
           onFiltersChanged($event, 'categories')
         "></shoppers-point-filters>
-      <!-- Category End -->
-
-      <!-- Rating Start -->
-      <shoppers-point-filters
-        heading="Filter by rating"
-        [filters]="ctx.filters?.ratings"
-        [filterOptions]="ratings$ | async"
+        <!-- Category End -->
+        <!-- Rating Start -->
+        <shoppers-point-filters
+          heading="Filter by rating"
+          [filters]="ctx.filters?.ratings"
+          [filterOptions]="ratings$ | async"
         (filterChanged)="
           onFiltersChanged($event, 'ratings')
         "></shoppers-point-filters>
-      <!-- Rating End -->
-
-      <!-- Price Start -->
-      <shoppers-point-filters
-        heading="Filter by price"
-        [filterType]="FilterType.range"
-        [filters]="ctx.filters?.range"
-        [range]="range$ | async"
+        <!-- Rating End -->
+        <!-- Price Start -->
+        <shoppers-point-filters
+          heading="Filter by price"
+          [filterType]="FilterType.range"
+          [filters]="ctx.filters?.range"
+          [range]="range$ | async"
         (filterChanged)="
           onFiltersChanged($event, 'range')
         "></shoppers-point-filters>
-      <!-- Price End -->
-    </div>
+        <!-- Price End -->
+      </div>
+    }
     <!-- Shop Sidebar End -->
 
     <!-- Shop Product Start -->
@@ -41,18 +41,19 @@
       [ngClass]="{
         'shoppers-point-spinner': (productsLoading$ | async)
       }">
-      <shoppers-point-products
-        *ngIf="!(productsLoading$ | async)"
-        [productsPerPageOptions]="(productsPerPageOptions$ | async) ?? []"
-        [products]="(products$ | async) ?? []"
-        [pages]="(pages$ | async) ?? []"
-        [currentPage]="(page$ | async) ?? 0"
-        [productsPerPage]="(productsPerPage$ | async) ?? 0"
-        (addToCart)="onAddToCart($event)"
-        (addToWishlist)="onAddToWishlist($event)"
-        (productsPerPageChanged)="onProductsPerPageChanged($event)"
-        (viewProduct)="onViewProduct($event)"
+      @if (!(productsLoading$ | async)) {
+        <shoppers-point-products
+          [productsPerPageOptions]="(productsPerPageOptions$ | async) ?? []"
+          [products]="(products$ | async) ?? []"
+          [pages]="(pages$ | async) ?? []"
+          [currentPage]="(page$ | async) ?? 0"
+          [productsPerPage]="(productsPerPage$ | async) ?? 0"
+          (addToCart)="onAddToCart($event)"
+          (addToWishlist)="onAddToWishlist($event)"
+          (productsPerPageChanged)="onProductsPerPageChanged($event)"
+          (viewProduct)="onViewProduct($event)"
         (pageChanged)="onPageChanged($event)"></shoppers-point-products>
+      }
     </div>
     <!-- Shop Product End -->
   </div>

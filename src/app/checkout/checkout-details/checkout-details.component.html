@@ -5,7 +5,7 @@
         heading="Billing Address"
         [countries]="(countries$ | async) ?? []"
         [form]="billingForm"
-        [model]="model.billingAddress"></shoppers-point-address-form>
+      [model]="model.billingAddress"></shoppers-point-address-form>
 
       <div class="row p-30">
         <div class="col-md-12">
@@ -20,12 +20,13 @@
         </div>
       </div>
 
-      <shoppers-point-address-form
-        *ngIf="model.shippingAddressRequired"
-        heading="Shipping Address"
-        [countries]="(countries$ | async) ?? []"
-        [form]="shippingForm"
+      @if (model.shippingAddressRequired) {
+        <shoppers-point-address-form
+          heading="Shipping Address"
+          [countries]="(countries$ | async) ?? []"
+          [form]="shippingForm"
         [model]="model.shippingAddress"></shoppers-point-address-form>
+      }
     </div>
     <div class="col-lg-4">
       <shoppers-point-order-summary
@@ -37,7 +38,7 @@
         [form]="summaryForm"
         [model]="model.summary"
         (updateSummary)="onUpdateSummary($event)"
-        (placeOrder)="onPlaceOrder()"></shoppers-point-order-summary>
+      (placeOrder)="onPlaceOrder()"></shoppers-point-order-summary>
     </div>
   </div>
 </div>

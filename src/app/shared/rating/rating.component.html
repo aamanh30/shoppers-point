@@ -1,6 +1,6 @@
-<ng-container *ngIf="rating">
+@if (rating) {
   <div class="text-primary mr-2">
-    <ng-container *ngFor="let ratingItem of ratings">
+    @for (ratingItem of ratings; track ratingItem) {
       <small
         class="fa-star"
         [ngClass]="{
@@ -9,8 +9,10 @@
           'fa-star-half-alt': isFaStarHalf(ratingItem)
         }"
         [title]="rating.rate"
-        (click)="onClick(ratingItem)"></small>
-    </ng-container>
+      (click)="onClick(ratingItem)"></small>
+    }
   </div>
-  <small *ngIf="!hideRating" class="pt-1">({{ rating.count }} Reviews)</small>
-</ng-container>
+  @if (!hideRating) {
+    <small class="pt-1">({{ rating.count }} Reviews)</small>
+  }
+}

@@ -7,14 +7,15 @@
       }">
       <a class="page-link" (click)="onPageChanged(currentPage - 1)">Previous</a>
     </li>
-    <li
-      *ngFor="let page of pages"
-      class="page-item"
+    @for (page of pages; track page) {
+      <li
+        class="page-item"
       [ngClass]="{
         active: page === currentPage
       }">
-      <a class="page-link" (click)="onPageChanged(page)">{{ page }}</a>
-    </li>
+        <a class="page-link" (click)="onPageChanged(page)">{{ page }}</a>
+      </li>
+    }
     <li
       class="page-item"
       [ngClass]="{

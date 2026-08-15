@@ -1,6 +1,8 @@
-<label *ngIf="props['showLabel']" class="form-label" [for]="props['id']">{{
-  props.label
-}}</label>
+@if (props['showLabel']) {
+  <label class="form-label" [for]="props['id']">{{
+    props.label
+  }}</label>
+}
 <textarea
   class="form-control"
   [id]="props['id']"
@@ -9,4 +11,4 @@
   [formControl]="formControl"
   [formlyAttributes]="field"
   (change)="onChange($event)"
-  (keyup)="onKeyUp($event)"></textarea>
+(keyup)="onKeyUp($event)"></textarea>

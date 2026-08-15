@@ -3,20 +3,18 @@
   [ngClass]="{
     'shoppers-point-spinner': (productDetailsLoading$ | async)
   }">
-  <ng-container *ngIf="productDetails$ | async as product">
+  @if (productDetails$ | async; as product) {
     <section class="row px-xl-5">
       <div class="col-lg-5 mb-30">
         <shoppers-point-carousel [product]="product"></shoppers-point-carousel>
       </div>
-
       <div class="col-lg-7 h-auto mb-30">
         <shoppers-point-specifications
           [product]="product"
           [quantity]="(quantity$ | async) ?? 1"
-          (updateCart)="onUpdateCart($event)"></shoppers-point-specifications>
+        (updateCart)="onUpdateCart($event)"></shoppers-point-specifications>
       </div>
     </section>
-
     <section class="row px-xl-5">
       <shoppers-point-reviews
         [product]="product"
@@ -24,5 +22,5 @@
           onSubmitReview(product.id, $event)
         "></shoppers-point-reviews>
     </section>
-  </ng-container>
+  }
 </div>

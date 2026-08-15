@@ -4,16 +4,19 @@
 <div class="bg-light p-30 mb-5">
   <div class="border-bottom">
     <h6 class="mb-3">Products</h6>
-    <div
-      *ngFor="let product of products"
-      class="d-flex justify-content-between products">
-      <p class="product-title" [title]="product.title">{{ product.title }}</p>
-      <p class="text-end">{{ product.price | currency }}</p>
-      <p class="text-end">{{ product.quantity }}</p>
-    </div>
-    <div *ngIf="!products?.length" class="d-block">
-      <p class="text-center">No products found</p>
-    </div>
+    @for (product of products; track product) {
+      <div
+        class="d-flex justify-content-between products">
+        <p class="product-title" [title]="product.title">{{ product.title }}</p>
+        <p class="text-end">{{ product.price | currency }}</p>
+        <p class="text-end">{{ product.quantity }}</p>
+      </div>
+    }
+    @if (!products?.length) {
+      <div class="d-block">
+        <p class="text-center">No products found</p>
+      </div>
+    }
   </div>
   <div class="border-bottom pt-3 pb-2">
     <div class="d-flex justify-content-between mb-3">
@@ -41,7 +44,7 @@
       <formly-form
         [fields]="fields"
         [form]="form"
-        [model]="model"></formly-form>
+      [model]="model"></formly-form>
     </form>
 
     <button

@@ -8,28 +8,32 @@
   </div>
   <div class="col-lg-6 text-center text-lg-right">
     <div class="d-inline-flex align-items-center">
-      <div *ngIf="user" class="btn-group">
-        <button
-          type="button"
-          class="btn btn-sm btn-light dropdown-toggle"
-          (click)="onToggle()">
-          My Account
-        </button>
-        <div
-          class="dropdown-menu dropdown-menu-right"
-          [ngClass]="{ show: expanded }">
-          <button class="dropdown-item" type="button" [disabled]="true">
-            Hi, {{ user.displayName || user.email }}
+      @if (user) {
+        <div class="btn-group">
+          <button
+            type="button"
+            class="btn btn-sm btn-light dropdown-toggle"
+            (click)="onToggle()">
+            My Account
           </button>
-          <button class="dropdown-item" type="button" (click)="onSignOut()">
-            Sign Out
-          </button>
+          <div
+            class="dropdown-menu dropdown-menu-right"
+            [ngClass]="{ show: expanded }">
+            <button class="dropdown-item" type="button" [disabled]="true">
+              Hi, {{ user.displayName || user.email }}
+            </button>
+            <button class="dropdown-item" type="button" (click)="onSignOut()">
+              Sign Out
+            </button>
+          </div>
         </div>
-      </div>
-      <div *ngIf="!user" class="d-inline-flex align-items-center h-100">
-        <a class="text-body mr-3" [routerLink]="['/auth/sign-up']">Sign Up</a>
-        <a class="text-body mr-3" [routerLink]="['/auth/sign-in']">Sign In</a>
-      </div>
+      }
+      @if (!user) {
+        <div class="d-inline-flex align-items-center h-100">
+          <a class="text-body mr-3" [routerLink]="['/auth/sign-up']">Sign Up</a>
+          <a class="text-body mr-3" [routerLink]="['/auth/sign-in']">Sign In</a>
+        </div>
+      }
     </div>
     <div class="d-inline-flex align-items-center d-block d-lg-none">
       <a href="" class="btn px-0 ml-2">
@@ -38,16 +42,16 @@
           class="badge text-dark border border-dark rounded-circle"
           style="padding-bottom: 2px"
           >0</span
-        >
-      </a>
-      <a href="" class="btn px-0 ml-2">
-        <i class="fas fa-shopping-cart text-dark"></i>
-        <span
-          class="badge text-dark border border-dark rounded-circle"
-          style="padding-bottom: 2px"
-          >0</span
-        >
-      </a>
+          >
+        </a>
+        <a href="" class="btn px-0 ml-2">
+          <i class="fas fa-shopping-cart text-dark"></i>
+          <span
+            class="badge text-dark border border-dark rounded-circle"
+            style="padding-bottom: 2px"
+            >0</span
+            >
+          </a>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
