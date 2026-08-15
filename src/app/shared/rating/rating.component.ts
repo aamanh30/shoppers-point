@@ -3,9 +3,10 @@ import { Product } from '../models/product';
 import { Rating } from '../models/rating';
 
 @Component({
-  selector: 'shoppers-point-rating',
-  templateUrl: './rating.component.html',
-  styleUrls: ['./rating.component.scss']
+    selector: 'shoppers-point-rating',
+    templateUrl: './rating.component.html',
+    styleUrls: ['./rating.component.scss'],
+    standalone: false
 })
 export class RatingComponent {
   @Input() rating: Rating | undefined;

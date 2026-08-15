@@ -19,9 +19,10 @@ import { AuthActions } from './auth-state';
 import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
-  selector: 'shoppers-point-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'shoppers-point-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: false
 })
 export class AppComponent implements OnDestroy {
   user$: Observable<User | undefined> = EMPTY;

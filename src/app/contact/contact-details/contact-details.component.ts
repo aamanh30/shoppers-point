@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { ContactActions, ContactForm } from '@shoppers-point/contact-state';
 
 @Component({
-  selector: 'shoppers-point-contact-details',
-  templateUrl: './contact-details.component.html',
-  styleUrls: ['./contact-details.component.scss']
+    selector: 'shoppers-point-contact-details',
+    templateUrl: './contact-details.component.html',
+    styleUrls: ['./contact-details.component.scss'],
+    standalone: false
 })
 export class ContactDetailsComponent {
   constructor(private store: Store) {}

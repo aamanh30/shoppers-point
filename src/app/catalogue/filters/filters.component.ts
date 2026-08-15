@@ -7,9 +7,10 @@ import {
 } from '@shoppers-point/catalogue-state';
 
 @Component({
-  selector: 'shoppers-point-filters',
-  templateUrl: './filters.component.html',
-  styleUrls: ['./filters.component.scss']
+    selector: 'shoppers-point-filters',
+    templateUrl: './filters.component.html',
+    styleUrls: ['./filters.component.scss'],
+    standalone: false
 })
 export class FiltersComponent {
   @Input() heading = '';

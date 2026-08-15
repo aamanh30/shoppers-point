@@ -6,9 +6,10 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getSignUpFieldsConfig } from './sign-up-fields';
 
 @Component({
-  selector: 'shoppers-point-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+    selector: 'shoppers-point-sign-up',
+    templateUrl: './sign-up.component.html',
+    styleUrls: ['./sign-up.component.scss'],
+    standalone: false
 })
 export class SignUpComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

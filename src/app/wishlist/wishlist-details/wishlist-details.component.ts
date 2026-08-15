@@ -15,9 +15,10 @@ import {
 } from '@shoppers-point/catalogue-state';
 
 @Component({
-  selector: 'shoppers-point-wishlist-details',
-  templateUrl: './wishlist-details.component.html',
-  styleUrls: ['./wishlist-details.component.scss']
+    selector: 'shoppers-point-wishlist-details',
+    templateUrl: './wishlist-details.component.html',
+    styleUrls: ['./wishlist-details.component.scss'],
+    standalone: false
 })
 export class WishlistDetailsComponent {
   wishlist$: Observable<Product[] | undefined> = EMPTY;

@@ -4,9 +4,10 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Filter, Product, User } from '../../shared/models';
 
 @Component({
-  selector: 'shoppers-point-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+    selector: 'shoppers-point-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.scss'],
+    standalone: false
 })
 export class HeaderComponent {
   @Input() user: User | undefined | null;

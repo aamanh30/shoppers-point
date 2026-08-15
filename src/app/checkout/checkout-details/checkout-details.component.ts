@@ -21,10 +21,11 @@ import {
 import { SelectOption } from '../../shared/models';
 
 @Component({
-  selector: 'shoppers-point-checkout-details',
-  templateUrl: './checkout-details.component.html',
-  styleUrls: ['./checkout-details.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'shoppers-point-checkout-details',
+    templateUrl: './checkout-details.component.html',
+    styleUrls: ['./checkout-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CheckoutDetailsComponent {
   products$: Observable<CartProduct[] | undefined> = EMPTY;

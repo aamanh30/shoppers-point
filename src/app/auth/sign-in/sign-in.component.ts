@@ -7,9 +7,10 @@ import { getSignInFieldsConfig } from './sign-in-fields';
 import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
-  selector: 'shoppers-point-sign-in',
-  templateUrl: './sign-in.component.html',
-  styleUrls: ['./sign-in.component.scss']
+    selector: 'shoppers-point-sign-in',
+    templateUrl: './sign-in.component.html',
+    styleUrls: ['./sign-in.component.scss'],
+    standalone: false
 })
 export class SignInComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

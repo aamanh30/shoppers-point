@@ -5,9 +5,10 @@ import { Address } from '@shoppers-point/checkout-state';
 import { SelectOption } from '../../shared/models';
 
 @Component({
-  selector: 'shoppers-point-address-form',
-  templateUrl: './address-form.component.html',
-  styleUrls: ['./address-form.component.scss']
+    selector: 'shoppers-point-address-form',
+    templateUrl: './address-form.component.html',
+    styleUrls: ['./address-form.component.scss'],
+    standalone: false
 })
 export class AddressFormComponent {
   @Input() heading = '';

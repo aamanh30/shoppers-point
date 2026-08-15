@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartProduct } from '@shoppers-point/cart-state';
 
 @Component({
-  selector: 'shoppers-point-products-table',
-  templateUrl: './products-table.component.html',
-  styleUrls: ['./products-table.component.scss']
+    selector: 'shoppers-point-products-table',
+    templateUrl: './products-table.component.html',
+    styleUrls: ['./products-table.component.scss'],
+    standalone: false
 })
 export class ProductsTableComponent {
   @Input() products: CartProduct[] = [];

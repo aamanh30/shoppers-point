@@ -4,9 +4,10 @@ import { AuthForm } from '@shoppers-point/auth-state';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({
-  selector: 'shoppers-point-auth-form',
-  templateUrl: './auth-form.component.html',
-  styleUrls: ['./auth-form.component.scss']
+    selector: 'shoppers-point-auth-form',
+    templateUrl: './auth-form.component.html',
+    styleUrls: ['./auth-form.component.scss'],
+    standalone: false
 })
 export class AuthFormComponent {
   @Input() formClass = '';

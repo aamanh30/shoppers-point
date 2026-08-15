@@ -6,9 +6,10 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getForgotPasswordFieldsConfig } from './forgot-password-fields';
 
 @Component({
-  selector: 'shoppers-point-forgot-password',
-  templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+    selector: 'shoppers-point-forgot-password',
+    templateUrl: './forgot-password.component.html',
+    styleUrls: ['./forgot-password.component.scss'],
+    standalone: false
 })
 export class ForgotPasswordComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

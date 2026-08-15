@@ -5,9 +5,10 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getDefaultReview } from './reviews.aux';
 
 @Component({
-  selector: 'shoppers-point-reviews',
-  templateUrl: './reviews.component.html',
-  styleUrls: ['./reviews.component.scss']
+    selector: 'shoppers-point-reviews',
+    templateUrl: './reviews.component.html',
+    styleUrls: ['./reviews.component.scss'],
+    standalone: false
 })
 export class ReviewsComponent {
   @Input() product: Product | undefined;

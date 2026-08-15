@@ -10,7 +10,8 @@ import { NgbAccordionDirective } from '@ng-bootstrap/ng-bootstrap';
 import { AccordionComponent } from 'ngx-bootstrap/accordion';
 
 @Directive({
-  selector: '[confusedDeveloperSharedExpandCollapseAll]'
+    selector: '[confusedDeveloperSharedExpandCollapseAll]',
+    standalone: false
 })
 export class ExpandCollapseAllDirective implements AfterViewInit {
   @ContentChildren(NgbAccordionDirective)

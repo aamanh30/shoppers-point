@@ -5,9 +5,10 @@ import { getContactFormFieldsConfig } from './contact-form-fields';
 import { ContactForm } from '@shoppers-point/contact-state';
 
 @Component({
-  selector: 'shoppers-point-contact-form',
-  templateUrl: './contact-form.component.html',
-  styleUrls: ['./contact-form.component.scss']
+    selector: 'shoppers-point-contact-form',
+    templateUrl: './contact-form.component.html',
+    styleUrls: ['./contact-form.component.scss'],
+    standalone: false
 })
 export class ContactFormComponent {
   @Input() model: ContactForm | undefined;

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'shoppers-point-features',
-  templateUrl: './features.component.html',
-  styleUrls: ['./features.component.scss']
+    selector: 'shoppers-point-features',
+    templateUrl: './features.component.html',
+    styleUrls: ['./features.component.scss'],
+    standalone: false
 })
 export class FeaturesComponent {
 

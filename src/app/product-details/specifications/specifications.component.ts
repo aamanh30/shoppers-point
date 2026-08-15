@@ -3,9 +3,10 @@ import { Product } from '../../shared/models';
 import { CartProduct } from '@shoppers-point/cart-state';
 
 @Component({
-  selector: 'shoppers-point-specifications',
-  templateUrl: './specifications.component.html',
-  styleUrls: ['./specifications.component.scss']
+    selector: 'shoppers-point-specifications',
+    templateUrl: './specifications.component.html',
+    styleUrls: ['./specifications.component.scss'],
+    standalone: false
 })
 export class SpecificationsComponent {
   @Input() product: Product | undefined;

@@ -10,9 +10,10 @@ import {
 import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
-  selector: 'shoppers-point-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+    selector: 'shoppers-point-main',
+    templateUrl: './main.component.html',
+    styleUrls: ['./main.component.scss'],
+    standalone: false
 })
 export class MainComponent {
   categories$: Observable<CatalogueFilter[]> = EMPTY;

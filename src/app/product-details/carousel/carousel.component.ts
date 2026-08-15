@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Product } from '../../shared/models';
 
 @Component({
-  selector: 'shoppers-point-carousel',
-  templateUrl: './carousel.component.html',
-  styleUrls: ['./carousel.component.scss']
+    selector: 'shoppers-point-carousel',
+    templateUrl: './carousel.component.html',
+    styleUrls: ['./carousel.component.scss'],
+    standalone: false
 })
 export class CarouselComponent {
   @Input() product: Product | undefined;

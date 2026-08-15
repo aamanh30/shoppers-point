@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../shared/models';
 
 @Component({
-  selector: 'shoppers-point-product-card',
-  templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss']
+    selector: 'shoppers-point-product-card',
+    templateUrl: './product-card.component.html',
+    styleUrls: ['./product-card.component.scss'],
+    standalone: false
 })
 export class ProductCardComponent {
   @Input() product: Product | undefined;

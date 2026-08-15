@@ -6,9 +6,10 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getResetPasswordFieldsConfig } from './reset-password-fields';
 
 @Component({
-  selector: 'shoppers-point-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrls: ['./reset-password.component.scss']
+    selector: 'shoppers-point-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrls: ['./reset-password.component.scss'],
+    standalone: false
 })
 export class ResetPasswordComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

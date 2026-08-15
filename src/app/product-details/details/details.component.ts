@@ -28,9 +28,10 @@ import {
 } from '@shoppers-point/progress-state';
 
 @Component({
-  selector: 'shoppers-point-details',
-  templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+    selector: 'shoppers-point-details',
+    templateUrl: './details.component.html',
+    styleUrls: ['./details.component.scss'],
+    standalone: false
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   productDetails$: Observable<Product | undefined> = EMPTY;

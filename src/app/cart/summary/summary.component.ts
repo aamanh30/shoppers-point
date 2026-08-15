@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CartProduct } from '@shoppers-point/cart-state';
 
 @Component({
-  selector: 'shoppers-point-summary',
-  templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.scss']
+    selector: 'shoppers-point-summary',
+    templateUrl: './summary.component.html',
+    styleUrls: ['./summary.component.scss'],
+    standalone: false
 })
 export class SummaryComponent {
   @Output() checkout: EventEmitter<void> = new EventEmitter<void>();

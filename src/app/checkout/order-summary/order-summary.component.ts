@@ -6,9 +6,10 @@ import { Summary } from '@shoppers-point/checkout-state';
 import { SelectOption } from '../../shared/models';
 
 @Component({
-  selector: 'shoppers-point-order-summary',
-  templateUrl: './order-summary.component.html',
-  styleUrls: ['./order-summary.component.scss']
+    selector: 'shoppers-point-order-summary',
+    templateUrl: './order-summary.component.html',
+    styleUrls: ['./order-summary.component.scss'],
+    standalone: false
 })
 export class OrderSummaryComponent implements OnInit {
   @Input() formValid = false;

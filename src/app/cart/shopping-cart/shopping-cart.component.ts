@@ -14,9 +14,10 @@ import {
 } from '@shoppers-point/catalogue-state';
 
 @Component({
-  selector: 'shoppers-point-shopping-cart',
-  templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+    selector: 'shoppers-point-shopping-cart',
+    templateUrl: './shopping-cart.component.html',
+    styleUrls: ['./shopping-cart.component.scss'],
+    standalone: false
 })
 export class ShoppingCartComponent implements OnInit {
   products$: Observable<CartProduct[] | undefined> = EMPTY;

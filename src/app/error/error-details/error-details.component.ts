@@ -10,9 +10,10 @@ import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
-  selector: 'shoppers-point-error-details',
-  templateUrl: './error-details.component.html',
-  styleUrls: ['./error-details.component.scss']
+    selector: 'shoppers-point-error-details',
+    templateUrl: './error-details.component.html',
+    styleUrls: ['./error-details.component.scss'],
+    standalone: false
 })
 export class ErrorDetailsComponent implements OnInit, OnDestroy {
   error$: Observable<CustomError | undefined> = EMPTY;
