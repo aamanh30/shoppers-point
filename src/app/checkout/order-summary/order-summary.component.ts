@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { CartProduct } from '../../cart-state/models';
-import { Summary } from '../../checkout-state/models';
+import { CartProduct } from '@shoppers-point/cart-state';
+import { Summary } from '@shoppers-point/checkout-state';
 import { SelectOption } from '../../shared/models';
 
 @Component({

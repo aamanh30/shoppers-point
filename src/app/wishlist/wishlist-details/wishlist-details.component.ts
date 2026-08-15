@@ -2,10 +2,17 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, concatMap, map } from 'rxjs';
-import { CartActions, CartFeature, CartSelectors } from '../../cart-state';
+import {
+  CartActions,
+  CartFeature,
+  CartSelectors,
+  CartAction
+} from '@shoppers-point/cart-state';
 import { Product } from '../../shared/models';
-import { CartAction } from '../../cart-state/models';
-import { CatalogueFeature, CatalogueSelectors } from 'src/app/catalogue-state';
+import {
+  CatalogueFeature,
+  CatalogueSelectors
+} from '@shoppers-point/catalogue-state';
 
 @Component({
   selector: 'shoppers-point-wishlist-details',

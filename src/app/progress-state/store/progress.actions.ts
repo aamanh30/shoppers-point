@@ -1,17 +1,14 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, props } from '@ngrx/store';
+import { PROGRESS_FEATURE_KEY } from './index';
 import { StartProgress, StopProgress } from '../models';
 
-export enum ProgressActionTypes {
-  StartProgress = '[Progress] Start Progress',
-  StopProgress = '[Progress] Stop Progress'
-}
+type StartProgressAction = Pick<StartProgress, 'triggerAction' | 'cancellable'>;
+type StopProgressAction = Pick<StopProgress, 'triggerAction'>;
 
-export const startProgress = createAction(
-  ProgressActionTypes.StartProgress,
-  props<{ triggerAction: string } & StartProgress>()
-);
-
-export const stopProgress = createAction(
-  ProgressActionTypes.StopProgress,
-  props<StopProgress>()
-);
+export const { startProgress, stopProgress } = createActionGroup({
+  source: PROGRESS_FEATURE_KEY,
+  events: {
+    startProgress: props<StartProgressAction>(),
+    stopProgress: props<StopProgressAction>()
+  }
+});

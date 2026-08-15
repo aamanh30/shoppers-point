@@ -5,7 +5,7 @@ import {
   ErrorActions,
   ErrorFeature,
   ErrorSelectors
-} from '../../error-state';
+} from '@shoppers-point/error-state';
 import { EMPTY, Observable, Subject, takeUntil } from 'rxjs';
 import { NavigationEnd, Router } from '@angular/router';
 

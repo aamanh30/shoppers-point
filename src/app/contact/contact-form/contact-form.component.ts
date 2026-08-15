@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getContactFormFieldsConfig } from './contact-form-fields';
-import { ContactForm } from '../../contact-state';
+import { ContactForm } from '@shoppers-point/contact-state';
 
 @Component({
   selector: 'shoppers-point-contact-form',

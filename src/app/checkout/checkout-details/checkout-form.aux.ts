@@ -1,5 +1,5 @@
 import { SelectOption } from 'src/app/shared/models';
-import { CheckoutForm } from '../../checkout-state/models';
+import { CheckoutForm } from '@shoppers-point/checkout-state';
 
 export const getCheckoutForm = (): CheckoutForm => ({
   billingAddress: {},

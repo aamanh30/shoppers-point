@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { Address } from '../../checkout-state/models';
+import { Address } from '@shoppers-point/checkout-state';
 import { SelectOption } from '../../shared/models';
 
 @Component({

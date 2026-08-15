@@ -1,10 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, map } from 'rxjs';
-import { CartProduct } from '../../cart-state/models';
-import { CartActions, CartFeature, CartSelectors } from '../../cart-state';
+import {
+  CartProduct,
+  CartActions,
+  CartFeature,
+  CartSelectors
+} from '@shoppers-point/cart-state';
 import { Router } from '@angular/router';
-import { CatalogueFeature, CatalogueSelectors } from '../../catalogue-state';
+import {
+  CatalogueFeature,
+  CatalogueSelectors
+} from '@shoppers-point/catalogue-state';
 
 @Component({
   selector: 'shoppers-point-shopping-cart',

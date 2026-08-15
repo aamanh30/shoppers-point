@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Address } from '../models/address';
-import { CartProduct } from '../../cart-state/models';
+import { CartProduct } from '@shoppers-point/cart-state';
 import { SelectOption } from 'src/app/shared/models';
 import { CHECKOUT_KEY } from './checkout-key';
 

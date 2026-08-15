@@ -2,10 +2,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, map } from 'rxjs';
-import { CartProduct } from '../../cart-state/models';
-import { CartFeature, CartSelectors } from '../../cart-state';
-import { CatalogueFeature, CatalogueSelectors } from '../../catalogue-state';
-import { CheckoutForm } from '../../checkout-state/models';
+import {
+  CartProduct,
+  CartFeature,
+  CartSelectors
+} from '@shoppers-point/cart-state';
+import {
+  CatalogueFeature,
+  CatalogueSelectors
+} from '@shoppers-point/catalogue-state';
+import { CheckoutForm } from '@shoppers-point/checkout-state';
 import { getCheckoutForm, getPaymentOptions } from './checkout-form.aux';
 import {
   CheckoutActions,

@@ -4,7 +4,7 @@ import {
   FilterEvent,
   FilterType,
   Range
-} from '../../catalogue-state/models';
+} from '@shoppers-point/catalogue-state';
 
 @Component({
   selector: 'shoppers-point-filters',

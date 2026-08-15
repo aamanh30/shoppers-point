@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CatalogueFilter } from '../../catalogue-state/models';
+import { CatalogueFilter } from '@shoppers-point/catalogue-state';
 
 @Component({
   selector: 'shoppers-point-categories',

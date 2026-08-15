@@ -1,14 +1,13 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { startProgress, stopProgress } from './progress.actions';
-
-export const PROGRESS_KEY = 'progress';
+import { PROGRESS_FEATURE_KEY } from './index';
 
 export interface ProgressState {
   actionsInProgress: Record<string, number>;
 }
 
 export interface ProgressPartialState {
-  [PROGRESS_KEY]: ProgressState;
+  readonly [PROGRESS_FEATURE_KEY]: ProgressState;
 }
 export const initialProgressState: ProgressState = {
   actionsInProgress: {}
@@ -18,11 +17,13 @@ export const reducer = createReducer(
   initialProgressState,
   on(
     startProgress,
-    (state, { triggerAction }): ProgressState => ({
+    (state, { triggerAction, cancellable }): ProgressState => ({
       ...state,
       actionsInProgress: {
         ...state.actionsInProgress,
-        [triggerAction]: (state.actionsInProgress[triggerAction] ?? 0) + 1
+        [triggerAction]: cancellable
+          ? 1
+          : (state.actionsInProgress[triggerAction] ?? 0) + 1
       }
     })
   ),
@@ -32,9 +33,10 @@ export const reducer = createReducer(
       ...state,
       actionsInProgress: {
         ...state.actionsInProgress,
-        [triggerAction]: state.actionsInProgress[triggerAction]
-          ? state.actionsInProgress[triggerAction] - 1
-          : 0
+        [triggerAction]: Math.max(
+          (state.actionsInProgress[triggerAction] ?? 0) - 1,
+          0
+        )
       }
     })
   )

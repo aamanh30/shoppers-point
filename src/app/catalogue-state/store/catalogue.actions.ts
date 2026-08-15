@@ -1,7 +1,7 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { Product, Review } from '../../shared/models';
 import { CatalogueFilterKey } from '../models/catalogue-filter-key';
-import { ProgressDecorators } from '../../progress-state/models';
+import { ProgressDecorators } from '@shoppers-point/progress-state';
 
 export enum CatalogueActionTypes {
   FetchProducts = '[Catalogue] Fetch Products',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ContactActions, ContactForm } from '../../contact-state';
+import { ContactActions, ContactForm } from '@shoppers-point/contact-state';
 
 @Component({
   selector: 'shoppers-point-contact-details',

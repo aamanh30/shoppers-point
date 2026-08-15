@@ -1,4 +1,4 @@
-import { TypeOption } from '@ngx-formly/core/lib/models';
+import { TypeOption } from 'node_modules/@ngx-formly/core/lib/models';
 import { TypeButtonComponent } from './formly-types/type-button/type-button.component';
 import { TypeTextareaComponent } from './formly-types/type-textarea/type-textarea.component';
 

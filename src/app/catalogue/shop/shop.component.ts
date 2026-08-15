@@ -2,27 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { Product } from '../../shared/models';
 import {
+  CatalogueFilter,
   CatalogueActions,
   CatalogueFeature,
-  CatalogueSelectors
-} from '../../catalogue-state';
-import { CartActions } from '../../cart-state';
-import { CartAction } from '../../cart-state/models';
-import {
+  CatalogueSelectors,
   FilterType,
-  CatalogueFilter,
   CatalogueFilters,
   Range,
   FilterEvent,
   CatalogueFilterKey
-} from '../../catalogue-state/models';
+} from '@shoppers-point/catalogue-state';
+import { CartActions, CartAction } from '@shoppers-point/cart-state';
+import { Product } from '../../shared/models';
 import {
   ProgressFeature,
   ProgressSelectors,
   ProgressType
-} from '../../progress-state';
+} from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-shop',
@@ -70,7 +67,7 @@ export class ShopComponent implements OnInit {
     );
     this.store.dispatch(
       CatalogueActions.fetchProducts({
-        progressType: ProgressType.start
+        progressActionType: ProgressType.Start
       })
     );
   }

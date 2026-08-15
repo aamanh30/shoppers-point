@@ -1,7 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PROGRESS_KEY, ProgressState } from './progress.reducer';
+import { PROGRESS_FEATURE_KEY } from './index';
+import { ProgressState } from './progress.reducer';
 
-const progressFeatureState = createFeatureSelector<ProgressState>(PROGRESS_KEY);
+const progressFeatureState =
+  createFeatureSelector<ProgressState>(PROGRESS_FEATURE_KEY);
 
 export const hasSpecificActionInProgress = (action: string) =>
   createSelector(

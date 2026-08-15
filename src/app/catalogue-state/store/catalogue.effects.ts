@@ -31,11 +31,11 @@ export class CatalogueEffects {
         this.catalogueService.fetchProducts().pipe(
           concatMap(products => [
             fetchCategories({
-              progressType: ProgressType.start
+              progressActionType: ProgressType.Start
             }),
             fetchProductsSuccess({
               products,
-              progressType: ProgressType.stop,
+              progressActionType: ProgressType.Stop,
               triggerAction: CatalogueActionTypes.FetchProducts
             })
           ]),
@@ -43,7 +43,7 @@ export class CatalogueEffects {
             of(
               fetchError({
                 error,
-                progressType: ProgressType.stop,
+                progressActionType: ProgressType.Stop,
                 triggerAction: CatalogueActionTypes.FetchProducts
               })
             )
@@ -62,12 +62,12 @@ export class CatalogueEffects {
             product
               ? fetchProductDetailsSuccess({
                   product,
-                  progressType: ProgressType.stop,
+                  progressActionType: ProgressType.Stop,
                   triggerAction: CatalogueActionTypes.FetchProductDetails
                 })
               : fetchError({
                   error: new Error(`Product with id = ${id} not found`),
-                  progressType: ProgressType.stop,
+                  progressActionType: ProgressType.Stop,
                   triggerAction: CatalogueActionTypes.FetchProductDetails
                 })
           ),
@@ -75,7 +75,7 @@ export class CatalogueEffects {
             of(
               fetchError({
                 error,
-                progressType: ProgressType.stop,
+                progressActionType: ProgressType.Stop,
                 triggerAction: CatalogueActionTypes.FetchProductDetails
               })
             )
@@ -93,7 +93,7 @@ export class CatalogueEffects {
           map(categories =>
             fetchCategoriesSuccess({
               categories,
-              progressType: ProgressType.stop,
+              progressActionType: ProgressType.Stop,
               triggerAction: CatalogueActionTypes.FetchCategories
             })
           ),
@@ -101,7 +101,7 @@ export class CatalogueEffects {
             of(
               fetchError({
                 error,
-                progressType: ProgressType.stop,
+                progressActionType: ProgressType.Stop,
                 triggerAction: CatalogueActionTypes.FetchCategories
               })
             )
@@ -119,7 +119,7 @@ export class CatalogueEffects {
           map(products =>
             searchProductsSuccess({
               products: toSearchedProducts(products, search),
-              progressType: ProgressType.stop,
+              progressActionType: ProgressType.Stop,
               triggerAction: CatalogueActionTypes.SearchProducts
             })
           ),
@@ -127,7 +127,7 @@ export class CatalogueEffects {
             of(
               fetchError({
                 error,
-                progressType: ProgressType.stop,
+                progressActionType: ProgressType.Stop,
                 triggerAction: CatalogueActionTypes.SearchProducts
               })
             )

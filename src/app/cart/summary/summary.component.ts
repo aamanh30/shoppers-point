@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CartProduct } from '../../cart-state/models';
+import { CartProduct } from '@shoppers-point/cart-state';
 
 @Component({
   selector: 'shoppers-point-summary',

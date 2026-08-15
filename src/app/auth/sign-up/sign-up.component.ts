@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthActions, AuthForm } from '../../auth-state';
+import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getSignUpFieldsConfig } from './sign-up-fields';

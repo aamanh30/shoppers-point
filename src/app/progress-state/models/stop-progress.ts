@@ -1,4 +1,4 @@
-export type StopProgress = {
-  triggerAction: string;
-  error?: Partial<Error>;
-};
+import { Progress } from './progress';
+import { StopProgressDecorators } from './stop-progress-decorators';
+
+export type StopProgress = Progress & StopProgressDecorators;

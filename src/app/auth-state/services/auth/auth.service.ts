@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, map, of } from 'rxjs';
+import { Observable, from, map, of, shareReplay } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthForm } from '../../models/auth-form';
 
@@ -32,6 +32,7 @@ export class AuthService {
   }
 
   fetchUser(): Observable<any> {
-    return this.afAuth.user;
+    // Using 'as any' to handle RxJS version mismatch between @angular/fire and project dependencies
+    return this.afAuth.user as any;
   }
 }

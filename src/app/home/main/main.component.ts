@@ -4,10 +4,10 @@ import { EMPTY, Observable } from 'rxjs';
 import {
   CatalogueActions,
   CatalogueFeature,
-  CatalogueSelectors
-} from '../../catalogue-state';
-import { CatalogueFilter } from '../../catalogue-state/models';
-import { ProgressType } from '../../progress-state';
+  CatalogueSelectors,
+  CatalogueFilter
+} from '@shoppers-point/catalogue-state';
+import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-main',
@@ -22,7 +22,7 @@ export class MainComponent {
     this.categories$ = this.store.select(CatalogueSelectors.categories);
     this.store.dispatch(
       CatalogueActions.fetchProducts({
-        progressType: ProgressType.start
+        progressActionType: ProgressType.Start
       })
     );
   }

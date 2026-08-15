@@ -13,15 +13,19 @@ import {
   CatalogueActions,
   CatalogueFeature,
   CatalogueSelectors
-} from '../../catalogue-state';
+} from '@shoppers-point/catalogue-state';
 import { ActivatedRoute } from '@angular/router';
-import { CartActions, CartFeature, CartSelectors } from '../../cart-state';
-import { CartProduct } from '../../cart-state/models';
+import {
+  CartActions,
+  CartFeature,
+  CartSelectors,
+  CartProduct
+} from '@shoppers-point/cart-state';
 import {
   ProgressFeature,
   ProgressSelectors,
   ProgressType
-} from '../../progress-state';
+} from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-details',
@@ -71,7 +75,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.store.dispatch(
         CatalogueActions.fetchProductDetails({
           id,
-          progressType: ProgressType.start
+          progressActionType: ProgressType.Start
         })
       );
     });

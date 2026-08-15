@@ -1,6 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { AuthForm } from '../models/auth-form';
-import { ProgressDecorators } from '../../progress-state/models';
+import { ProgressDecorators } from '@shoppers-point/progress-state';
 
 export const AuthActions = createActionGroup({
   source: 'Auth',

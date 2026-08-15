@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UntypedFormGroup } from '@angular/forms';
-import { AuthActions, AuthForm } from '../../auth-state';
+import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getSignInFieldsConfig } from './sign-in-fields';
-import { ProgressType } from '../../progress-state';
+import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-sign-in',
@@ -28,7 +28,7 @@ export class SignInComponent {
     this.store.dispatch(
       AuthActions.signIn({
         ...this.form.value,
-        progressType: ProgressType.start
+        progressType: ProgressType.Start
       })
     );
   }

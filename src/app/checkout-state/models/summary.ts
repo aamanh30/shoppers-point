@@ -1,4 +1,4 @@
-import { CartProduct } from '../../cart-state/models';
+import { CartProduct } from '@shoppers-point/cart-state';
 
 export interface Summary {
   paymentType?: string;

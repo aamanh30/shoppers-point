@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { AuthForm } from '../../auth-state';
+import { AuthForm } from '@shoppers-point/auth-state';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UntypedFormGroup } from '@angular/forms';
-import { AuthActions, AuthForm } from '../../auth-state';
+import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getForgotPasswordFieldsConfig } from './forgot-password-fields';
 

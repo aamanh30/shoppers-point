@@ -1,42 +1,32 @@
-import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { inject, Injectable } from '@angular/core';
+import { Actions, createEffect } from '@ngrx/effects';
 import { filter, map } from 'rxjs/operators';
-import { ProgressType } from '../models/progress-type';
 import { startProgress, stopProgress } from './progress.actions';
-import { StopProgress } from '../models/stop-progress';
+import {
+  isStartProgressAction,
+  isStopProgressAction
+} from '../models/progress.utils';
 
 @Injectable()
 export class ProgressEffects {
   startProgress$ = createEffect(() =>
-    this.actions$.pipe(
-      filter((action: any) => action.progressType === ProgressType.start),
-      map(({ type: triggerAction }) => startProgress({ triggerAction }))
+    this.#actions$.pipe(
+      filter(isStartProgressAction),
+      map(({ cancellable, type }) =>
+        startProgress({
+          triggerAction: type,
+          cancellable
+        })
+      )
     )
   );
 
   stopProgress$ = createEffect(() =>
-    this.actions$.pipe(
-      filter((action: any) => action.progressType === ProgressType.stop),
-      map(({ triggerAction, error }) => stopProgress({ triggerAction, error }))
+    this.#actions$.pipe(
+      filter(isStopProgressAction),
+      map(({ type }) => stopProgress({ triggerAction: type }))
     )
   );
 
-  showToast$ = createEffect(
-    () =>
-      this.actions$.pipe(
-        ofType(stopProgress),
-        map(({ error }: StopProgress) => {
-          if (!error) {
-            return;
-          }
-
-          alert(error.message);
-        })
-      ),
-    {
-      dispatch: false
-    }
-  );
-
-  constructor(private actions$: Actions) {}
+  readonly #actions$ = inject(Actions);
 }

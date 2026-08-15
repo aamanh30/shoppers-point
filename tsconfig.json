@@ -3,6 +3,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "rootDir": "./src",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,17 +13,26 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "es2020",
+    "target": "es2022",
+    "module": "esnext",
     "lib": [
       "es2020",
       "dom"
     ],
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "paths": {
+      "@shoppers-point/auth-state": ["./src/app/auth-state/index.ts"],
+      "@shoppers-point/cart-state": ["./src/app/cart-state/index.ts"],
+      "@shoppers-point/catalogue-state": ["./src/app/catalogue-state/index.ts"],
+      "@shoppers-point/checkout-state": ["./src/app/checkout-state/index.ts"],
+      "@shoppers-point/contact-state": ["./src/app/contact-state/index.ts"],
+      "@shoppers-point/error-state": ["./src/app/error-state/index.ts"],
+      "@shoppers-point/progress-state": ["./src/app/progress-state/index.ts"],
+      "@shoppers-point/user-state": ["./src/app/user-state/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

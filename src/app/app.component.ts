@@ -16,7 +16,7 @@ import { CartProduct } from './cart-state/models';
 import { CatalogueActions, CatalogueSelectors } from './catalogue-state';
 import { Router } from '@angular/router';
 import { AuthActions } from './auth-state';
-import { ProgressType } from './progress-state';
+import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-root',
@@ -58,7 +58,7 @@ export class AppComponent implements OnDestroy {
         this.store.dispatch(
           CatalogueActions.searchProducts({
             search,
-            progressType: ProgressType.start
+            progressActionType: ProgressType.Start
           })
         )
       );

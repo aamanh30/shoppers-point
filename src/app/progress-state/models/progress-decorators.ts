@@ -1,8 +1,9 @@
-import { ProgressType } from './progress-type';
-import { StartProgress } from './start-progress';
-import { StopProgress } from './stop-progress';
+import { Progress } from './progress';
+import { StartProgressDecorators } from './start-progress-decorators';
+import { StopProgressDecorators } from './stop-progress-decorators';
 
-export type ProgressDecorators = { progressType: ProgressType } & (
-  | StartProgress
-  | StopProgress
-);
+export type ProgressDecorators = (
+  | StartProgressDecorators
+  | StopProgressDecorators
+) &
+  Partial<Progress>;
