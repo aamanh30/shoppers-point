@@ -6,7 +6,10 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi
+} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 import { CartStateModule } from './cart-state/cart-state.module';
@@ -21,6 +24,7 @@ import { ProgressStateModule } from './progress-state/progress-state.module';
 
 @NgModule({
   declarations: [AppComponent],
+  bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -36,7 +40,6 @@ import { ProgressStateModule } from './progress-state/progress-state.module';
     EffectsModule.forRoot(),
     CartStateModule,
     CatalogueStateModule,
-    HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, {
       name: 'shoppers-point',
       automaticDataCollectionEnabled: true
@@ -49,6 +52,6 @@ import { ProgressStateModule } from './progress-state/progress-state.module';
     AuthStateModule,
     ProgressStateModule
   ],
-  bootstrap: [AppComponent]
+  providers: [provideHttpClient(withInterceptorsFromDi())]
 })
 export class AppModule {}
