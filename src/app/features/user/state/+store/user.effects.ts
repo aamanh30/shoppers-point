@@ -9,7 +9,7 @@ import {
   fetchUser,
   fetchUserSuccess,
 } from './user.actions';
-import { UserService } from '../services/user/user.service';
+import { UserService } from './user.service';
 import { environment } from '@shoppers-point/environment';
 import { User } from '@shoppers-point/shared-ui';
 

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserSelectors, UserFeature } from './user-state';
+import { UserSelectors, UserFeature } from '@shoppers-point/user-state';
 import {
   EMPTY,
   Observable,

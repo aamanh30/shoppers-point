@@ -4,23 +4,27 @@ import { Route, RouterModule } from '@angular/router';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { SummaryComponent } from './summary/summary.component';
 import { CartStateModule } from '../cart-state';
-import { UserStateModule } from '../user-state';
+import { UserStateModule } from '@shoppers-point/user-state';
 import { ProductsTableComponent } from './products-table/products-table.component';
 
 const routes: Route[] = [
   {
     path: '',
-    component: ShoppingCartComponent
-  }
+    component: ShoppingCartComponent,
+  },
 ];
 
 @NgModule({
-  declarations: [ShoppingCartComponent, SummaryComponent, ProductsTableComponent],
+  declarations: [
+    ShoppingCartComponent,
+    SummaryComponent,
+    ProductsTableComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     CartStateModule,
-    UserStateModule
-  ]
+    UserStateModule,
+  ],
 })
 export class CartModule {}

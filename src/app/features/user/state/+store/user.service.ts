@@ -1,14 +1,14 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Observable, from } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-  constructor(private afAuth: AngularFireAuth) {}
+  readonly #afAuth: AngularFireAuth = inject(AngularFireAuth);
 
   fetchUser(): Observable<unknown> {
-    return from(this.afAuth.currentUser);
+    return from(this.#afAuth.currentUser);
   }
 }

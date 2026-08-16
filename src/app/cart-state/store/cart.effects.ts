@@ -41,7 +41,7 @@ export class CartEffects {
         if (idx < 0) {
           product = {
             id: productId,
-            quantity: action === CartAction.increment ? quantity : -quantity
+            quantity: action === CartAction.increment ? quantity : -quantity,
           };
           cartProducts = [...cartProducts, product];
         } else {
@@ -49,7 +49,7 @@ export class CartEffects {
             ...cartProducts[idx],
             quantity:
               cartProducts[idx].quantity +
-              (action === CartAction.increment ? quantity : -quantity)
+              (action === CartAction.increment ? quantity : -quantity),
           };
           cartProducts[idx] = product;
         }
@@ -59,7 +59,7 @@ export class CartEffects {
         }
 
         return CartActions.updateCartSuccess({
-          products: cartProducts
+          products: cartProducts,
         });
       })
     )
@@ -73,7 +73,7 @@ export class CartEffects {
         CartActions.updateWishlistSuccess({
           wishlist: wishlist.includes(productId)
             ? wishlist.filter((id: number) => id !== productId)
-            : [...wishlist, productId]
+            : [...wishlist, productId],
         })
       )
     )

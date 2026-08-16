@@ -1,7 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { UserActions } from './user.actions';
-import { User } from '../../shared/models/user';
-import { USER_KEY } from './user-key';
+import { clearUser, fetchUser, fetchUserSuccess } from './user.actions';
+import { User } from '../../../../shared/models/user';
 
 const { clearUser, fetchUser, fetchUserSuccess } = UserActions;
 
@@ -14,7 +13,7 @@ export interface UserPartialState {
 }
 
 export const initialUserState: UserState = {
-  user: undefined
+  user: undefined,
 };
 
 export const reducer = createReducer(

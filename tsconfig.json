@@ -38,7 +38,7 @@
       "@shoppers-point/progress-state": [
         "src/app/features/progress/state/index.ts"
       ],
-      "@shoppers-point/user-state": ["./src/app/user-state/index.ts"]
+      "@shoppers-point/user-state": ["src/app/features/user/state/index.ts"]
     }
   },
   "angularCompilerOptions": {
