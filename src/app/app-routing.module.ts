@@ -43,7 +43,7 @@ const routes: Routes = [
       {
         path: 'wishlist',
         loadChildren: () =>
-          import('./wishlist/wishlist.module').then(m => m.WishlistModule),
+          import('@shoppers-point/wishlist-ui').then(({ routes }) => routes),
       },
       {
         path: 'product-details',

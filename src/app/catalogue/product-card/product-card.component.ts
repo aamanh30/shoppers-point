@@ -1,12 +1,18 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
-import { Product } from '../../shared/models';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { Product } from '@shoppers-point/shared-ui';
 
 @Component({
-    selector: 'shoppers-point-product-card',
-    templateUrl: './product-card.component.html',
-    styleUrls: ['./product-card.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-product-card',
+  templateUrl: './product-card.component.html',
+  styleUrls: ['./product-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class ProductCardComponent {
   @Input() product: Product | undefined;

@@ -11,14 +11,14 @@ import {
   CatalogueFilters,
   Range,
   FilterEvent,
-  CatalogueFilterKey
+  CatalogueFilterKey,
 } from '@shoppers-point/catalogue-state';
 import { CartActions, CartAction } from '@shoppers-point/cart-state';
-import { Product } from '../../shared/models';
+import { Product } from '@shoppers-point/shared-ui';
 import {
   ProgressFeature,
   ProgressSelectors,
-  ProgressType
+  ProgressType,
 } from '@shoppers-point/progress-state';
 
 @Component({
@@ -26,7 +26,7 @@ import {
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  standalone: false,
 })
 export class ShopComponent implements OnInit {
   readonly FilterType = FilterType;
@@ -69,7 +69,7 @@ export class ShopComponent implements OnInit {
     );
     this.store.dispatch(
       CatalogueActions.fetchProducts({
-        progressActionType: ProgressType.Start
+        progressActionType: ProgressType.Start,
       })
     );
   }
@@ -79,7 +79,7 @@ export class ShopComponent implements OnInit {
       CartActions.updateCart({
         productId,
         action: CartAction.increment,
-        quantity: 1
+        quantity: 1,
       })
     );
   }
@@ -107,7 +107,7 @@ export class ShopComponent implements OnInit {
         label,
         checked,
         value,
-        key
+        key,
       })
     );
   }

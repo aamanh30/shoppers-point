@@ -1,16 +1,23 @@
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CartProduct } from '@shoppers-point/cart-state';
 import { Summary } from '@shoppers-point/checkout-state';
-import { SelectOption } from '../../shared/models';
+import { SelectOption } from '@shoppers-point/shared-ui';
 
 @Component({
-    selector: 'shoppers-point-order-summary',
-    templateUrl: './order-summary.component.html',
-    styleUrls: ['./order-summary.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-order-summary',
+  templateUrl: './order-summary.component.html',
+  styleUrls: ['./order-summary.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class OrderSummaryComponent implements OnInit {
   @Input() formValid = false;
@@ -63,13 +70,13 @@ export class OrderSummaryComponent implements OnInit {
                   name: 'paymentType',
                   className: 'form-control',
                   required: true,
-                  options: this.paymentOptions
-                }
-              }
-            ]
-          }
-        ]
-      }
+                  options: this.paymentOptions,
+                },
+              },
+            ],
+          },
+        ],
+      },
     ];
   }
   onPlaceOrder(): void {

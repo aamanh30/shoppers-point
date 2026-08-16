@@ -2,7 +2,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   EMPTY,
@@ -10,26 +10,26 @@ import {
   Subject,
   combineLatest,
   map,
-  takeUntil
+  takeUntil,
 } from 'rxjs';
-import { Product, Review } from '../../shared/models';
+import { Product, Review } from '@shoppers-point/shared-ui';
 import { Store } from '@ngrx/store';
 import {
   CatalogueActions,
   CatalogueFeature,
-  CatalogueSelectors
+  CatalogueSelectors,
 } from '@shoppers-point/catalogue-state';
 import { ActivatedRoute } from '@angular/router';
 import {
   CartActions,
   CartFeature,
   CartSelectors,
-  CartProduct
+  CartProduct,
 } from '@shoppers-point/cart-state';
 import {
   ProgressFeature,
   ProgressSelectors,
-  ProgressType
+  ProgressType,
 } from '@shoppers-point/progress-state';
 
 @Component({
@@ -37,7 +37,7 @@ import {
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  standalone: false,
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   productDetails$: Observable<Product | undefined> = EMPTY;
@@ -63,11 +63,11 @@ export class DetailsComponent implements OnInit, OnDestroy {
     );
     this.quantity$ = combineLatest([
       this.store.select(CartSelectors.products),
-      this.productDetails$
+      this.productDetails$,
     ]).pipe(
       map(([cartProducts, productDetails]) => {
         const cartProduct = cartProducts.find(
-          product => product.id === productDetails?.id
+          (product: CartProduct) => product.id === productDetails?.id
         );
 
         return cartProduct?.quantity ?? 1;
@@ -82,7 +82,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
       this.store.dispatch(
         CatalogueActions.fetchProductDetails({
           id,
-          progressActionType: ProgressType.Start
+          progressActionType: ProgressType.Start,
         })
       );
     });

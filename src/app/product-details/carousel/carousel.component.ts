@@ -1,12 +1,12 @@
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
-import { Product } from '../../shared/models';
+import { Product } from '@shoppers-point/shared-ui';
 
 @Component({
-    selector: 'shoppers-point-carousel',
-    templateUrl: './carousel.component.html',
-    styleUrls: ['./carousel.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-carousel',
+  templateUrl: './carousel.component.html',
+  styleUrls: ['./carousel.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class CarouselComponent {
   @Input() product: Product | undefined;

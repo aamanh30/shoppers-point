@@ -1,13 +1,19 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
-import { Product } from '../../shared/models';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
+import { Product } from '@shoppers-point/shared-ui';
 import { CartProduct } from '@shoppers-point/cart-state';
 
 @Component({
-    selector: 'shoppers-point-specifications',
-    templateUrl: './specifications.component.html',
-    styleUrls: ['./specifications.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-specifications',
+  templateUrl: './specifications.component.html',
+  styleUrls: ['./specifications.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class SpecificationsComponent {
   @Input() product: Product | undefined;
@@ -37,7 +43,7 @@ export class SpecificationsComponent {
     }
     this.updateCart.emit({
       ...this.product,
-      quantity: this.quantity
+      quantity: this.quantity,
     });
   }
 }

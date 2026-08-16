@@ -1,15 +1,21 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
-import { Product, Review } from '../../shared/models';
+import { Product, Review } from '@shoppers-point/shared-ui';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getDefaultReview } from './reviews.aux';
 
 @Component({
-    selector: 'shoppers-point-reviews',
-    templateUrl: './reviews.component.html',
-    styleUrls: ['./reviews.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-reviews',
+  templateUrl: './reviews.component.html',
+  styleUrls: ['./reviews.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class ReviewsComponent {
   @Input() product: Product | undefined;
@@ -21,7 +27,7 @@ export class ReviewsComponent {
 
   onRatingChanged(rate: number): void {
     this.form.patchValue({
-      rating: { rate }
+      rating: { rate },
     });
   }
 
@@ -44,12 +50,12 @@ export class ReviewsComponent {
               {
                 key: 'rating.rate',
                 props: {
-                  required: true
-                }
-              }
-            ]
-          }
-        ]
+                  required: true,
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -65,12 +71,12 @@ export class ReviewsComponent {
                   type: 'text',
                   placeholder: 'Your Review',
                   className: 'form-control',
-                  required: true
-                }
-              }
-            ]
-          }
-        ]
+                  required: true,
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -85,12 +91,12 @@ export class ReviewsComponent {
                   label: 'Your Name',
                   placeholder: 'John Doe',
                   className: 'form-control',
-                  required: true
-                }
-              }
-            ]
-          }
-        ]
+                  required: true,
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -105,12 +111,12 @@ export class ReviewsComponent {
                   label: 'E-mail',
                   placeholder: 'example@email.com',
                   className: 'form-control',
-                  required: true
-                }
-              }
-            ]
-          }
-        ]
+                  required: true,
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -124,13 +130,13 @@ export class ReviewsComponent {
                   text: 'Leave Your Review',
                   btnType: 'submit',
                   btnClass: 'btn-primary',
-                  onClick: this.onSubmitReview.bind(this)
-                }
-              }
-            ]
-          }
-        ]
-      }
+                  onClick: this.onSubmitReview.bind(this),
+                },
+              },
+            ],
+          },
+        ],
+      },
     ];
   }
 }

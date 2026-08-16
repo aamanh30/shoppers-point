@@ -7,11 +7,11 @@ import {
   clearUser,
   fetchError,
   fetchUser,
-  fetchUserSuccess
+  fetchUserSuccess,
 } from './user.actions';
 import { UserService } from '../services/user/user.service';
-import { environment } from '../../../environments/environment';
-import { User } from '../../shared/models';
+import { environment } from '@shoppers-point/environment';
+import { User } from '@shoppers-point/shared-ui';
 
 const { fetchError, fetchUser, fetchUserSuccess } = UserActions;
 
@@ -39,12 +39,12 @@ export class UserEffects {
             user.accessToken ?? user.stsTokenManager.accessToken
           );
           this.router.navigate([
-            this.route.snapshot.queryParams['url'] ?? '/shop'
+            this.route.snapshot.queryParams['url'] ?? '/shop',
           ]);
         })
       ),
     {
-      dispatch: false
+      dispatch: false,
     }
   );
 
@@ -58,7 +58,7 @@ export class UserEffects {
         })
       ),
     {
-      dispatch: false
+      dispatch: false,
     }
   );
 

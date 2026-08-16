@@ -28,6 +28,8 @@
       "@shoppers-point/auth-ui": ["src/app/features/auth/ui/index.ts"],
       "@shoppers-point/error-ui": ["src/app/features/error/ui/index.ts"],
       "@shoppers-point/home-ui": ["src/app/features/home/ui/index.ts"],
+      "@shoppers-point/shared-ui": ["src/app/shared/index.ts"],
+      "@shoppers-point/wishlist-ui": ["src/app/features/wishlist/ui/index.ts"],
       "@shoppers-point/cart-state": ["./src/app/cart-state/index.ts"],
       "@shoppers-point/catalogue-state": ["./src/app/catalogue-state/index.ts"],
       "@shoppers-point/checkout-state": ["./src/app/checkout-state/index.ts"],

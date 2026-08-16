@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Product, Review } from '../../shared/models';
+import { Product } from '../../shared/models/product';
+import { Review } from '../../shared/models/review';
 import { CatalogueFilterKey } from '../models/catalogue-filter-key';
 import { ProgressDecorators } from '@shoppers-point/progress-state';
 import { CATALOGUE_FEATURE_KEY } from './index';
@@ -19,7 +20,7 @@ export const {
   clearFilters,
   updateProductReview,
   updatePage,
-  updateProductsPerPage
+  updateProductsPerPage,
 } = createActionGroup({
   source: CATALOGUE_FEATURE_KEY,
   events: {
@@ -48,6 +49,6 @@ export const {
     clearFilters: emptyProps(),
     updateProductReview: props<Review & { id: number }>(),
     updatePage: props<{ page: number }>(),
-    updateProductsPerPage: props<{ productsPerPage: number }>()
-  }
+    updateProductsPerPage: props<{ productsPerPage: number }>(),
+  },
 });

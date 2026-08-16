@@ -5,27 +5,27 @@ import { EMPTY, Observable, combineLatest, map } from 'rxjs';
 import {
   CartProduct,
   CartFeature,
-  CartSelectors
+  CartSelectors,
 } from '@shoppers-point/cart-state';
 import {
   CatalogueFeature,
-  CatalogueSelectors
+  CatalogueSelectors,
 } from '@shoppers-point/catalogue-state';
 import { CheckoutForm } from '@shoppers-point/checkout-state';
 import { getCheckoutForm, getPaymentOptions } from './checkout-form.aux';
 import {
   CheckoutActions,
   CheckoutFeature,
-  CheckoutSelectors
+  CheckoutSelectors,
 } from '../../checkout-state';
-import { SelectOption } from '../../shared/models';
+import { SelectOption } from '@shoppers-point/shared-ui';
 
 @Component({
-    selector: 'shoppers-point-checkout-details',
-    templateUrl: './checkout-details.component.html',
-    styleUrls: ['./checkout-details.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+  selector: 'shoppers-point-checkout-details',
+  templateUrl: './checkout-details.component.html',
+  styleUrls: ['./checkout-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: false,
 })
 export class CheckoutDetailsComponent {
   products$: Observable<CartProduct[] | undefined> = EMPTY;
@@ -48,12 +48,12 @@ export class CheckoutDetailsComponent {
     this.countries$ = this.store.select(CheckoutSelectors.countries);
     this.products$ = combineLatest([
       this.store.select(CatalogueSelectors.allProductsLookUp),
-      this.store.select(CartSelectors.products)
+      this.store.select(CartSelectors.products),
     ]).pipe(
       map(([allProductsLookUp, cartProducts]) =>
         cartProducts.map(cartProduct => ({
           ...cartProduct,
-          ...allProductsLookUp[cartProduct.id]
+          ...allProductsLookUp[cartProduct.id],
         }))
       )
     );
@@ -67,7 +67,7 @@ export class CheckoutDetailsComponent {
   onUpdateSummary(items: CartProduct[]): void {
     this.model.summary = {
       ...this.model.summary,
-      items
+      items,
     };
   }
 
@@ -76,7 +76,7 @@ export class CheckoutDetailsComponent {
       CheckoutActions.placeOrder({
         billingAddress: this.billingForm.value,
         shippingAddress: this.shippingForm.value,
-        summary: this.summaryForm.value
+        summary: this.summaryForm.value,
       })
     );
   }

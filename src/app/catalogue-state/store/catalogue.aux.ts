@@ -1,4 +1,4 @@
-import { Product } from '../../shared/models';
+import { Product } from '../../shared/models/product';
 import { CatalogueFilters } from '../models/catalogue-filters';
 
 export const toRatingLabel = (rating: number): string =>

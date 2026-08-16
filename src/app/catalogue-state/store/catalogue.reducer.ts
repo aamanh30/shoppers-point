@@ -19,9 +19,9 @@ const {
   setFilters,
   updatePage,
   updateProductReview,
-  updateProductsPerPage
+  updateProductsPerPage,
 } from './catalogue.actions';
-import { Product } from '../../shared/models';
+import { Product } from '../../shared/models/product';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { CatalogueFilterKey, CatalogueFilters } from '../models';
 import { CATALOGUE_FEATURE_KEY } from './index';
@@ -40,7 +40,7 @@ export interface CataloguePartialState extends EntityState<Product> {
 }
 export const catalogueAdapter: EntityAdapter<Product> =
   createEntityAdapter<Product>({
-    selectId: (product: Product) => product.id
+    selectId: (product: Product) => product.id,
   });
 
 export const initialCatalogueState: CatalogueState =
@@ -50,7 +50,7 @@ export const initialCatalogueState: CatalogueState =
     products: [],
     filters: undefined,
     page: 1,
-    productsPerPage: 5
+    productsPerPage: 5,
   });
 
 export const reducer = createReducer(
@@ -74,7 +74,7 @@ export const reducer = createReducer(
     (state, { product }): CatalogueState =>
       catalogueAdapter.upsertOne(product, {
         ...state,
-        productId: product.id
+        productId: product.id,
       })
   ),
   on(
@@ -90,14 +90,14 @@ export const reducer = createReducer(
     clearSearchProducts,
     (state): CatalogueState => ({
       ...state,
-      products: []
+      products: [],
     })
   ),
   on(
     searchProductsSuccess,
     (state, { products }): CatalogueState => ({
       ...state,
-      products
+      products,
     })
   ),
   on(setFilters, (state, { label, key, checked, value }): CatalogueState => {
@@ -111,16 +111,16 @@ export const reducer = createReducer(
               [key]: Array.from(
                 new Set([
                   ...((state.filters ?? {})[<CatalogueFilterKey>key] ?? []),
-                  label
+                  label,
                 ])
-              )
+              ),
             }
           : {
               ...state.filters,
               [key]: [
-                ...((state.filters ?? {})[<CatalogueFilterKey>key] ?? [])
-              ].filter(filterLabel => filterLabel !== label)
-            }
+                ...((state.filters ?? {})[<CatalogueFilterKey>key] ?? []),
+              ].filter(filterLabel => filterLabel !== label),
+            },
       };
     }
 
@@ -129,15 +129,15 @@ export const reducer = createReducer(
       page: 1,
       filters: {
         ...state.filters,
-        [key]: [value]
-      }
+        [key]: [value],
+      },
     };
   }),
   on(
     clearFilters,
     (state): CatalogueState => ({
       ...state,
-      filters: undefined
+      filters: undefined,
     })
   ),
   on(
@@ -160,13 +160,13 @@ export const reducer = createReducer(
                   rating.rate) /
                   (state.entities[state.productId]?.rating?.count ?? 0) +
                 1,
-              count: (state.entities[state.productId]?.rating?.count ?? 0) + 1
+              count: (state.entities[state.productId]?.rating?.count ?? 0) + 1,
             },
             reviews: [
               ...(state.entities[state.productId]?.reviews ?? []),
-              { message, name, email, rating }
-            ]
-          }
+              { message, name, email, rating },
+            ],
+          },
         },
         state
       );
@@ -176,7 +176,7 @@ export const reducer = createReducer(
     updatePage,
     (state, { page }): CatalogueState => ({
       ...state,
-      page
+      page,
     })
   ),
   on(
@@ -184,7 +184,7 @@ export const reducer = createReducer(
     (state, { productsPerPage }): CatalogueState => ({
       ...state,
       page: 1,
-      productsPerPage
+      productsPerPage,
     })
   )
 );

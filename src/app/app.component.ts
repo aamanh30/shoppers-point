@@ -8,9 +8,9 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  takeUntil
+  takeUntil,
 } from 'rxjs';
-import { Product, User } from './shared/models';
+import { Product, User } from '@shoppers-point/shared-ui';
 import { CartFeature, CartSelectors } from './cart-state';
 import { CartProduct } from './cart-state/models';
 import { CatalogueActions, CatalogueSelectors } from './catalogue-state';
@@ -23,7 +23,7 @@ import { ProgressType } from '@shoppers-point/progress-state';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  standalone: false,
 })
 export class AppComponent implements OnDestroy {
   user$: Observable<User | undefined> = EMPTY;
@@ -60,7 +60,7 @@ export class AppComponent implements OnDestroy {
         this.store.dispatch(
           CatalogueActions.searchProducts({
             search,
-            progressActionType: ProgressType.Start
+            progressActionType: ProgressType.Start,
           })
         )
       );

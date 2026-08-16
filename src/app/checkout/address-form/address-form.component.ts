@@ -2,14 +2,14 @@ import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Address } from '@shoppers-point/checkout-state';
-import { SelectOption } from '../../shared/models';
+import { SelectOption } from '@shoppers-point/shared-ui';
 
 @Component({
-    selector: 'shoppers-point-address-form',
-    templateUrl: './address-form.component.html',
-    styleUrls: ['./address-form.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-address-form',
+  templateUrl: './address-form.component.html',
+  styleUrls: ['./address-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class AddressFormComponent {
   @Input() heading = '';
@@ -48,10 +48,10 @@ export class AddressFormComponent {
                   label: 'First Name',
                   placeholder: 'John',
                   className: 'form-control',
-                  required: true
-                }
-              }
-            ]
+                  required: true,
+                },
+              },
+            ],
           },
           {
             className: 'col-md-6 form-group',
@@ -62,12 +62,12 @@ export class AddressFormComponent {
                 props: {
                   label: 'Last Name',
                   placeholder: 'Doe',
-                  className: 'form-control'
-                }
-              }
-            ]
-          }
-        ]
+                  className: 'form-control',
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -82,10 +82,10 @@ export class AddressFormComponent {
                   label: 'E-mail',
                   placeholder: 'example@email.com',
                   className: 'form-control',
-                  required: true
-                }
-              }
-            ]
+                  required: true,
+                },
+              },
+            ],
           },
           {
             className: 'col-md-6 form-group',
@@ -96,12 +96,12 @@ export class AddressFormComponent {
                 props: {
                   label: 'Mobile No.',
                   placeholder: '+91-9876543210',
-                  className: 'form-control'
-                }
-              }
-            ]
-          }
-        ]
+                  className: 'form-control',
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -115,10 +115,10 @@ export class AddressFormComponent {
                 props: {
                   label: 'Address Line 1',
                   placeholder: '123 Street',
-                  className: 'form-control'
-                }
-              }
-            ]
+                  className: 'form-control',
+                },
+              },
+            ],
           },
           {
             className: 'col-md-6 form-group',
@@ -129,12 +129,12 @@ export class AddressFormComponent {
                 props: {
                   label: 'Address Line 2',
                   placeholder: '123 Street',
-                  className: 'form-control'
-                }
-              }
-            ]
-          }
-        ]
+                  className: 'form-control',
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -150,10 +150,10 @@ export class AddressFormComponent {
                   label: 'Country',
                   options: this.countries,
                   placeholder: 'Country',
-                  required: true
-                }
-              }
-            ]
+                  required: true,
+                },
+              },
+            ],
           },
           {
             className: 'col-md-6 form-group',
@@ -165,12 +165,12 @@ export class AddressFormComponent {
                   className: 'form-control',
                   label: 'City',
                   options: this.cities,
-                  placeholder: 'City'
-                }
-              }
-            ]
-          }
-        ]
+                  placeholder: 'City',
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         fieldGroupClassName: 'row',
@@ -184,10 +184,10 @@ export class AddressFormComponent {
                 props: {
                   label: 'State',
                   placeholder: 'State',
-                  className: 'form-control'
-                }
-              }
-            ]
+                  className: 'form-control',
+                },
+              },
+            ],
           },
           {
             className: 'col-md-6 form-group',
@@ -198,13 +198,13 @@ export class AddressFormComponent {
                 props: {
                   label: 'Zip',
                   placeholder: 'Zip Code',
-                  className: 'form-control'
-                }
-              }
-            ]
-          }
-        ]
-      }
+                  className: 'form-control',
+                },
+              },
+            ],
+          },
+        ],
+      },
     ];
   }
 }

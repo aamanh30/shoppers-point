@@ -1,14 +1,22 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { Filter, Product, User } from '../../shared/models';
+import { Filter } from '../../shared/models/filter';
+import { Product } from '../../shared/models/product';
+import { User } from '../../shared/models/user';
 
 @Component({
-    selector: 'shoppers-point-header',
-    templateUrl: './header.component.html',
-    styleUrls: ['./header.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class HeaderComponent {
   @Input() user: User | undefined | null;
@@ -20,7 +28,7 @@ export class HeaderComponent {
   @Output() signOut: EventEmitter<void> = new EventEmitter<void>();
   form: UntypedFormGroup = new UntypedFormGroup({});
   model: Filter = {
-    search: ''
+    search: '',
   };
   fields: FormlyFieldConfig[] = [
     {
@@ -30,9 +38,9 @@ export class HeaderComponent {
       props: {
         placeholder: 'Search Products',
         keydown: this.#onSearch.bind(this),
-        change: this.#onSearch.bind(this)
-      }
-    }
+        change: this.#onSearch.bind(this),
+      },
+    },
   ];
 
   onSelectProduct(productId: number): void {
