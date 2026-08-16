@@ -26,6 +26,6 @@ export const AuthActions = createActionGroup({
       {
         error: Partial<Error>;
       } & ProgressDecorators
-    >()
-  }
+    >(),
+  },
 });

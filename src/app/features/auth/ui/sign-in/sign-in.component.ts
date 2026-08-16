@@ -11,7 +11,7 @@ import { ProgressType } from '@shoppers-point/progress-state';
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  standalone: false,
 })
 export class SignInComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});
@@ -29,7 +29,7 @@ export class SignInComponent {
     this.#store.dispatch(
       AuthActions.signIn({
         ...this.form.value,
-        progressType: ProgressType.Start
+        progressType: ProgressType.Start,
       })
     );
   }

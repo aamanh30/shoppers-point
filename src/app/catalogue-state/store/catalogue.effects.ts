@@ -15,11 +15,11 @@ const {
   fetchCategories,
   fetchCategoriesSuccess,
   searchProducts,
-  searchProductsSuccess
+  searchProductsSuccess,
 } from './catalogue.actions';
 import { CatalogueService } from '../services/catalogue/catalogue.service';
 import { toSearchedProducts } from './catalogue.aux';
-import { ProgressType } from 'src/app/progress-state';
+import { ProgressType } from '@shoppers-point/progress-state';
 
 @Injectable()
 export class CatalogueEffects {
@@ -30,20 +30,20 @@ export class CatalogueEffects {
         this.catalogueService.fetchProducts().pipe(
           concatMap(products => [
             fetchCategories({
-              progressActionType: ProgressType.Start
+              progressActionType: ProgressType.Start,
             }),
             fetchProductsSuccess({
               products,
               progressActionType: ProgressType.Stop,
-              triggerAction: fetchProducts.type
-            })
+              triggerAction: fetchProducts.type,
+            }),
           ]),
           catchError((error: Error) =>
             of(
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: fetchProducts.type
+                triggerAction: fetchProducts.type,
               })
             )
           )
@@ -62,12 +62,12 @@ export class CatalogueEffects {
               ? fetchProductDetailsSuccess({
                   product,
                   progressActionType: ProgressType.Stop,
-                  triggerAction: fetchProductDetails.type
+                  triggerAction: fetchProductDetails.type,
                 })
               : fetchError({
                   error: new Error(`Product with id = ${id} not found`),
                   progressActionType: ProgressType.Stop,
-                  triggerAction: fetchProductDetails.type
+                  triggerAction: fetchProductDetails.type,
                 })
           ),
           catchError((error: Error) =>
@@ -75,7 +75,7 @@ export class CatalogueEffects {
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: fetchProductDetails.type
+                triggerAction: fetchProductDetails.type,
               })
             )
           )
@@ -93,7 +93,7 @@ export class CatalogueEffects {
             fetchCategoriesSuccess({
               categories,
               progressActionType: ProgressType.Stop,
-              triggerAction: fetchCategories.type
+              triggerAction: fetchCategories.type,
             })
           ),
           catchError((error: Error) =>
@@ -101,7 +101,7 @@ export class CatalogueEffects {
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: fetchCategories.type
+                triggerAction: fetchCategories.type,
               })
             )
           )
@@ -119,7 +119,7 @@ export class CatalogueEffects {
             searchProductsSuccess({
               products: toSearchedProducts(products, search),
               progressActionType: ProgressType.Stop,
-              triggerAction: searchProducts.type
+              triggerAction: searchProducts.type,
             })
           ),
           catchError((error: Error) =>
@@ -127,7 +127,7 @@ export class CatalogueEffects {
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: searchProducts.type
+                triggerAction: searchProducts.type,
               })
             )
           )

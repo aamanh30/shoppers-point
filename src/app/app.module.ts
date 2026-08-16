@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import {
   provideHttpClient,
   withInterceptorsFromDi,
-  withXhr
+  withXhr,
 } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
@@ -21,7 +21,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AuthStateModule } from '@shoppers-point/auth-state';
-import { ProgressStateModule } from './progress-state/progress-state.module';
+import { ProgressStateModule } from '@shoppers-point/progress-state';
 import { AsyncPipe } from '@angular/common';
 
 @NgModule({
@@ -37,14 +37,14 @@ import { AsyncPipe } from '@angular/common';
       logOnly: !environment.production,
       autoPause: true,
       trace: false,
-      traceLimit: 75
+      traceLimit: 75,
     }),
     EffectsModule.forRoot(),
     CartStateModule,
     CatalogueStateModule,
     AngularFireModule.initializeApp(environment.firebaseConfig, {
       name: 'shoppers-point',
-      automaticDataCollectionEnabled: true
+      automaticDataCollectionEnabled: true,
     }),
     AngularFireAuthModule,
     AngularFireStorageModule,
@@ -53,8 +53,8 @@ import { AsyncPipe } from '@angular/common';
     SharedModule,
     UserStateModule,
     AuthStateModule,
-    ProgressStateModule
+    ProgressStateModule,
   ],
-  providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())]
+  providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())],
 })
 export class AppModule {}

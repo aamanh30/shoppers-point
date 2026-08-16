@@ -6,7 +6,7 @@ import {
   CatalogueFeature,
   CatalogueSelectors,
   CatalogueFilter,
-  CatalogueStateModule
+  CatalogueStateModule,
 } from '@shoppers-point/catalogue-state';
 import { ProgressType } from '@shoppers-point/progress-state';
 import { CommonModule } from '@angular/common';
@@ -30,8 +30,8 @@ import { OffersComponent } from '../offers/offers.component';
     FeaturedProductsComponent,
     MainCarouselComponent,
     NewArrivalsComponent,
-    OffersComponent
-  ]
+    OffersComponent,
+  ],
 })
 export class MainComponent {
   categories$: Observable<CatalogueFilter[]> = EMPTY;
@@ -43,7 +43,7 @@ export class MainComponent {
     this.categories$ = this.#store.select(CatalogueSelectors.categories);
     this.#store.dispatch(
       CatalogueActions.fetchProducts({
-        progressActionType: ProgressType.Start
+        progressActionType: ProgressType.Start,
       })
     );
   }

@@ -35,7 +35,9 @@
       "@shoppers-point/checkout-state": ["./src/app/checkout-state/index.ts"],
       "@shoppers-point/contact-state": ["./src/app/contact-state/index.ts"],
       "@shoppers-point/error-state": ["src/app/features/error/state/index.ts"],
-      "@shoppers-point/progress-state": ["./src/app/progress-state/index.ts"],
+      "@shoppers-point/progress-state": [
+        "src/app/features/progress/state/index.ts"
+      ],
       "@shoppers-point/user-state": ["./src/app/user-state/index.ts"]
     }
   },

@@ -19,15 +19,15 @@ export class AuthEffects {
             ),
             AuthActions.signUpSuccess({
               progressActionType: ProgressType.Stop,
-              triggerAction: AuthActions.signUp.type
-            })
+              triggerAction: AuthActions.signUp.type,
+            }),
           ]),
           catchError(error =>
             of(
               AuthActions.authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.signUp.type
+                triggerAction: AuthActions.signUp.type,
               })
             )
           )
@@ -48,15 +48,15 @@ export class AuthEffects {
                 ),
                 AuthActions.signInSuccess({
                   progressActionType: ProgressType.Stop,
-                  triggerAction: AuthActions.signIn.type
-                })
+                  triggerAction: AuthActions.signIn.type,
+                }),
               ]),
               catchError(error =>
                 of(
                   AuthActions.authError({
                     error,
                     progressActionType: ProgressType.Stop,
-                    triggerAction: AuthActions.signIn.type
+                    triggerAction: AuthActions.signIn.type,
                   })
                 )
               )
@@ -65,7 +65,7 @@ export class AuthEffects {
               AuthActions.authError({
                 error: new Error('Email and Password are mandatory'),
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.signIn.type
+                triggerAction: AuthActions.signIn.type,
               })
             )
       )
@@ -83,7 +83,7 @@ export class AuthEffects {
               AuthActions.authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.forgotPassword.type
+                triggerAction: AuthActions.forgotPassword.type,
               })
             )
           )
@@ -100,7 +100,7 @@ export class AuthEffects {
           map(() =>
             AuthActions.resetPasswordSuccess({
               progressActionType: ProgressType.Stop,
-              triggerAction: AuthActions.resetPassword.type
+              triggerAction: AuthActions.resetPassword.type,
             })
           ),
           catchError(error =>
@@ -108,7 +108,7 @@ export class AuthEffects {
               AuthActions.authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.resetPassword.type
+                triggerAction: AuthActions.resetPassword.type,
               })
             )
           )
@@ -128,7 +128,7 @@ export class AuthEffects {
               AuthActions.authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.signOut.type
+                triggerAction: AuthActions.signOut.type,
               })
             )
           )
@@ -147,14 +147,14 @@ export class AuthEffects {
               ? [
                   UserActions.fetchUserSuccess(
                     structuredClone(user.multiFactor.user)
-                  )
+                  ),
                 ]
               : [
                   AuthActions.authError({
                     error: new Error('User Details not found'),
                     progressActionType: ProgressType.Stop,
-                    triggerAction: AuthActions.fetchUser.type
-                  })
+                    triggerAction: AuthActions.fetchUser.type,
+                  }),
                 ]
           ),
           catchError(error =>
@@ -162,7 +162,7 @@ export class AuthEffects {
               AuthActions.authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.fetchUser.type
+                triggerAction: AuthActions.fetchUser.type,
               })
             )
           )
