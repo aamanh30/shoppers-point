@@ -24,8 +24,7 @@ const {
 import { Product } from '../../shared/models';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { CatalogueFilterKey, CatalogueFilters } from '../models';
-
-export const CATALOGUE_KEY = 'catalogue';
+import { CATALOGUE_FEATURE_KEY } from './index';
 
 export interface CatalogueState extends EntityState<Product> {
   categories: string[];
@@ -37,7 +36,7 @@ export interface CatalogueState extends EntityState<Product> {
 }
 
 export interface CataloguePartialState extends EntityState<Product> {
-  [CATALOGUE_KEY]: CatalogueState;
+  [CATALOGUE_FEATURE_KEY]: CatalogueState;
 }
 export const catalogueAdapter: EntityAdapter<Product> =
   createEntityAdapter<Product>({

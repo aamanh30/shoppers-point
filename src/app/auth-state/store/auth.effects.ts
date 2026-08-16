@@ -26,7 +26,8 @@ export class AuthEffects {
             of(
               AuthActions.authError({
                 error,
-                progressActionType: ProgressType.Stop
+                progressActionType: ProgressType.Stop,
+                triggerAction: AuthActions.signUp.type
               })
             )
           )

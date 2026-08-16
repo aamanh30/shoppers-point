@@ -15,8 +15,7 @@ const {
   fetchCategories,
   fetchCategoriesSuccess,
   searchProducts,
-  searchProductsSuccess,
-  CatalogueActionTypes
+  searchProductsSuccess
 } from './catalogue.actions';
 import { CatalogueService } from '../services/catalogue/catalogue.service';
 import { toSearchedProducts } from './catalogue.aux';
@@ -36,7 +35,7 @@ export class CatalogueEffects {
             fetchProductsSuccess({
               products,
               progressActionType: ProgressType.Stop,
-              triggerAction: CatalogueActionTypes.FetchProducts
+              triggerAction: fetchProducts.type
             })
           ]),
           catchError((error: Error) =>
@@ -44,7 +43,7 @@ export class CatalogueEffects {
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: CatalogueActionTypes.FetchProducts
+                triggerAction: fetchProducts.type
               })
             )
           )
@@ -63,12 +62,12 @@ export class CatalogueEffects {
               ? fetchProductDetailsSuccess({
                   product,
                   progressActionType: ProgressType.Stop,
-                  triggerAction: CatalogueActionTypes.FetchProductDetails
+                  triggerAction: fetchProductDetails.type
                 })
               : fetchError({
                   error: new Error(`Product with id = ${id} not found`),
                   progressActionType: ProgressType.Stop,
-                  triggerAction: CatalogueActionTypes.FetchProductDetails
+                  triggerAction: fetchProductDetails.type
                 })
           ),
           catchError((error: Error) =>
@@ -76,7 +75,7 @@ export class CatalogueEffects {
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: CatalogueActionTypes.FetchProductDetails
+                triggerAction: fetchProductDetails.type
               })
             )
           )
@@ -94,7 +93,7 @@ export class CatalogueEffects {
             fetchCategoriesSuccess({
               categories,
               progressActionType: ProgressType.Stop,
-              triggerAction: CatalogueActionTypes.FetchCategories
+              triggerAction: fetchCategories.type
             })
           ),
           catchError((error: Error) =>
@@ -102,7 +101,7 @@ export class CatalogueEffects {
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: CatalogueActionTypes.FetchCategories
+                triggerAction: fetchCategories.type
               })
             )
           )
@@ -120,7 +119,7 @@ export class CatalogueEffects {
             searchProductsSuccess({
               products: toSearchedProducts(products, search),
               progressActionType: ProgressType.Stop,
-              triggerAction: CatalogueActionTypes.SearchProducts
+              triggerAction: searchProducts.type
             })
           ),
           catchError((error: Error) =>
@@ -128,7 +127,7 @@ export class CatalogueEffects {
               fetchError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: CatalogueActionTypes.SearchProducts
+                triggerAction: searchProducts.type
               })
             )
           )

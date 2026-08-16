@@ -2,7 +2,7 @@
   <div class="product-item bg-light p-4 mb-4">
     <div class="product-img position-relative overflow-hidden">
       <img
-        class="img-fluid w-100"
+        class="img-fluid"
         src="{{ product.image }}"
         alt="{{ product.title }}" />
       <div class="product-action">
@@ -33,7 +33,8 @@
         <h5>{{ product.price | currency }}</h5>
       </div>
       <div class="d-flex align-items-center justify-content-center mb-1">
-        <shoppers-point-rating [rating]="product.rating"></shoppers-point-rating>
+        <shoppers-point-rating
+          [rating]="product.rating"></shoppers-point-rating>
       </div>
     </div>
   </div>

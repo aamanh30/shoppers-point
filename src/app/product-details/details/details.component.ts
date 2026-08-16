@@ -1,4 +1,9 @@
-import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import {
   EMPTY,
   Observable,
@@ -28,11 +33,11 @@ import {
 } from '@shoppers-point/progress-state';
 
 @Component({
-    selector: 'shoppers-point-details',
-    templateUrl: './details.component.html',
-    styleUrls: ['./details.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class DetailsComponent implements OnInit, OnDestroy {
   productDetails$: Observable<Product | undefined> = EMPTY;
@@ -53,7 +58,7 @@ export class DetailsComponent implements OnInit, OnDestroy {
     this.productDetails$ = this.store.select(CatalogueSelectors.productDetails);
     this.productDetailsLoading$ = this.store.select(
       ProgressSelectors.hasSpecificActionInProgress(
-        CatalogueActions.CatalogueActionTypes.FetchProductDetails
+        CatalogueActions.fetchProductDetails.type
       )
     );
     this.quantity$ = combineLatest([

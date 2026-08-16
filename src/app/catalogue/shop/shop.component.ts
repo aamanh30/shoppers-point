@@ -22,11 +22,11 @@ import {
 } from '@shoppers-point/progress-state';
 
 @Component({
-    selector: 'shoppers-point-shop',
-    templateUrl: './shop.component.html',
-    styleUrls: ['./shop.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-shop',
+  templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class ShopComponent implements OnInit {
   readonly FilterType = FilterType;
@@ -64,7 +64,7 @@ export class ShopComponent implements OnInit {
     );
     this.productsLoading$ = this.store.select(
       ProgressSelectors.hasSpecificActionInProgress(
-        CatalogueActions.CatalogueActionTypes.FetchProducts
+        CatalogueActions.fetchProducts.type
       )
     );
     this.store.dispatch(

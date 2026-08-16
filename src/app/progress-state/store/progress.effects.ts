@@ -25,7 +25,7 @@ export class ProgressEffects {
   stopProgress$ = createEffect(() =>
     this.#actions$.pipe(
       filter(isStopProgressAction),
-      map(({ type }) => stopProgress({ triggerAction: type }))
+      map(({ triggerAction }) => stopProgress({ triggerAction }))
     )
   );
 }
