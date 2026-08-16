@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
@@ -7,11 +7,11 @@ import { getSignInFieldsConfig } from './sign-in-fields';
 import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
-    selector: 'shoppers-point-sign-in',
-    templateUrl: './sign-in.component.html',
-    styleUrls: ['./sign-in.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-sign-in',
+  templateUrl: './sign-in.component.html',
+  styleUrls: ['./sign-in.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class SignInComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});
@@ -20,14 +20,13 @@ export class SignInComponent {
     this.onSignUp.bind(this),
     this.onReset.bind(this)
   );
-
-  constructor(private store: Store) {}
+  readonly #store: Store = inject(Store);
 
   onSignUp(): void {
     if (this.form.invalid) {
       return;
     }
-    this.store.dispatch(
+    this.#store.dispatch(
       AuthActions.signIn({
         ...this.form.value,
         progressType: ProgressType.Start

@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
@@ -6,11 +6,11 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getResetPasswordFieldsConfig } from './reset-password-fields';
 
 @Component({
-    selector: 'shoppers-point-reset-password',
-    templateUrl: './reset-password.component.html',
-    styleUrls: ['./reset-password.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class ResetPasswordComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});
@@ -19,14 +19,13 @@ export class ResetPasswordComponent {
     this.onResetPassword.bind(this),
     this.onReset.bind(this)
   );
-
-  constructor(private store: Store) {}
+  readonly #store: Store = inject(Store);
 
   onResetPassword(): void {
     if (this.form.invalid) {
       return;
     }
-    this.store.dispatch(AuthActions.resetPassword(this.form.value));
+    this.#store.dispatch(AuthActions.resetPassword(this.form.value));
   }
 
   onReset(): void {
