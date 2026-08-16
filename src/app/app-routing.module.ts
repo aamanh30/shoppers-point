@@ -9,27 +9,28 @@ const routes: Routes = [
       {
         path: 'shop',
         loadChildren: () =>
-          import('./catalogue/catalogue.module').then(m => m.CatalogueModule)
+          import('./catalogue/catalogue.module').then(m => m.CatalogueModule),
       },
       {
         path: 'cart',
-        loadChildren: () => import('./cart/cart.module').then(m => m.CartModule)
+        loadChildren: () =>
+          import('./cart/cart.module').then(m => m.CartModule),
       },
       {
         path: 'checkout',
         canActivate: [authGuard],
         loadChildren: () =>
-          import('./checkout/checkout.module').then(m => m.CheckoutModule)
+          import('./checkout/checkout.module').then(m => m.CheckoutModule),
       },
       {
         path: 'contact',
         loadChildren: () =>
-          import('./contact/contact.module').then(m => m.ContactModule)
+          import('./contact/contact.module').then(m => m.ContactModule),
       },
       {
         path: 'home',
         loadChildren: () =>
-          import('@shoppers-point/home-ui').then(({ routes }) => routes)
+          import('@shoppers-point/home-ui').then(({ routes }) => routes),
       },
       {
         path: 'auth',
@@ -37,40 +38,41 @@ const routes: Routes = [
         loadChildren: () =>
           import('@shoppers-point/auth-ui').then(
             ({ AuthUiModule }) => AuthUiModule
-          )
+          ),
       },
       {
         path: 'wishlist',
         loadChildren: () =>
-          import('./wishlist/wishlist.module').then(m => m.WishlistModule)
+          import('./wishlist/wishlist.module').then(m => m.WishlistModule),
       },
       {
         path: 'product-details',
         loadChildren: () =>
           import('./product-details/product-details.module').then(
             m => m.ProductDetailsModule
-          )
+          ),
       },
       {
         path: '',
         redirectTo: 'home',
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+    ],
   },
   {
     path: 'error',
-    loadChildren: () => import('./error/error.module').then(m => m.ErrorModule)
+    loadChildren: () =>
+      import('@shoppers-point/error-ui').then(({ routes }) => routes),
   },
   {
     path: '**',
     redirectTo: 'error/404',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

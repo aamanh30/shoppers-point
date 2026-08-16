@@ -3,7 +3,7 @@ import { HttpStatusCode } from '@angular/common/http';
 const errorCodes = [
   HttpStatusCode.NotFound,
   HttpStatusCode.Forbidden,
-  HttpStatusCode.InternalServerError
+  HttpStatusCode.InternalServerError,
 ];
 
 export const toErrorStatus = (path: string): HttpStatusCode => {
