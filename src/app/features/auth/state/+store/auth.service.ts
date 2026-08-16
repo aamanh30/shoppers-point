@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, from, map, of, shareReplay } from 'rxjs';
+import { Observable, from, of } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AuthForm } from '../../models/auth-form';
+import { AuthForm } from '../models/auth-form';
 
 @Injectable({
   providedIn: 'root'

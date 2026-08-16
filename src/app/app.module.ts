@@ -20,8 +20,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AuthStateModule } from './auth-state/auth-state.module';
+import { AuthStateModule } from '@shoppers-point/auth-state';
 import { ProgressStateModule } from './progress-state/progress-state.module';
+import { AsyncPipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,6 +49,7 @@ import { ProgressStateModule } from './progress-state/progress-state.module';
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AsyncPipe,
     SharedModule,
     UserStateModule,
     AuthStateModule,

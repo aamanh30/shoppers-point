@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { authGuard } from './auth/guards/auth/auth.guard';
-import { loggedInGuard } from './auth/guards/logged-in/logged-in.guard';
+import { authGuard, loggedInGuard } from '@shoppers-point/auth-ui';
 
 const routes: Routes = [
   {
@@ -34,7 +33,10 @@ const routes: Routes = [
       {
         path: 'auth',
         canActivateChild: [loggedInGuard],
-        loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+        loadChildren: () =>
+          import('@shoppers-point/auth-ui').then(
+            ({ AuthUiModule }) => AuthUiModule
+          )
       },
       {
         path: 'wishlist',

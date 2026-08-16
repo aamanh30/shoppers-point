@@ -5,7 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { AuthStateModule } from '../auth-state/auth-state.module';
+import { AuthStateModule } from '../state/auth-state.module';
 import { AuthFormComponent } from './auth-form/auth-form.component';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -52,4 +52,4 @@ const routes: Route[] = [
     FormlyModule.forChild()
   ]
 })
-export class AuthModule {}
+export class AuthUiModule {}

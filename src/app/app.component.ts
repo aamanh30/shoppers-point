@@ -15,15 +15,15 @@ import { CartFeature, CartSelectors } from './cart-state';
 import { CartProduct } from './cart-state/models';
 import { CatalogueActions, CatalogueSelectors } from './catalogue-state';
 import { Router } from '@angular/router';
-import { AuthActions } from './auth-state';
+import { AuthActions } from '@shoppers-point/auth-state';
 import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
-    selector: 'shoppers-point-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false
 })
 export class AppComponent implements OnDestroy {
   user$: Observable<User | undefined> = EMPTY;

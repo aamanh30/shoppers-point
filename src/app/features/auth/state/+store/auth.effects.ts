@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AuthActions } from './auth.actions';
 import { catchError, concatMap, map, of } from 'rxjs';
-import { AuthService } from '../services/auth/auth.service';
+import { AuthService } from './auth.service';
 import { UserActions } from '@shoppers-point/user-state';
 import { ProgressType } from '@shoppers-point/progress-state';
 

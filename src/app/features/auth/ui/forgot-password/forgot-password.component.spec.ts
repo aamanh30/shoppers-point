@@ -1,10 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Store } from '@ngrx/store';
-
-import { ResetPasswordComponent } from './reset-password.component';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
-import { AuthActions } from 'src/app/auth-state';
+import { Store } from '@ngrx/store';
+
+import { ForgotPasswordComponent } from './forgot-password.component';
+import { AuthActions } from 'src/app/features/auth/auth-state';
 
 const formlyField = (
   fields: FormlyFieldConfig[],
@@ -14,16 +14,18 @@ const formlyField = (
     .flatMap(field => field.fieldGroup)
     .flatMap(field => field?.fieldGroup ?? [])
     .find(field => field.key === key || field.props?.['btnType'] === key);
-describe('ResetPasswordComponent', () => {
-  let component: ResetPasswordComponent;
-  let fixture: ComponentFixture<ResetPasswordComponent>;
+
+describe('ForgotPasswordComponent', () => {
+  let component: ForgotPasswordComponent;
+  let fixture: ComponentFixture<ForgotPasswordComponent>;
   let mockStore: Store;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ResetPasswordComponent]
+      declarations: [ForgotPasswordComponent]
     });
-    fixture = TestBed.createComponent(ResetPasswordComponent);
+    fixture = TestBed.createComponent(ForgotPasswordComponent);
+    mockStore = TestBed.inject(Store);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -68,7 +70,7 @@ describe('ResetPasswordComponent', () => {
       submitButton?.props?.click?.(submitButton);
 
       expect(mockStore.dispatch).toHaveBeenCalledWith(
-        AuthActions.resetPassword(component.form.value)
+        AuthActions.forgotPassword(component.form.value)
       );
     });
 

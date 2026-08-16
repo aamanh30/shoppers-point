@@ -1,9 +1,10 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { AuthForm } from '../models/auth-form';
 import { ProgressDecorators } from '@shoppers-point/progress-state';
+import { AUTH_FEATURE_KEY } from './index';
 
 export const AuthActions = createActionGroup({
-  source: 'Auth',
+  source: AUTH_FEATURE_KEY,
   events: {
     signUp: props<AuthForm & ProgressDecorators>(),
     signUpSuccess: props<ProgressDecorators>(),
