@@ -1,5 +1,5 @@
-import { CartAction } from '../models/cart-action.enum';
-import { CartProduct } from '../models/cart-product';
+import { CartAction } from './cart-action.enum';
+import { CartProduct } from './cart-product';
 
 export const toCartProduct = (products: CartProduct[]) =>
   products.reduce(
@@ -13,7 +13,7 @@ export const toCartProduct = (products: CartProduct[]) =>
       }
       productMap.set(cartProduct.id, {
         ...cartProduct,
-        quantity
+        quantity,
       });
 
       return productMap;
@@ -33,7 +33,7 @@ export const toProducts = (
   productsMap.set(productId, {
     ...product,
     id: product?.quantity ?? productId,
-    quantity: product?.quantity ?? 1
+    quantity: product?.quantity ?? 1,
   });
 
   return Array.from(productsMap.values());

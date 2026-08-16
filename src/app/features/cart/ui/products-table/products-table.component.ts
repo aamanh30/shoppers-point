@@ -1,12 +1,19 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { CartProduct } from '@shoppers-point/cart-state';
 
 @Component({
-    selector: 'shoppers-point-products-table',
-    templateUrl: './products-table.component.html',
-    styleUrls: ['./products-table.component.scss'],
-    changeDetection: ChangeDetectionStrategy.Eager,
-    standalone: false
+  selector: 'shoppers-point-products-table',
+  templateUrl: './products-table.component.html',
+  styleUrls: ['./products-table.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  imports: [CommonModule, CurrencyPipe],
 })
 export class ProductsTableComponent {
   @Input() products: CartProduct[] = [];
@@ -22,14 +29,14 @@ export class ProductsTableComponent {
   onReduce(index: number): void {
     this.updateCartQuantity.emit({
       id: this.products[index].id,
-      quantity: this.products[index].quantity - 1
+      quantity: this.products[index].quantity - 1,
     });
   }
 
   onAdd(index: number): void {
     this.updateCartQuantity.emit({
       id: this.products[index].id,
-      quantity: this.products[index].quantity + 1
+      quantity: this.products[index].quantity + 1,
     });
   }
 

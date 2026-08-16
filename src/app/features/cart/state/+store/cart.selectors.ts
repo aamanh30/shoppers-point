@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CartState } from './cart.reducer';
-import { CART_KEY } from './cart-key';
+import { CART_FEATURE_KEY } from './index';
 
-const cartFeatureState = createFeatureSelector<CartState>(CART_KEY);
+const cartFeatureState = createFeatureSelector<CartState>(CART_FEATURE_KEY);
 
 export const id = createSelector(cartFeatureState, state => state.id);
 

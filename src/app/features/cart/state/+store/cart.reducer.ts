@@ -1,8 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { CartActions } from './cart.actions';
+import {
+  fetchCart,
+  fetchCartSuccess,
+  removeProduct,
+  updateCartSuccess,
+  updateProductQuantity,
+  updateWishlistSuccess,
+} from './cart.actions';
 import { CartProduct } from '../models/cart-product';
-
-export const CART_KEY = 'cart';
+import { CART_FEATURE_KEY } from './index';
 
 export interface CartState {
   id: number | undefined;
@@ -11,67 +17,62 @@ export interface CartState {
 }
 
 export interface CartPartialState {
-  [CART_KEY]: CartState;
+  [CART_FEATURE_KEY]: CartState;
 }
 
 export const initialCartState: CartState = {
   id: undefined,
   products: [],
-  wishlist: []
+  wishlist: [],
 };
 
 export const reducer = createReducer(
   initialCartState,
   on(
-    CartActions.fetchCart,
+    fetchCart,
     (state): CartState => ({ ...state, id: undefined, products: [] })
   ),
   on(
-    CartActions.fetchCartSuccess,
+    fetchCartSuccess,
     (state, { id, products }): CartState => ({ ...state, id, products })
   ),
   on(
-    CartActions.updateCartSuccess,
+    updateCartSuccess,
     (state, { products }): CartState => ({
       ...state,
-      products
+      products,
     })
   ),
-  on(
-    CartActions.updateProductQuantity,
-    (state, { id, quantity }): CartState => {
-      const productIndex = state.products.findIndex(
-        product => product.id === id
-      );
-      if (productIndex >= 0) {
-        const products = [...state.products];
-        products[productIndex] = {
-          id,
-          quantity
-        };
+  on(updateProductQuantity, (state, { id, quantity }): CartState => {
+    const productIndex = state.products.findIndex(product => product.id === id);
+    if (productIndex >= 0) {
+      const products = [...state.products];
+      products[productIndex] = {
+        id,
+        quantity,
+      };
 
-        return {
-          ...state,
-          products
-        };
-      }
       return {
         ...state,
-        products: [...state.products, { id, quantity }]
+        products,
       };
     }
-  ),
-  on(CartActions.updateWishlistSuccess, (state, { wishlist }): CartState => {
     return {
       ...state,
-      wishlist
+      products: [...state.products, { id, quantity }],
+    };
+  }),
+  on(updateWishlistSuccess, (state, { wishlist }): CartState => {
+    return {
+      ...state,
+      wishlist,
     };
   }),
   on(
-    CartActions.removeProduct,
+    removeProduct,
     (state, { id }): CartState => ({
       ...state,
-      products: state.products.filter(product => product.id !== id)
+      products: state.products.filter(product => product.id !== id),
     })
   )
 );

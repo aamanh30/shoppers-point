@@ -13,7 +13,7 @@ import {
 } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
-import { CartStateModule } from './cart-state/cart-state.module';
+import { CartStateModule } from './features/cart/state/cart-state.module';
 import { UserStateModule } from '@shoppers-point/user-state';
 import { CatalogueStateModule } from './catalogue-state';
 import { AngularFireModule } from '@angular/fire/compat';

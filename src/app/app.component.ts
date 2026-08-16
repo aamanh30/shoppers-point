@@ -11,8 +11,8 @@ import {
   takeUntil,
 } from 'rxjs';
 import { Product, User } from '@shoppers-point/shared-ui';
-import { CartFeature, CartSelectors } from './cart-state';
-import { CartProduct } from './cart-state/models';
+import { CartFeature, CartSelectors } from './features/cart/state';
+import { CartProduct } from '@shoppers-point/cart-state';
 import { CatalogueActions, CatalogueSelectors } from './catalogue-state';
 import { Router } from '@angular/router';
 import { AuthActions } from '@shoppers-point/auth-state';

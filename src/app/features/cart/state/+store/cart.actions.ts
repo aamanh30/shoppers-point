@@ -1,10 +1,20 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { CartAction } from '../models/cart-action.enum';
 import { CartProduct } from '../models/cart-product';
-import { CART_KEY } from './cart-key';
+import { CART_FEATURE_KEY } from './index';
 
-export const CartActions = createActionGroup({
-  source: 'Cart',
+export const {
+  fetchCart,
+  fetchCartSuccess,
+  fetchError,
+  updateCart,
+  updateCartSuccess,
+  updateProductQuantity,
+  updateWishlist,
+  updateWishlistSuccess,
+  removeProduct,
+} = createActionGroup({
+  source: CART_FEATURE_KEY,
   events: {
     fetchCart: emptyProps(),
     fetchCartSuccess: props<{ id: number; products: CartProduct[] }>(),
@@ -18,6 +28,6 @@ export const CartActions = createActionGroup({
     updateProductQuantity: props<CartProduct>(),
     updateWishlist: props<{ productId: number }>(),
     updateWishlistSuccess: props<{ wishlist: number[] }>(),
-    removeProduct: props<{ id: number }>()
-  }
+    removeProduct: props<{ id: number }>(),
+  },
 });

@@ -9,14 +9,14 @@ import { SharedModule } from '../shared/shared.module';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyModule } from '@ngx-formly/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CartStateModule } from '../cart-state/cart-state.module';
+import { CartStateModule } from '../features/cart/state/cart-state.module';
 import { CatalogueStateModule } from '../catalogue-state';
 
 const routes: Route[] = [
   {
     path: '',
-    component: ShopComponent
-  }
+    component: ShopComponent,
+  },
 ];
 
 @NgModule({
@@ -24,7 +24,7 @@ const routes: Route[] = [
     FiltersComponent,
     ShopComponent,
     ProductsComponent,
-    ProductCardComponent
+    ProductCardComponent,
   ],
   imports: [
     CommonModule,
@@ -34,7 +34,7 @@ const routes: Route[] = [
     SharedModule,
     ReactiveFormsModule,
     FormlyBootstrapModule,
-    FormlyModule.forRoot()
-  ]
+    FormlyModule.forRoot(),
+  ],
 })
 export class CatalogueModule {}

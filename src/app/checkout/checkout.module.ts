@@ -4,7 +4,7 @@ import { CheckoutDetailsComponent } from './checkout-details/checkout-details.co
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { Route, RouterModule } from '@angular/router';
 import { CatalogueStateModule } from '../catalogue-state';
-import { CartStateModule } from '../cart-state';
+import { CartStateModule } from '../features/cart/state';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { FormlyModule } from '@ngx-formly/core';
@@ -14,15 +14,15 @@ import { AddressFormComponent } from './address-form/address-form.component';
 const routes: Route[] = [
   {
     path: '',
-    component: CheckoutDetailsComponent
-  }
+    component: CheckoutDetailsComponent,
+  },
 ];
 
 @NgModule({
   declarations: [
     CheckoutDetailsComponent,
     OrderSummaryComponent,
-    AddressFormComponent
+    AddressFormComponent,
   ],
   imports: [
     CommonModule,
@@ -32,7 +32,7 @@ const routes: Route[] = [
     ReactiveFormsModule,
     FormlyBootstrapModule,
     FormlyModule.forRoot(),
-    CartStateModule
-  ]
+    CartStateModule,
+  ],
 })
 export class CheckoutModule {}

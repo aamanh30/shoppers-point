@@ -7,7 +7,7 @@ import { SpecificationsComponent } from './specifications/specifications.compone
 import { ReviewsComponent } from './reviews/reviews.component';
 import { ReviewFormComponent } from './review-form/review-form.component';
 import { CatalogueModule } from '../catalogue/catalogue.module';
-import { CartStateModule } from '../cart-state';
+import { CartStateModule } from '../features/cart/state';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
@@ -18,8 +18,8 @@ import { SharedModule } from '../shared/shared.module';
 const routes: Route[] = [
   {
     path: ':id',
-    component: DetailsComponent
-  }
+    component: DetailsComponent,
+  },
 ];
 
 @NgModule({
@@ -28,7 +28,7 @@ const routes: Route[] = [
     CarouselComponent,
     SpecificationsComponent,
     ReviewsComponent,
-    ReviewFormComponent
+    ReviewFormComponent,
   ],
   imports: [
     CommonModule,
@@ -39,7 +39,7 @@ const routes: Route[] = [
     ReactiveFormsModule,
     FormlyBootstrapModule,
     FormlyModule.forRoot(),
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
 export class ProductDetailsModule {}

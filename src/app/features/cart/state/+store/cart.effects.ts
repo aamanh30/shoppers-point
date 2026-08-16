@@ -1,37 +1,50 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { CartActions } from './cart.actions';
-import { CartService } from '../services/cart/cart.service';
+import {
+  fetchCart,
+  fetchCartSuccess,
+  fetchError,
+  updateCart,
+  updateCartSuccess,
+  updateWishlist,
+  updateWishlistSuccess,
+} from './cart.actions';
+import { CartService } from './cart.service';
 import { Store } from '@ngrx/store';
 import { UserFeature, UserSelectors } from '@shoppers-point/user-state';
 import { products } from './cart.selectors';
-import { CartAction, CartProduct } from '../models';
+import { CartAction } from '../models/cart-action.enum';
+import { CartProduct } from '../models/cart-product';
 import { wishlist } from './cart.selectors';
 
 @Injectable()
 export class CartEffects {
+  readonly #store: Store<UserFeature.UserPartialState> = inject(
+    Store<UserFeature.UserPartialState>
+  );
+  readonly #actions$: Actions = inject(Actions);
+  readonly #cartService: CartService = inject(CartService);
+
   fetchCart$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CartActions.fetchCart),
-      concatLatestFrom(() => [this.store.select(UserSelectors.user)]),
+    this.#actions$.pipe(
+      ofType(fetchCart),
+      concatLatestFrom(() => [this.#store.select(UserSelectors.user)]),
       concatMap(([_, user]) => {
-        return this.cartService.fetchCart(user?.uid ?? 2).pipe(
-          map(({ id, products }) =>
-            CartActions.fetchCartSuccess({ id, products })
-          ),
-          catchError((error: Error) => of(CartActions.fetchError({ error })))
+        return this.#cartService.fetchCart(user?.uid ?? 2).pipe(
+          map(({ id, products }) => fetchCartSuccess({ id, products })),
+          catchError((error: Error) => of(fetchError({ error })))
         );
       })
     )
   );
 
   updateCart$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CartActions.updateCart),
-      concatLatestFrom(() => [this.store.select(products)]),
+    this.#actions$.pipe(
+      ofType(updateCart),
+      concatLatestFrom(() => [this.#store.select(products)]),
       map(([{ productId, action, quantity }, _products]) => {
         let cartProducts = _products?.length ? [..._products] : [];
         let product: CartProduct | undefined;
@@ -58,7 +71,7 @@ export class CartEffects {
           cartProducts = cartProducts.filter(({ id }) => id !== product?.id);
         }
 
-        return CartActions.updateCartSuccess({
+        return updateCartSuccess({
           products: cartProducts,
         });
       })
@@ -66,11 +79,11 @@ export class CartEffects {
   );
 
   updateWishList$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(CartActions.updateWishlist),
-      concatLatestFrom(() => [this.store.select(wishlist)]),
+    this.#actions$.pipe(
+      ofType(updateWishlist),
+      concatLatestFrom(() => [this.#store.select(wishlist)]),
       map(([{ productId }, wishlist]) =>
-        CartActions.updateWishlistSuccess({
+        updateWishlistSuccess({
           wishlist: wishlist.includes(productId)
             ? wishlist.filter((id: number) => id !== productId)
             : [...wishlist, productId],
@@ -78,10 +91,4 @@ export class CartEffects {
       )
     )
   );
-
-  constructor(
-    private readonly store: Store<UserFeature.UserPartialState>,
-    private actions$: Actions,
-    private cartService: CartService
-  ) {}
 }
