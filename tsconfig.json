@@ -32,8 +32,11 @@
       "@shoppers-point/wishlist-ui": ["src/app/features/wishlist/ui/index.ts"],
       "@shoppers-point/cart-state": ["src/app/features/cart/state/index.ts"],
       "@shoppers-point/cart-ui": ["src/app/features/cart/ui/index.ts"],
-      "@shoppers-point/catalogue-state": ["./src/app/catalogue-state/index.ts"],
-      "@shoppers-point/checkout-state": ["./src/app/checkout-state/index.ts"],
+      "@shoppers-point/catalogue-state": ["src/app/catalogue-state/index.ts"],
+      "@shoppers-point/checkout-state": [
+        "src/app/features/checkout/state/index.ts"
+      ],
+      "@shoppers-point/checkout-ui": ["src/app/features/checkout/ui/index.ts"],
       "@shoppers-point/contact-state": [
         "src/app/features/contact/state/index.ts"
       ],

@@ -1,15 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable, combineLatest, map } from 'rxjs';
+import { EMPTY, Observable, combineLatest, map, tap } from 'rxjs';
 import {
   CartProduct,
   CartFeature,
   CartSelectors,
+  CartStateModule,
 } from '@shoppers-point/cart-state';
 import {
   CatalogueFeature,
   CatalogueSelectors,
+  CatalogueStateModule,
 } from '@shoppers-point/catalogue-state';
 import { CheckoutForm } from '@shoppers-point/checkout-state';
 import { getCheckoutForm, getPaymentOptions } from './checkout-form.aux';
@@ -17,15 +19,29 @@ import {
   CheckoutActions,
   CheckoutFeature,
   CheckoutSelectors,
-} from '../../checkout-state';
+  CheckoutStateModule,
+} from '@shoppers-point/checkout-state';
 import { SelectOption } from '@shoppers-point/shared-ui';
+import { CommonModule } from '@angular/common';
+import { AddressFormComponent } from '../address-form/address-form.component';
+import { OrderSummaryComponent } from '../order-summary/order-summary.component';
+import { FormlyModule } from '@ngx-formly/core';
 
 @Component({
   selector: 'shoppers-point-checkout-details',
   templateUrl: './checkout-details.component.html',
   styleUrls: ['./checkout-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: false,
+  imports: [
+    CommonModule,
+    CheckoutStateModule,
+    CatalogueStateModule,
+    ReactiveFormsModule,
+    FormlyModule,
+    CartStateModule,
+    OrderSummaryComponent,
+    AddressFormComponent,
+  ],
 })
 export class CheckoutDetailsComponent {
   products$: Observable<CartProduct[] | undefined> = EMPTY;
@@ -55,7 +71,8 @@ export class CheckoutDetailsComponent {
           ...cartProduct,
           ...allProductsLookUp[cartProduct.id],
         }))
-      )
+      ),
+      tap(this.onUpdateSummary.bind(this))
     );
     this.store.dispatch(CheckoutActions.fetchCountries());
   }
@@ -72,11 +89,14 @@ export class CheckoutDetailsComponent {
   }
 
   onPlaceOrder(): void {
+    const order = {
+      billingAddress: this.billingForm.value,
+      shippingAddress: this.shippingForm.value,
+      summary: this.summaryForm.value,
+    };
     this.store.dispatch(
       CheckoutActions.placeOrder({
-        billingAddress: this.billingForm.value,
-        shippingAddress: this.shippingForm.value,
-        summary: this.summaryForm.value,
+        order,
       })
     );
   }

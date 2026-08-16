@@ -1,15 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { fetchCountries, fetchCountriesSuccess } from './checkout.actions';
 import { SelectOption } from 'src/app/shared/models/select-option';
-
-const { fetchCountries, fetchCountriesSuccess } = CheckoutActions;
+import { CHECKOUT_FEATURE_KEY } from './index';
 
 export interface CheckoutState {
   countries: SelectOption[];
 }
 
 export interface CheckoutPartialState {
-  [CHECKOUT_KEY]: CheckoutState;
+  [CHECKOUT_FEATURE_KEY]: CheckoutState;
 }
 export const initialCheckoutState: CheckoutState = {
   countries: [],

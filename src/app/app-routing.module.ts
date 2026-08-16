@@ -20,7 +20,7 @@ const routes: Routes = [
         path: 'checkout',
         canActivate: [authGuard],
         loadChildren: () =>
-          import('./checkout/checkout.module').then(m => m.CheckoutModule),
+          import('@shoppers-point/checkout-ui').then(({ routes }) => routes),
       },
       {
         path: 'contact',

@@ -4,15 +4,13 @@
 <div class="bg-light p-30 mb-5">
   <div class="border-bottom">
     <h6 class="mb-3">Products</h6>
-    @for (product of products; track product) {
-      <div
-        class="d-flex justify-content-between products">
+    @for (product of products(); track product) {
+      <div class="d-flex justify-content-between products">
         <p class="product-title" [title]="product.title">{{ product.title }}</p>
         <p class="text-end">{{ product.price | currency }}</p>
         <p class="text-end">{{ product.quantity }}</p>
       </div>
-    }
-    @if (!products?.length) {
+    } @empty {
       <div class="d-block">
         <p class="text-center">No products found</p>
       </div>
@@ -21,17 +19,17 @@
   <div class="border-bottom pt-3 pb-2">
     <div class="d-flex justify-content-between mb-3">
       <h6>Subtotal</h6>
-      <h6>{{ subTotal | currency }}</h6>
+      <h6>{{ subTotal() | currency }}</h6>
     </div>
     <div class="d-flex justify-content-between">
       <h6 class="font-weight-medium">Shipping</h6>
-      <h6 class="font-weight-medium">{{ shipping | currency }}</h6>
+      <h6 class="font-weight-medium">{{ shipping() | currency }}</h6>
     </div>
   </div>
   <div class="pt-2">
     <div class="d-flex justify-content-between mt-2">
       <h5>Total</h5>
-      <h5>{{ total | currency }}</h5>
+      <h5>{{ total() | currency }}</h5>
     </div>
   </div>
 </div>
@@ -40,16 +38,13 @@
     <span class="bg-secondary pr-3">Payment</span>
   </h5>
   <div class="bg-light p-30">
-    <form [formGroup]="form">
-      <formly-form
-        [fields]="fields"
-        [form]="form"
-      [model]="model"></formly-form>
+    <form [formGroup]="form()">
+      <formly-form [fields]="fields()" [form]="form()" [model]="model()" />
     </form>
 
     <button
-      [disabled]="!formValid"
       class="btn btn-block btn-primary font-weight-bold py-3"
+      [disabled]="!formValid()"
       (click)="onPlaceOrder()">
       Place Order
     </button>

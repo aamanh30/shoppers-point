@@ -1,5 +1,5 @@
-import { SelectOption } from '../../shared/models/select-option';
-import { Country } from '../models/country';
+import { SelectOption } from '../../../../shared/models/select-option';
+import { Country } from './country';
 
 export const toSelectOption = (options: Country[]): SelectOption[] =>
   options.map(option => ({

@@ -5,7 +5,7 @@
         heading="Billing Address"
         [countries]="(countries$ | async) ?? []"
         [form]="billingForm"
-      [model]="model.billingAddress"></shoppers-point-address-form>
+        [model]="model.billingAddress"></shoppers-point-address-form>
 
       <div class="row p-30">
         <div class="col-md-12">
@@ -25,7 +25,7 @@
           heading="Shipping Address"
           [countries]="(countries$ | async) ?? []"
           [form]="shippingForm"
-        [model]="model.shippingAddress"></shoppers-point-address-form>
+          [model]="model.shippingAddress" />
       }
     </div>
     <div class="col-lg-4">
@@ -37,8 +37,7 @@
         [products]="products$ | async"
         [form]="summaryForm"
         [model]="model.summary"
-        (updateSummary)="onUpdateSummary($event)"
-      (placeOrder)="onPlaceOrder()"></shoppers-point-order-summary>
+        (placeOrder)="onPlaceOrder()" />
     </div>
   </div>
 </div>
