@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'contact',
         loadChildren: () =>
-          import('./contact/contact.module').then(m => m.ContactModule),
+          import('@shoppers-point/contact-ui').then(({ routes }) => routes),
       },
       {
         path: 'home',
