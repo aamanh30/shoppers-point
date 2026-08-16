@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { concatMap, map, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { CartActions } from './cart.actions';
@@ -53,7 +54,7 @@ export class CartEffects {
           cartProducts[idx] = product;
         }
 
-        if (!product.quantity || product.quantity < 0) {
+        if (!product?.quantity || product.quantity < 0) {
           cartProducts = cartProducts.filter(({ id }) => id !== product?.id);
         }
 
@@ -71,7 +72,7 @@ export class CartEffects {
       map(([{ productId }, wishlist]) =>
         CartActions.updateWishlistSuccess({
           wishlist: wishlist.includes(productId)
-            ? wishlist.filter(id => id !== productId)
+            ? wishlist.filter((id: number) => id !== productId)
             : [...wishlist, productId]
         })
       )

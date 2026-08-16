@@ -1,10 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { CartProduct } from '@shoppers-point/cart-state';
 
 @Component({
     selector: 'shoppers-point-summary',
     templateUrl: './summary.component.html',
     styleUrls: ['./summary.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SummaryComponent {

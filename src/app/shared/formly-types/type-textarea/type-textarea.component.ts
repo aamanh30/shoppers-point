@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { FieldType, FieldTypeConfig } from '@ngx-formly/core';
 
 @Component({
     selector: 'shoppers-point-type-textarea',
     templateUrl: './type-textarea.component.html',
     styleUrls: ['./type-textarea.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class TypeTextareaComponent extends FieldType<FieldTypeConfig> {

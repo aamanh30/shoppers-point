@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from '../../shared/models';
 import { CartProduct } from '@shoppers-point/cart-state';
 
@@ -6,6 +6,7 @@ import { CartProduct } from '@shoppers-point/cart-state';
     selector: 'shoppers-point-specifications',
     templateUrl: './specifications.component.html',
     styleUrls: ['./specifications.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SpecificationsComponent {

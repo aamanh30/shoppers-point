@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
@@ -9,6 +9,7 @@ import { getResetPasswordFieldsConfig } from './reset-password-fields';
     selector: 'shoppers-point-reset-password',
     templateUrl: './reset-password.component.html',
     styleUrls: ['./reset-password.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ResetPasswordComponent {

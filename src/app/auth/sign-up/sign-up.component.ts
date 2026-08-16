@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
 import { UntypedFormGroup } from '@angular/forms';
@@ -9,6 +9,7 @@ import { getSignUpFieldsConfig } from './sign-up-fields';
     selector: 'shoppers-point-sign-up',
     templateUrl: './sign-up.component.html',
     styleUrls: ['./sign-up.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SignUpComponent {

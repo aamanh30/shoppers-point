@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Product, Review } from '../../shared/models';
 import { FormlyFieldConfig } from '@ngx-formly/core';
@@ -8,6 +8,7 @@ import { getDefaultReview } from './reviews.aux';
     selector: 'shoppers-point-reviews',
     templateUrl: './reviews.component.html',
     styleUrls: ['./reviews.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ReviewsComponent {

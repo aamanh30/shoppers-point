@@ -10,7 +10,7 @@
         <button ngbNavLink>Description</button>
         <ng-template ngbNavContent>
           <h4 class="mb-3">Product Description</h4>
-          <p [innerHTML]="product?.description"></p>
+          <p [innerHTML]="$safeNavigationMigration(product?.description)"></p>
         </ng-template>
       </li>
       <li [ngbNavItem]="2">
@@ -31,10 +31,10 @@
                   {{ product?.title }}
                 </li>
                 <li class="list-group-item px-0">
-                  {{ product?.category | titlecase }}
+                  {{ $safeNavigationMigration(product?.category) | titlecase }}
                 </li>
                 <li class="list-group-item px-0">
-                  {{ product?.price | currency }}
+                  {{ $safeNavigationMigration(product?.price) | currency }}
                 </li>
               </ul>
             </div>

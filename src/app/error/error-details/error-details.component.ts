@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
   CustomError,
@@ -13,6 +13,7 @@ import { NavigationEnd, Router } from '@angular/router';
     selector: 'shoppers-point-error-details',
     templateUrl: './error-details.component.html',
     styleUrls: ['./error-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ErrorDetailsComponent implements OnInit, OnDestroy {

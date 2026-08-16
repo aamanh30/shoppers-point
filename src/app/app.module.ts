@@ -8,7 +8,8 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import {
   provideHttpClient,
-  withInterceptorsFromDi
+  withInterceptorsFromDi,
+  withXhr
 } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
@@ -52,6 +53,6 @@ import { ProgressStateModule } from './progress-state/progress-state.module';
     AuthStateModule,
     ProgressStateModule
   ],
-  providers: [provideHttpClient(withInterceptorsFromDi())]
+  providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())]
 })
 export class AppModule {}

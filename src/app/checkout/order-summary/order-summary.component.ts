@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { CartProduct } from '@shoppers-point/cart-state';
@@ -9,6 +9,7 @@ import { SelectOption } from '../../shared/models';
     selector: 'shoppers-point-order-summary',
     templateUrl: './order-summary.component.html',
     styleUrls: ['./order-summary.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class OrderSummaryComponent implements OnInit {

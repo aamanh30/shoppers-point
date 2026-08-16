@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
@@ -9,6 +9,7 @@ import { getForgotPasswordFieldsConfig } from './forgot-password-fields';
     selector: 'shoppers-point-forgot-password',
     templateUrl: './forgot-password.component.html',
     styleUrls: ['./forgot-password.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ForgotPasswordComponent {

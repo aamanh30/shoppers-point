@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ContactActions, ContactForm } from '@shoppers-point/contact-state';
 
@@ -6,6 +6,7 @@ import { ContactActions, ContactForm } from '@shoppers-point/contact-state';
     selector: 'shoppers-point-contact-details',
     templateUrl: './contact-details.component.html',
     styleUrls: ['./contact-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ContactDetailsComponent {

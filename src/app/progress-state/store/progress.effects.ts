@@ -9,6 +9,7 @@ import {
 
 @Injectable()
 export class ProgressEffects {
+  readonly #actions$ = inject(Actions);
   startProgress$ = createEffect(() =>
     this.#actions$.pipe(
       filter(isStartProgressAction),
@@ -27,6 +28,4 @@ export class ProgressEffects {
       map(({ type }) => stopProgress({ triggerAction: type }))
     )
   );
-
-  readonly #actions$ = inject(Actions);
 }

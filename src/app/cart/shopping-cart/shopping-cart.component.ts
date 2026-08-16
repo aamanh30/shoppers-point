@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, map } from 'rxjs';
 import {
@@ -17,6 +17,7 @@ import {
     selector: 'shoppers-point-shopping-cart',
     templateUrl: './shopping-cart.component.html',
     styleUrls: ['./shopping-cart.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShoppingCartComponent implements OnInit {

@@ -6,7 +6,7 @@
         <!-- Category Start -->
         <shoppers-point-filters
           heading="Filter by category"
-          [filters]="ctx.filters?.categories"
+          [filters]="$safeNavigationMigration(ctx.filters?.categories)"
           [filterOptions]="categories$ | async"
         (filterChanged)="
           onFiltersChanged($event, 'categories')
@@ -15,7 +15,7 @@
         <!-- Rating Start -->
         <shoppers-point-filters
           heading="Filter by rating"
-          [filters]="ctx.filters?.ratings"
+          [filters]="$safeNavigationMigration(ctx.filters?.ratings)"
           [filterOptions]="ratings$ | async"
         (filterChanged)="
           onFiltersChanged($event, 'ratings')
@@ -25,7 +25,7 @@
         <shoppers-point-filters
           heading="Filter by price"
           [filterType]="FilterType.range"
-          [filters]="ctx.filters?.range"
+          [filters]="$safeNavigationMigration(ctx.filters?.range)"
           [range]="range$ | async"
         (filterChanged)="
           onFiltersChanged($event, 'range')

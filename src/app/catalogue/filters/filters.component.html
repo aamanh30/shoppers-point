@@ -36,7 +36,7 @@
           class="form-range"
           id="price-range"
           step="1"
-          title="{{ filters?.[0] | currency }}"
+          title="{{ $safeNavigationMigration(filters?.[0]) | currency }}"
           [min]="range.min"
           [max]="range.max"
           (input)="onFilterChange(rangeElement, 'range')" />

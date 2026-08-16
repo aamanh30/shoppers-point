@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { EMPTY, Observable, combineLatest, concatMap, map } from 'rxjs';
@@ -18,6 +18,7 @@ import {
     selector: 'shoppers-point-wishlist-details',
     templateUrl: './wishlist-details.component.html',
     styleUrls: ['./wishlist-details.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class WishlistDetailsComponent {

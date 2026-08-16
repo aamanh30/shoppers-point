@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { UserSelectors, UserFeature } from './user-state';
 import {
@@ -22,6 +22,7 @@ import { ProgressType } from '@shoppers-point/progress-state';
     selector: 'shoppers-point-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent implements OnDestroy {

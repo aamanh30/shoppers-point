@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { EMPTY, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -25,6 +25,7 @@ import {
     selector: 'shoppers-point-shop',
     templateUrl: './shop.component.html',
     styleUrls: ['./shop.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ShopComponent implements OnInit {

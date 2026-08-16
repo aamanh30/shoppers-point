@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from '../models/product';
 import { Rating } from '../models/rating';
 
@@ -6,6 +6,7 @@ import { Rating } from '../models/rating';
     selector: 'shoppers-point-rating',
     templateUrl: './rating.component.html',
     styleUrls: ['./rating.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class RatingComponent {

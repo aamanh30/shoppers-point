@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { Address } from '@shoppers-point/checkout-state';
@@ -8,6 +8,7 @@ import { SelectOption } from '../../shared/models';
     selector: 'shoppers-point-address-form',
     templateUrl: './address-form.component.html',
     styleUrls: ['./address-form.component.scss'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AddressFormComponent {
