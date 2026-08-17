@@ -1,4 +1,5 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, ChangeDetectionStrategy, input } from '@angular/core';
 import { Product } from '@shoppers-point/shared-ui';
 
 @Component({
@@ -6,10 +7,10 @@ import { Product } from '@shoppers-point/shared-ui';
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  imports: [CommonModule],
 })
 export class CarouselComponent {
-  @Input() product: Product | undefined;
+  product = input<Product | undefined>();
   readonly indices: number[] = [0, 1, 2, 3, 4];
   activeIndex = 0;
 

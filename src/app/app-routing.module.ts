@@ -48,8 +48,8 @@ const routes: Routes = [
       {
         path: 'product-details',
         loadChildren: () =>
-          import('./product-details/product-details.module').then(
-            m => m.ProductDetailsModule
+          import('@shoppers-point/product-details-ui').then(
+            ({ routes }) => routes
           ),
       },
       {

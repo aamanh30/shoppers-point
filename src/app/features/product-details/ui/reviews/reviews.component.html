@@ -1,3 +1,6 @@
+@let reviewModel = model();
+@let reviewProduct = product();
+
 <div class="col">
   <div class="bg-light p-30">
     <ul
@@ -10,7 +13,10 @@
         <button ngbNavLink>Description</button>
         <ng-template ngbNavContent>
           <h4 class="mb-3">Product Description</h4>
-          <p [innerHTML]="$safeNavigationMigration(product?.description)"></p>
+          <p
+            [innerHTML]="
+              $safeNavigationMigration(reviewProduct?.description)
+            "></p>
         </ng-template>
       </li>
       <li [ngbNavItem]="2">
@@ -28,13 +34,18 @@
             <div class="col-md-6">
               <ul class="list-group list-group-flush">
                 <li class="list-group-item px-0">
-                  {{ product?.title }}
+                  {{ reviewProduct?.title }}
                 </li>
                 <li class="list-group-item px-0">
-                  {{ $safeNavigationMigration(product?.category) | titlecase }}
+                  {{
+                    $safeNavigationMigration(reviewProduct?.category)
+                      | titlecase
+                  }}
                 </li>
                 <li class="list-group-item px-0">
-                  {{ $safeNavigationMigration(product?.price) | currency }}
+                  {{
+                    $safeNavigationMigration(reviewProduct?.price) | currency
+                  }}
                 </li>
               </ul>
             </div>
@@ -42,14 +53,15 @@
         </ng-template>
       </li>
       <li [ngbNavItem]="3">
-        <button ngbNavLink>Reviews ({{ product?.rating?.count ?? 0 }} )</button>
+        <button ngbNavLink>
+          Reviews ({{ reviewProduct?.rating?.count ?? 0 }} )
+        </button>
         <ng-template ngbNavContent let-active>
           <div class="row">
             <div class="col-md-6">
               <h4 class="mb-3">Product Reviews</h4>
-              @for (review of product?.reviews ?? []; track review) {
-                <div
-                  class="media mb-4">
+              @for (review of reviewProduct?.reviews ?? []; track review) {
+                <div class="media mb-4">
                   <i class="fas fa-user fa-3x mr-3 mt-1"></i>
                   <div class="media-body">
                     <h6>
@@ -57,12 +69,11 @@
                     </h6>
                     <shoppers-point-rating
                       [rating]="review.rating"
-                    [hideRating]="true"></shoppers-point-rating>
+                      [hideRating]="true"></shoppers-point-rating>
                     <p [innerHTML]="review.message"></p>
                   </div>
                 </div>
-              }
-              @if (!product?.reviews?.length) {
+              } @empty {
                 <div class="media mb-4">
                   <div class="media-body">
                     <p>No Reviews Found</p>
@@ -75,29 +86,29 @@
               <small
                 >Your email address will not be published. Required fields are
                 marked *</small
+              >
+              <div class="d-flex my-3">
+                <label class="form-label mr-2"
+                  >Your Rating <span aria-hidden="true">*</span></label
                 >
-                <div class="d-flex my-3">
-                  <label class="form-label mr-2"
-                    >Your Rating <span aria-hidden="true">*</span></label
-                    >
-                    <shoppers-point-rating
-                      [rating]="model.rating"
-                      [hideRating]="true"
+                <shoppers-point-rating
+                  [rating]="reviewModel.rating"
+                  [hideRating]="true"
                   (ratingChange)="
                     onRatingChanged($event)
                   "></shoppers-point-rating>
-                  </div>
-                  <form [formGroup]="form">
-                    <formly-form
-                      [fields]="fields"
-                      [form]="form"
-                    [model]="model"></formly-form>
-                  </form>
-                </div>
               </div>
-            </ng-template>
-          </li>
-        </ul>
-        <div [ngbNavOutlet]="nav" class="mt-2"></div>
-      </div>
-    </div>
+              <form [formGroup]="form">
+                <formly-form
+                  [fields]="fields"
+                  [form]="form"
+                  [model]="reviewModel" />
+              </form>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>
