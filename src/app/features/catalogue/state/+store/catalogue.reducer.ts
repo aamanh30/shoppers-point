@@ -21,9 +21,10 @@ const {
   updateProductReview,
   updateProductsPerPage,
 } from './catalogue.actions';
-import { Product } from '../../shared/models/product';
+import { Product } from '../../../../shared/models/product';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
-import { CatalogueFilterKey, CatalogueFilters } from '../models';
+import { CatalogueFilters } from '../models/catalogue-filters';
+import { CatalogueFilterKey } from '../models/catalogue-filter-key';
 import { CATALOGUE_FEATURE_KEY } from './index';
 
 export interface CatalogueState extends EntityState<Product> {
@@ -143,7 +144,11 @@ export const reducer = createReducer(
   on(
     updateProductReview,
     (state, { id, rating, message, name, email }): CatalogueState => {
-      if (state.productId !== id || !state.entities[state.productId]) {
+      if (
+        !state.productId ||
+        state.productId !== id ||
+        !state.entities[state.productId]
+      ) {
         return { ...state };
       }
 

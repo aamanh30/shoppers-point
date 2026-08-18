@@ -12,6 +12,7 @@ import {
   CatalogueActions,
   CatalogueFeature,
   CatalogueSelectors,
+  CatalogueStateModule,
 } from '@shoppers-point/catalogue-state';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import {
@@ -27,7 +28,6 @@ import {
   ProgressType,
 } from '@shoppers-point/progress-state';
 import { CommonModule } from '@angular/common';
-import { CatalogueModule } from 'src/app/catalogue/catalogue.module';
 import { CarouselComponent } from '../carousel/carousel.component';
 import { SpecificationsComponent } from '../specifications/specifications.component';
 import { ReviewsComponent } from '../reviews/reviews.component';
@@ -41,8 +41,8 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   imports: [
     CommonModule,
     RouterModule,
-    CatalogueModule,
     CartStateModule,
+    CatalogueStateModule,
     CarouselComponent,
     SpecificationsComponent,
     ReviewsComponent,

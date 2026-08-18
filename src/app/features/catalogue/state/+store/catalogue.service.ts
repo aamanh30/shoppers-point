@@ -1,19 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { Product } from '../../../shared/models/product';
-import { environment } from '../../../../environments/environment';
+import { environment } from '@shoppers-point/environment';
+import { Product } from '../../../../shared/models/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CatalogueService {
-  constructor(private httpClient: HttpClient) {}
+  readonly #http: HttpClient = inject(HttpClient);
 
   fetchProducts(): Observable<Product[]> {
-    return this.httpClient.get<Product[]>(
-      `${environment.BASE_PATH}products.json`
-    );
+    return this.#http.get<Product[]>(`${environment.BASE_PATH}products.json`);
   }
 
   fetchProductDetails(id: string): Observable<Product | undefined> {
@@ -23,7 +21,7 @@ export class CatalogueService {
   }
 
   fetchCategories(): Observable<string[]> {
-    return this.httpClient.get<string[]>(
+    return this.#http.get<string[]>(
       `${environment.BASE_PATH}products/categories.json`
     );
   }

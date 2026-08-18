@@ -9,7 +9,7 @@ const routes: Routes = [
       {
         path: 'shop',
         loadChildren: () =>
-          import('./catalogue/catalogue.module').then(m => m.CatalogueModule),
+          import('@shoppers-point/catalogue-ui').then(({ routes }) => routes),
       },
       {
         path: 'cart',

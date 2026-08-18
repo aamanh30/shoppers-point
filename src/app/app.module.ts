@@ -15,7 +15,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
 import { CartStateModule } from './features/cart/state/cart-state.module';
 import { UserStateModule } from '@shoppers-point/user-state';
-import { CatalogueStateModule } from './catalogue-state';
+import { CatalogueStateModule } from '@shoppers-point/catalogue-state';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';

@@ -1,6 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { CatalogueState, catalogueAdapter } from './catalogue.reducer';
-import { toFilteredProducts, toRatingLabel } from './catalogue.aux';
+import { toFilteredProducts, toRatingLabel } from '../models/catalogue.aux';
 import { CATALOGUE_FEATURE_KEY } from './index';
 
 const catalogueFeatureState = createFeatureSelector<CatalogueState>(
@@ -32,7 +32,7 @@ export const categories = createSelector(catalogueFeatureState, state => {
     label: category,
     optionLabel: category,
     quantity:
-      products.filter(product => product.category === category).length ?? 0
+      products.filter(product => product.category === category).length ?? 0,
   }));
 });
 
@@ -44,7 +44,7 @@ export const ratings = createSelector(catalogueFeatureState, state => {
     quantity:
       products.filter(
         product => Math.floor(product.rating?.rate ?? 0) === rating
-      ).length ?? 0
+      ).length ?? 0,
   }));
 });
 
@@ -52,7 +52,7 @@ export const range = createSelector(catalogueFeatureState, state => {
   const prices = selectAll(state).map(product => <number>product.price);
   return {
     min: Math.min(...prices),
-    max: Math.max(...prices)
+    max: Math.max(...prices),
   };
 });
 

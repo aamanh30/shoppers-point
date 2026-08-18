@@ -1,22 +1,22 @@
 <h5 class="section-title position-relative text-uppercase mb-3">
-  <span class="bg-secondary pr-3">{{ heading }}</span>
+  <span class="bg-secondary pr-3">{{ heading() }}</span>
 </h5>
-@if (filterType === FilterType.list) {
+@if (filterType() === FilterType.list) {
   <div class="bg-light p-4 mb-30">
-    @for (filter of filterOptions; track filter; let i = $index) {
+    @for (filter of refinedFilterOptions(); track filter; let i = $index) {
       <div
         class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
         <input
           #checkboxElement
           type="checkbox"
           class="custom-control-input"
-          id="{{ filterId }}-{{ i }}"
+          id="{{ filterId() }}-{{ i }}"
           [checked]="filter.checked"
           (change)="onFilterCheck(checkboxElement, filter.label)" />
         <label
           class="text-capitalize custom-control-label"
-          for="{{ filterId }}-{{ i }}"
-        [innerHTML]="filter.optionLabel"></label>
+          for="{{ filterId() }}-{{ i }}"
+          [innerHTML]="filter.optionLabel"></label>
         <span class="badge border font-weight-normal quantity-count">{{
           filter.quantity
         }}</span>
@@ -25,9 +25,10 @@
   </div>
 }
 
-@if (filterType === FilterType.range) {
+@if (filterType() === FilterType.range) {
   <div class="bg-light p-4 mb-30">
-    @if (range) {
+    @let filterRange = range();
+    @if (filterRange) {
       <div
         class="custom-control custom-checkbox align-items-center justify-content-between mb-3">
         <input
@@ -36,13 +37,17 @@
           class="form-range"
           id="price-range"
           step="1"
-          title="{{ $safeNavigationMigration(filters?.[0]) | currency }}"
-          [min]="range.min"
-          [max]="range.max"
+          title="{{ $safeNavigationMigration(filters()?.[0]) | currency }}"
+          [min]="filterRange.min"
+          [max]="filterRange.max"
           (input)="onFilterChange(rangeElement, 'range')" />
         <span class="d-flex justify-content-between mb-30">
-          <small class="font-weight-bold">${{ range.min | number }}</small>
-          <small class="font-weight-bold">${{ range.max | number }}</small>
+          <small class="font-weight-bold"
+            >${{ filterRange.min | number }}</small
+          >
+          <small class="font-weight-bold"
+            >${{ filterRange.max | number }}</small
+          >
         </span>
       </div>
     }

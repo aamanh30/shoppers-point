@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
@@ -17,17 +17,20 @@ const {
   searchProducts,
   searchProductsSuccess,
 } from './catalogue.actions';
-import { CatalogueService } from '../services/catalogue/catalogue.service';
-import { toSearchedProducts } from './catalogue.aux';
+import { CatalogueService } from './catalogue.service';
+import { toSearchedProducts } from '../models/catalogue.aux';
 import { ProgressType } from '@shoppers-point/progress-state';
 
 @Injectable()
 export class CatalogueEffects {
+  readonly #actions$: Actions = inject(Actions);
+  readonly #catalogueService: CatalogueService = inject(CatalogueService);
+
   fetchProducts$ = createEffect(() =>
-    this.actions$.pipe(
+    this.#actions$.pipe(
       ofType(fetchProducts),
       concatMap(() =>
-        this.catalogueService.fetchProducts().pipe(
+        this.#catalogueService.fetchProducts().pipe(
           concatMap(products => [
             fetchCategories({
               progressActionType: ProgressType.Start,
@@ -53,10 +56,10 @@ export class CatalogueEffects {
   );
 
   fetchProductDetails$ = createEffect(() =>
-    this.actions$.pipe(
+    this.#actions$.pipe(
       ofType(fetchProductDetails),
       concatMap(({ id }) =>
-        this.catalogueService.fetchProductDetails(id.toString()).pipe(
+        this.#catalogueService.fetchProductDetails(id.toString()).pipe(
           map(product =>
             product
               ? fetchProductDetailsSuccess({
@@ -85,10 +88,10 @@ export class CatalogueEffects {
   );
 
   fetchCategories$ = createEffect(() =>
-    this.actions$.pipe(
+    this.#actions$.pipe(
       ofType(fetchCategories),
       concatMap(() =>
-        this.catalogueService.fetchCategories().pipe(
+        this.#catalogueService.fetchCategories().pipe(
           map(categories =>
             fetchCategoriesSuccess({
               categories,
@@ -111,10 +114,10 @@ export class CatalogueEffects {
   );
 
   searchProducts$ = createEffect(() =>
-    this.actions$.pipe(
+    this.#actions$.pipe(
       ofType(searchProducts),
       concatMap(({ search }) =>
-        this.catalogueService.fetchProducts().pipe(
+        this.#catalogueService.fetchProducts().pipe(
           map(products =>
             searchProductsSuccess({
               products: toSearchedProducts(products, search),
@@ -135,9 +138,4 @@ export class CatalogueEffects {
       )
     )
   );
-
-  constructor(
-    private actions$: Actions,
-    private catalogueService: CatalogueService
-  ) {}
 }
