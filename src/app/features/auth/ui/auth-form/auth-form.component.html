@@ -7,12 +7,9 @@
   <div class="row">
     <div class="col-12" [ngClass]="formClass()">
       <form [formGroup]="form()">
-        <formly-form
-          [fields]="fields()"
-          [form]="form()"
-          [model]="model()"></formly-form>
+        <formly-form [fields]="fields()" [form]="form()" [model]="model()" />
       </form>
     </div>
   </div>
-  <ng-content #formFooter></ng-content>
+  <ng-content #formFooter />
 </div>

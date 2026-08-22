@@ -36,9 +36,7 @@ const routes: Routes = [
         path: 'auth',
         canActivateChild: [loggedInGuard],
         loadChildren: () =>
-          import('@shoppers-point/auth-ui').then(
-            ({ AuthUiModule }) => AuthUiModule
-          ),
+          import('@shoppers-point/auth-ui').then(({ routes }) => routes),
       },
       {
         path: 'wishlist',

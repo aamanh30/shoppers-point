@@ -5,13 +5,16 @@ import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getSignInFieldsConfig } from './sign-in-fields';
 import { ProgressType } from '@shoppers-point/progress-state';
+import { CommonModule } from '@angular/common';
+import { AuthFormComponent } from '../auth-form/auth-form.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'shoppers-point-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  imports: [CommonModule, AuthFormComponent, RouterModule],
 })
 export class SignInComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

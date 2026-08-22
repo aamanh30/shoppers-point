@@ -1,16 +1,25 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { getForgotPasswordFieldsConfig } from './forgot-password-fields';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { AuthFormComponent } from '../auth-form/auth-form.component';
 
 @Component({
   selector: 'shoppers-point-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [
+    CommonModule,
+    FormlyModule,
+    ReactiveFormsModule,
+    RouterModule,
+    AuthFormComponent,
+  ],
 })
 export class ForgotPasswordComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

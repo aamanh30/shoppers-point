@@ -4,13 +4,16 @@ import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
 import { UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { getSignUpFieldsConfig } from './sign-up-fields';
+import { CommonModule } from '@angular/common';
+import { AuthFormComponent } from '../auth-form/auth-form.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'shoppers-point-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [CommonModule, AuthFormComponent, RouterModule],
 })
 export class SignUpComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

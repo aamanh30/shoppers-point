@@ -1,16 +1,19 @@
 import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { AuthActions, AuthForm } from '@shoppers-point/auth-state';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { getResetPasswordFieldsConfig } from './reset-password-fields';
+import { CommonModule } from '@angular/common';
+import { AuthFormComponent } from '../auth-form/auth-form.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'shoppers-point-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [CommonModule, FormlyModule, ReactiveFormsModule, AuthFormComponent],
 })
 export class ResetPasswordComponent {
   form: UntypedFormGroup = new UntypedFormGroup({});

@@ -1,14 +1,15 @@
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { AuthForm } from '@shoppers-point/auth-state';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'shoppers-point-auth-form',
   templateUrl: './auth-form.component.html',
   styleUrls: ['./auth-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false
+  imports: [CommonModule, FormlyModule, ReactiveFormsModule],
 })
 export class AuthFormComponent {
   formClass = input('');
