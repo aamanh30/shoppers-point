@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart } from '../models/cart';
 import { environment } from '@shoppers-point/environment';
 import { CartProduct } from '../models/cart-product';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class CartService {
   readonly #http: HttpClient = inject(HttpClient);
 

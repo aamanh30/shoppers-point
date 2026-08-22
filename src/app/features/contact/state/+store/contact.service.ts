@@ -1,12 +1,10 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ContactForm } from '../models/contact-form';
 import { environment } from '@shoppers-point/environment';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class ContactService {
   readonly #http: HttpClient = inject(HttpClient);
 

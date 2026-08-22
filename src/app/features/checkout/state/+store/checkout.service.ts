@@ -1,12 +1,10 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Service } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '@shoppers-point/environment';
 import { Country } from '../models/country';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Service()
 export class CheckoutService {
   readonly #http: HttpClient = inject(HttpClient);
 
