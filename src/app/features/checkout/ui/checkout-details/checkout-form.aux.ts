@@ -1,4 +1,4 @@
-import { SelectOption } from '@shoppers-point/shared-ui';
+import { SelectOption } from '@shoppers-point/shared-state';
 import { CheckoutForm } from '@shoppers-point/checkout-state';
 
 export const getCheckoutForm = (): CheckoutForm => ({

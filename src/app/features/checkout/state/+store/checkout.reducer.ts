@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { fetchCountries, fetchCountriesSuccess } from './checkout.actions';
-import { SelectOption } from 'src/app/shared/models/select-option';
+import { SelectOption } from '@shoppers-point/shared-state';
 import { CHECKOUT_FEATURE_KEY } from './index';
 
 export interface CheckoutState {

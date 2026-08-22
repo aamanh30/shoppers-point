@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { SelectOption } from 'src/app/shared/models/select-option';
+import { SelectOption } from '@shoppers-point/shared-state';
 import { CHECKOUT_FEATURE_KEY } from './index';
 import { Order } from '../models/order';
 

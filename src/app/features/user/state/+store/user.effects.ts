@@ -11,7 +11,7 @@ import {
 } from './user.actions';
 import { UserService } from './user.service';
 import { environment } from '@shoppers-point/environment';
-import { User } from '@shoppers-point/shared-ui';
+import { User } from '@shoppers-point/shared-state';
 
 const { fetchError, fetchUser, fetchUserSuccess } = UserActions;
 

@@ -1,30 +1,35 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
   Input,
   Output,
   ChangeDetectionStrategy,
+  input,
+  output,
+  signal,
 } from '@angular/core';
-import { User } from '../models/user';
+import { RouterModule } from '@angular/router';
+import { User } from '@shoppers-point/shared-state';
 
 @Component({
   selector: 'shoppers-point-topbar',
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  imports: [CommonModule, RouterModule],
 })
 export class TopbarComponent {
-  @Input() user: User | undefined | null;
-  @Output() signOut: EventEmitter<void> = new EventEmitter<void>();
-  expanded = false;
+  user = input<User | undefined | null>();
+  signOut = output<void>();
+  expanded = signal(false);
 
   onSignOut(): void {
-    this.expanded = false;
+    this.expanded.set(false);
     this.signOut.emit();
   }
 
   onToggle(): void {
-    this.expanded = !this.expanded;
+    this.expanded.update(expanded => !expanded);
   }
 }

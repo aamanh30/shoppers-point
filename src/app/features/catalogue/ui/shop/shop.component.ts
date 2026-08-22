@@ -19,7 +19,7 @@ import {
   CatalogueFilterKey,
 } from '@shoppers-point/catalogue-state';
 import { CartActions, CartAction } from '@shoppers-point/cart-state';
-import { Product } from '@shoppers-point/shared-ui';
+import { Product } from '@shoppers-point/shared-state';
 import {
   ProgressFeature,
   ProgressSelectors,

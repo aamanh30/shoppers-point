@@ -1,6 +1,5 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { Product } from '../../../../shared/models/product';
-import { Review } from '../../../../shared/models/review';
+import { Product, Review } from '@shoppers-point/shared-state';
 import { CatalogueFilterKey } from '../models/catalogue-filter-key';
 import { ProgressDecorators } from '@shoppers-point/progress-state';
 import { CATALOGUE_FEATURE_KEY } from './index';

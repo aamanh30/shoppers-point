@@ -1,4 +1,4 @@
-import { SelectOption } from '../../../../shared/models/select-option';
+import { SelectOption } from '@shoppers-point/shared-state';
 import { Country } from './country';
 
 export const toSelectOption = (options: Country[]): SelectOption[] =>

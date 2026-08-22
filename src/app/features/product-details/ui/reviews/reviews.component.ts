@@ -1,19 +1,16 @@
 import {
   Component,
-  EventEmitter,
-  Input,
-  Output,
   ChangeDetectionStrategy,
   input,
   output,
 } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
-import { Product, Review } from '@shoppers-point/shared-ui';
+import { Product, Review } from '@shoppers-point/shared-state';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { getDefaultReview } from './reviews.aux';
 import { CommonModule } from '@angular/common';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@shoppers-point/shared-ui';
 import { getReviewFieldsConfig } from './review-fields';
 
 @Component({

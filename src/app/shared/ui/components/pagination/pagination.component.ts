@@ -1,23 +1,25 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
   Input,
   Output,
   ChangeDetectionStrategy,
+  input,
+  output,
 } from '@angular/core';
-import { Product } from '../models/product';
 
 @Component({
   selector: 'shoppers-point-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  standalone: false,
+  imports: [CommonModule],
 })
 export class PaginationComponent {
-  @Input() currentPage = 1;
-  @Input() pages: number[] = [];
-  @Output() pageChanged: EventEmitter<number> = new EventEmitter<number>();
+  currentPage = input(1);
+  pages = input<number[]>([]);
+  pageChanged = output<number>();
 
   onPageChanged(page: number): void {
     this.pageChanged.emit(page);

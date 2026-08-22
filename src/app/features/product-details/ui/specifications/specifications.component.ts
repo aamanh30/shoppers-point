@@ -6,10 +6,10 @@ import {
   OnInit,
   signal,
 } from '@angular/core';
-import { Product } from '@shoppers-point/shared-ui';
+import { Product } from '@shoppers-point/shared-state';
 import { CartProduct } from '@shoppers-point/cart-state';
 import { CommonModule } from '@angular/common';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@shoppers-point/shared-ui';
 
 @Component({
   selector: 'shoppers-point-specifications',

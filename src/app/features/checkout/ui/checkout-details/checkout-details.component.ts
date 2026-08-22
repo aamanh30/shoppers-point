@@ -21,7 +21,7 @@ import {
   CheckoutSelectors,
   CheckoutStateModule,
 } from '@shoppers-point/checkout-state';
-import { SelectOption } from '@shoppers-point/shared-ui';
+import { SelectOption } from '@shoppers-point/shared-state';
 import { CommonModule } from '@angular/common';
 import { AddressFormComponent } from '../address-form/address-form.component';
 import { OrderSummaryComponent } from '../order-summary/order-summary.component';

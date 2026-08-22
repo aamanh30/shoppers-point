@@ -10,7 +10,7 @@ import {
   map,
   takeUntil,
 } from 'rxjs';
-import { Product, User } from '@shoppers-point/shared-ui';
+import { Product, User } from '@shoppers-point/shared-state';
 import {
   CartFeature,
   CartProduct,

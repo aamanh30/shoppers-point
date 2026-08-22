@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { clearUser, fetchUser, fetchUserSuccess } from './user.actions';
-import { User } from '../../../../shared/models/user';
+import { User } from '@shoppers-point/shared-state';
 
 const { clearUser, fetchUser, fetchUserSuccess } = UserActions;
 

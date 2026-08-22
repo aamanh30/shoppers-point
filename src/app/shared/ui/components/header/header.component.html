@@ -1,0 +1,40 @@
+<div class="container-fluid">
+  <shoppers-point-topbar [user]="user()" (signOut)="onSignOut()" />
+  <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+    <div class="col-lg-4">
+      <a href="" class="text-decoration-none">
+        <span class="h1 text-uppercase text-primary bg-dark px-2"
+          >Shoppers</span
+        >
+        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1"
+          >Point</span
+        >
+      </a>
+    </div>
+    <div class="col-lg-4 col-6 text-left position-relative">
+      <form [formGroup]="form">
+        <formly-form [fields]="fields" [form]="form" [model]="model" />
+      </form>
+
+      @let matchingProducts = products();
+
+      @if (productsVisible() && matchingProducts?.length) {
+        <ul class="list-group search-results position-absolute">
+          @for (product of matchingProducts; track product) {
+            <li class="list-group-item" (click)="onSelectProduct(product.id)">
+              {{ product.title }}
+            </li>
+          }
+        </ul>
+      }
+    </div>
+    <div class="col-lg-4 col-6 text-right">
+      <p class="m-0">Customer Service</p>
+      <h5 class="m-0">+91 98765 43210</h5>
+    </div>
+  </div>
+</div>
+<shoppers-point-navbar
+  [user]="user()"
+  [wishlist]="wishlist()"
+  [productQuantities]="productQuantities()" />

@@ -21,7 +21,7 @@ const {
   updateProductReview,
   updateProductsPerPage,
 } from './catalogue.actions';
-import { Product } from '../../../../shared/models/product';
+import { Product } from '@shoppers-point/shared-state';
 import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { CatalogueFilters } from '../models/catalogue-filters';
 import { CatalogueFilterKey } from '../models/catalogue-filter-key';

@@ -7,7 +7,7 @@ import {
 import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { Address } from '@shoppers-point/checkout-state';
-import { SelectOption } from '@shoppers-point/shared-ui';
+import { SelectOption } from '@shoppers-point/shared-state';
 import { getAddressFields } from './address-form-fields';
 import { CommonModule } from '@angular/common';
 

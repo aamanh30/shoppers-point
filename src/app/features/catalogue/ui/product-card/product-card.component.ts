@@ -5,8 +5,8 @@ import {
   input,
   output,
 } from '@angular/core';
-import { Product } from '@shoppers-point/shared-ui';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { Product } from '@shoppers-point/shared-state';
+import { SharedModule } from '@shoppers-point/shared-ui';
 
 @Component({
   selector: 'shoppers-point-product-card',

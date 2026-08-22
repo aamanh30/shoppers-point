@@ -1,5 +1,5 @@
 import { CatalogueFilters } from './catalogue-filters';
-import { Product } from '../../../../shared/models/product';
+import { Product } from '@shoppers-point/shared-state';
 
 export const toRatingLabel = (rating: number): string =>
   Array.from(new Array(rating))

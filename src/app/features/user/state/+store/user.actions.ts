@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { User } from '@shoppers-point/shared-ui';
+import { User } from '@shoppers-point/shared-state';
 
 export enum UserActionTypes {
   FetchUser = '[User] Fetch User',

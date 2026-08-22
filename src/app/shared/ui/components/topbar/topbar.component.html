@@ -8,7 +8,8 @@
   </div>
   <div class="col-lg-6 text-center text-lg-right">
     <div class="d-inline-flex align-items-center">
-      @if (user) {
+      @let loggedInUser = user();
+      @if (loggedInUser) {
         <div class="btn-group">
           <button
             type="button"
@@ -20,15 +21,14 @@
             class="dropdown-menu dropdown-menu-right"
             [ngClass]="{ show: expanded }">
             <button class="dropdown-item" type="button" [disabled]="true">
-              Hi, {{ user.displayName || user.email }}
+              Hi, {{ loggedInUser.displayName || loggedInUser.email }}
             </button>
             <button class="dropdown-item" type="button" (click)="onSignOut()">
               Sign Out
             </button>
           </div>
         </div>
-      }
-      @if (!user) {
+      } @else {
         <div class="d-inline-flex align-items-center h-100">
           <a class="text-body mr-3" [routerLink]="['/auth/sign-up']">Sign Up</a>
           <a class="text-body mr-3" [routerLink]="['/auth/sign-in']">Sign In</a>
@@ -42,16 +42,16 @@
           class="badge text-dark border border-dark rounded-circle"
           style="padding-bottom: 2px"
           >0</span
-          >
-        </a>
-        <a href="" class="btn px-0 ml-2">
-          <i class="fas fa-shopping-cart text-dark"></i>
-          <span
-            class="badge text-dark border border-dark rounded-circle"
-            style="padding-bottom: 2px"
-            >0</span
-            >
-          </a>
-        </div>
-      </div>
+        >
+      </a>
+      <a href="" class="btn px-0 ml-2">
+        <i class="fas fa-shopping-cart text-dark"></i>
+        <span
+          class="badge text-dark border border-dark rounded-circle"
+          style="padding-bottom: 2px"
+          >0</span
+        >
+      </a>
     </div>
+  </div>
+</div>

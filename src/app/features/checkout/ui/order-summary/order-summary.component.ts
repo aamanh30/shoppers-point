@@ -10,7 +10,7 @@ import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyModule } from '@ngx-formly/core';
 import { CartProduct } from '@shoppers-point/cart-state';
 import { Summary } from '@shoppers-point/checkout-state';
-import { SelectOption } from '@shoppers-point/shared-ui';
+import { SelectOption } from '@shoppers-point/shared-state';
 import { getOrderSummaryFields } from './order-summary-fields';
 
 @Component({

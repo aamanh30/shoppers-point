@@ -1,4 +1,4 @@
-import { SelectOption } from '@shoppers-point/shared-ui';
+import { SelectOption } from '@shoppers-point/shared-state';
 
 export const getAddressFields = (
   countries: SelectOption[],

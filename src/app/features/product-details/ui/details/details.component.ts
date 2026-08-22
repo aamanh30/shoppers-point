@@ -6,7 +6,7 @@ import {
   DestroyRef,
 } from '@angular/core';
 import { EMPTY, Observable, combineLatest, map } from 'rxjs';
-import { Product, Review } from '@shoppers-point/shared-ui';
+import { Product, Review } from '@shoppers-point/shared-state';
 import { Store } from '@ngrx/store';
 import {
   CatalogueActions,

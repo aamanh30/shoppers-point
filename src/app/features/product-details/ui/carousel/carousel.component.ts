@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, ChangeDetectionStrategy, input } from '@angular/core';
-import { Product } from '@shoppers-point/shared-ui';
+import { Product } from '@shoppers-point/shared-state';
 
 @Component({
   selector: 'shoppers-point-carousel',

@@ -1,7 +1,5 @@
 @if (props['showLabel']) {
-  <label class="form-label" [for]="props['id']">{{
-    props.label
-  }}</label>
+  <label class="form-label" [for]="props['id']">{{ props.label }}</label>
 }
 <textarea
   class="form-control"
@@ -11,4 +9,4 @@
   [formControl]="formControl"
   [formlyAttributes]="field"
   (change)="onChange($event)"
-(keyup)="onKeyUp($event)"></textarea>
+  (keyup)="onKeyUp($event)"></textarea>

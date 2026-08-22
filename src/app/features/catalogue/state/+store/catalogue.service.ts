@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { environment } from '@shoppers-point/environment';
-import { Product } from '../../../../shared/models/product';
+import { Product } from '@shoppers-point/shared-state';
 
 @Injectable({
   providedIn: 'root',

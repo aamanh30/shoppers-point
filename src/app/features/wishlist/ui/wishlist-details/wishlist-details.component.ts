@@ -14,7 +14,7 @@ import {
   CartAction,
   CartStateModule,
 } from '@shoppers-point/cart-state';
-import { Product } from '@shoppers-point/shared-ui';
+import { Product } from '@shoppers-point/shared-state';
 import {
   CatalogueFeature,
   CatalogueSelectors,
