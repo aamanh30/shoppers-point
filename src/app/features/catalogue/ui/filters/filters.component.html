@@ -3,7 +3,11 @@
 </h5>
 @if (filterType() === FilterType.list) {
   <div class="bg-light p-4 mb-30">
-    @for (filter of refinedFilterOptions(); track filter; let i = $index) {
+    @for (
+      filter of refinedFilterOptions();
+      track filter.label;
+      let i = $index
+    ) {
       <div
         class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
         <input
