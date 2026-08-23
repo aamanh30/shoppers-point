@@ -69,7 +69,7 @@
                     </h6>
                     <shoppers-point-rating
                       [rating]="review.rating"
-                      [hideRating]="true"></shoppers-point-rating>
+                      [hideRating]="true" />
                     <p [innerHTML]="review.message"></p>
                   </div>
                 </div>
@@ -94,9 +94,7 @@
                 <shoppers-point-rating
                   [rating]="reviewModel.rating"
                   [hideRating]="true"
-                  (ratingChange)="
-                    onRatingChanged($event)
-                  "></shoppers-point-rating>
+                  (ratingChange)="onRatingChanged($event)" />
               </div>
               <form [formGroup]="form">
                 <formly-form

@@ -8,18 +8,14 @@
           heading="Filter by category"
           [filters]="$safeNavigationMigration(ctx.filters?.categories)"
           [filterOptions]="categories$ | async"
-        (filterChanged)="
-          onFiltersChanged($event, 'categories')
-        "></shoppers-point-filters>
+          (filterChanged)="onFiltersChanged($event, 'categories')" />
         <!-- Category End -->
         <!-- Rating Start -->
         <shoppers-point-filters
           heading="Filter by rating"
           [filters]="$safeNavigationMigration(ctx.filters?.ratings)"
           [filterOptions]="ratings$ | async"
-        (filterChanged)="
-          onFiltersChanged($event, 'ratings')
-        "></shoppers-point-filters>
+          (filterChanged)="onFiltersChanged($event, 'ratings')" />
         <!-- Rating End -->
         <!-- Price Start -->
         <shoppers-point-filters
@@ -27,9 +23,7 @@
           [filterType]="FilterType.range"
           [filters]="$safeNavigationMigration(ctx.filters?.range)"
           [range]="range$ | async"
-        (filterChanged)="
-          onFiltersChanged($event, 'range')
-        "></shoppers-point-filters>
+          (filterChanged)="onFiltersChanged($event, 'range')" />
         <!-- Price End -->
       </div>
     }
@@ -39,7 +33,7 @@
     <div
       class="col-lg-9 col-md-8"
       [ngClass]="{
-        'shoppers-point-spinner': (productsLoading$ | async)
+        'shoppers-point-spinner': (productsLoading$ | async),
       }">
       @if (!(productsLoading$ | async)) {
         <shoppers-point-products
@@ -52,7 +46,7 @@
           (addToWishlist)="onAddToWishlist($event)"
           (productsPerPageChanged)="onProductsPerPageChanged($event)"
           (viewProduct)="onViewProduct($event)"
-        (pageChanged)="onPageChanged($event)"></shoppers-point-products>
+          (pageChanged)="onPageChanged($event)" />
       }
     </div>
     <!-- Shop Product End -->

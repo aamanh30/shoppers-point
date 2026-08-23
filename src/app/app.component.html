@@ -5,10 +5,8 @@
   [products]="products$ | async"
   (search)="onSearch($event)"
   (selectProduct)="onSelectProduct($event)"
-  (signOut)="onSignOut()"></shoppers-point-header>
+  (signOut)="onSignOut()" />
 
 <router-outlet></router-outlet>
 
-<shoppers-point-footer
-  [user]="user$ | async"
-  (signout)="onSignOut()"></shoppers-point-footer>
+<shoppers-point-footer [user]="user$ | async" (signout)="onSignOut()" />
