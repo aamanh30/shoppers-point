@@ -1,15 +1,14 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { clearUser, fetchUser, fetchUserSuccess } from './user.actions';
 import { User } from '@shoppers-point/shared-state';
-
-const { clearUser, fetchUser, fetchUserSuccess } = UserActions;
+import { USER_FEATURE_KEY } from './index';
 
 export interface UserState {
   user: User | undefined;
 }
 
 export interface UserPartialState {
-  [USER_KEY]: UserState;
+  [USER_FEATURE_KEY]: UserState;
 }
 
 export const initialUserState: UserState = {
@@ -18,12 +17,11 @@ export const initialUserState: UserState = {
 
 export const reducer = createReducer(
   initialUserState,
-  on(fetchUser, (state): UserState => ({ ...state, user: undefined })),
+  on(fetchUser, clearUser, (): UserState => initialUserState),
   on(
     fetchUserSuccess,
     (state, { type, ...user }): UserState => ({ ...state, user })
-  ),
-  on(clearUser, (): UserState => initialUserState)
+  )
 );
 
 export const userReducer = (state: UserState | undefined, action: Action) =>

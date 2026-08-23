@@ -1,11 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { CatalogueActions } from './catalogue.actions';
-import { Product } from '../../shared/models';
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
-import { CatalogueFilterKey, CatalogueFilters } from '../models';
-import { CATALOGUE_KEY } from './catalogue-key';
-
-const {
+import {
   clearFilters,
   clearSearchProducts,
   fetchCategories,

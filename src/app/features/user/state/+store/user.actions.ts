@@ -1,26 +1,14 @@
-import { createAction, props } from '@ngrx/store';
+import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { User } from '@shoppers-point/shared-state';
+import { USER_FEATURE_KEY } from './index';
 
-export enum UserActionTypes {
-  FetchUser = '[User] Fetch User',
-  FetchUserSuccess = '[User] Fetch User Success',
-  FetchError = '[User] Fetch Error',
-  ClearUser = '[User] Clear User',
-}
-
-export const fetchUser = createAction(
-  UserActionTypes.FetchUser,
-  props<{ id: number }>()
-);
-
-export const fetchUserSuccess = createAction(
-  UserActionTypes.FetchUserSuccess,
-  props<User>()
-);
-
-export const fetchError = createAction(
-  UserActionTypes.FetchError,
-  props<{ error: Partial<Error> }>()
-);
-
-export const clearUser = createAction(UserActionTypes.ClearUser);
+export const { fetchUser, fetchUserSuccess, fetchError, clearUser } =
+  createActionGroup({
+    source: USER_FEATURE_KEY,
+    events: {
+      fetchUser: props<{ id: number }>(),
+      fetchUserSuccess: props<User>(),
+      fetchError: props<{ error: Partial<Error> }>(),
+      clearUser: emptyProps(),
+    },
+  });

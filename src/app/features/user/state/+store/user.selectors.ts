@@ -1,11 +1,13 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { UserState } from './user.reducer';
-import { USER_KEY } from './user-key';
+import { USER_FEATURE_KEY } from './index';
 
-const userFeatureState = createFeatureSelector<UserState>(USER_KEY);
+const userFeatureState = createFeatureSelector<UserState>(USER_FEATURE_KEY);
 
 export const user = createSelector(userFeatureState, state => state.user);
 
-export const isTokenValid = createSelector(userFeatureState, state =>
-  state.user ? state.user.stsTokenManager.expirationTime > Date.now() : false
+export const isTokenValid = createSelector(user, loggedInUser =>
+  loggedInUser
+    ? loggedInUser.stsTokenManager.expirationTime > Date.now()
+    : false
 );

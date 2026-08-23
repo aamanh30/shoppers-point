@@ -11,9 +11,6 @@ import {
 import { CheckoutService } from './checkout.service';
 import { toSelectOption } from '../models/checkout.aux';
 
-const { fetchCountries, fetchCountriesSuccess, fetchError, placeOrder } =
-  CheckoutActions;
-
 @Injectable()
 export class CatalogueEffects {
   readonly #actions$: Actions = inject(Actions);

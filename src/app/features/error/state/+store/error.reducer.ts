@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { ErrorActions } from './error.actions';
+import { clearError, loadError } from './error.actions';
 import { CustomError } from '../models/custom-error';
 import { toErrorStatus } from '../models/error.aux';
 import { ERROR_FEATURE_KEY } from './index';
