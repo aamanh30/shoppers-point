@@ -3,18 +3,30 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from '@shoppers-point/shared-ui';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+  withXhr,
+} from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from '../environments/environment';
-import { CartStateModule } from './cart-state/cart-state.module';
-import { UserStateModule } from './user-state';
-import { CatalogueStateModule } from './catalogue-state';
+import { CartStateModule } from './features/cart/state/cart-state.module';
+import { UserStateModule } from '@shoppers-point/user-state';
+import { CatalogueStateModule } from '@shoppers-point/catalogue-state';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { AuthStateModule } from '@shoppers-point/auth-state';
+import { ProgressStateModule } from '@shoppers-point/progress-state';
+import { AsyncPipe } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
+  bootstrap: [AppComponent],
   imports: [
     AppRoutingModule,
     BrowserModule,
@@ -25,15 +37,24 @@ import { CatalogueStateModule } from './catalogue-state';
       logOnly: !environment.production,
       autoPause: true,
       trace: false,
-      traceLimit: 75
+      traceLimit: 75,
     }),
     EffectsModule.forRoot(),
     CartStateModule,
     CatalogueStateModule,
-    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig, {
+      name: 'shoppers-point',
+      automaticDataCollectionEnabled: true,
+    }),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    AngularFireDatabaseModule,
+    AsyncPipe,
     SharedModule,
-    UserStateModule
+    UserStateModule,
+    AuthStateModule,
+    ProgressStateModule,
   ],
-  bootstrap: [AppComponent]
+  providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())],
 })
 export class AppModule {}

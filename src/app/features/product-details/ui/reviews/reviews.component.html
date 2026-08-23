@@ -1,0 +1,114 @@
+@let reviewModel = model();
+@let reviewProduct = product();
+
+<div class="col">
+  <div class="bg-light p-30">
+    <ul
+      ngbNav
+      #nav="ngbNav"
+      [(activeId)]="activeId"
+      [destroyOnHide]="false"
+      class="nav-tabs">
+      <li [ngbNavItem]="1" [destroyOnHide]="true">
+        <button ngbNavLink>Description</button>
+        <ng-template ngbNavContent>
+          <h4 class="mb-3">Product Description</h4>
+          <p
+            [innerHTML]="
+              $safeNavigationMigration(reviewProduct?.description)
+            "></p>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="2">
+        <button ngbNavLink>Information</button>
+        <ng-template ngbNavContent>
+          <h4 class="mb-3">Product Information</h4>
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0">Title</li>
+                <li class="list-group-item px-0">Category</li>
+                <li class="list-group-item px-0">Price</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item px-0">
+                  {{ reviewProduct?.title }}
+                </li>
+                <li class="list-group-item px-0">
+                  {{
+                    $safeNavigationMigration(reviewProduct?.category)
+                      | titlecase
+                  }}
+                </li>
+                <li class="list-group-item px-0">
+                  {{
+                    $safeNavigationMigration(reviewProduct?.price) | currency
+                  }}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+      <li [ngbNavItem]="3">
+        <button ngbNavLink>
+          Reviews ({{ reviewProduct?.rating?.count ?? 0 }} )
+        </button>
+        <ng-template ngbNavContent let-active>
+          <div class="row">
+            <div class="col-md-6">
+              <h4 class="mb-3">Product Reviews</h4>
+              @for (review of reviewProduct?.reviews ?? []; track review) {
+                <div class="media mb-4">
+                  <i class="fas fa-user fa-3x mr-3 mt-1"></i>
+                  <div class="media-body">
+                    <h6>
+                      {{ review.name | titlecase }}
+                    </h6>
+                    <shoppers-point-rating
+                      [rating]="review.rating"
+                      [hideRating]="true"></shoppers-point-rating>
+                    <p [innerHTML]="review.message"></p>
+                  </div>
+                </div>
+              } @empty {
+                <div class="media mb-4">
+                  <div class="media-body">
+                    <p>No Reviews Found</p>
+                  </div>
+                </div>
+              }
+            </div>
+            <div class="col-md-6">
+              <h4 class="mb-3">Leave a review</h4>
+              <small
+                >Your email address will not be published. Required fields are
+                marked *</small
+              >
+              <div class="d-flex my-3">
+                <label class="form-label mr-2"
+                  >Your Rating <span aria-hidden="true">*</span></label
+                >
+                <shoppers-point-rating
+                  [rating]="reviewModel.rating"
+                  [hideRating]="true"
+                  (ratingChange)="
+                    onRatingChanged($event)
+                  "></shoppers-point-rating>
+              </div>
+              <form [formGroup]="form">
+                <formly-form
+                  [fields]="fields"
+                  [form]="form"
+                  [model]="reviewModel" />
+              </form>
+            </div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  </div>
+</div>

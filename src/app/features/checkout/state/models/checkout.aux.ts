@@ -1,0 +1,8 @@
+import { SelectOption } from '@shoppers-point/shared-state';
+import { Country } from './country';
+
+export const toSelectOption = (options: Country[]): SelectOption[] =>
+  options.map(option => ({
+    label: option.name,
+    value: option.code,
+  }));

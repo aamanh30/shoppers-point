@@ -1,7 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@use 'bootstrap/scss/bootstrap';
+
+// 1. Add this line at the very top of your file (above any other code)
+@use 'sass:color';
 
 /******* Bootstrap Theming ********/
 
@@ -30,9 +33,18 @@ $input-btn-focus-box-shadow: none;
 
 $input-placeholder-color: #999999;
 
-@import 'bootstrap/scss/bootstrap';
-
 /********** Custom CSS ************/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
 
 .h1,
 h2,
@@ -149,7 +161,7 @@ h6 {
   height: 0;
   top: 50%;
   left: 0;
-  border-top: 1px dashed lighten($dark, 50%);
+  border-top: 1px dashed color.adjust($dark, $lightness: 50%);
   z-index: -1;
 }
 
@@ -306,5 +318,28 @@ h6 {
 
   100% {
     transform: translateY(-15px);
+  }
+}
+
+.form-label {
+  span[aria-hidden='true'] {
+    color: #ff0000;
+  }
+}
+
+.shoppers-point-spinner {
+  position: relative;
+  &::before {
+    content: '';
+    width: 5rem;
+    height: 5rem;
+    position: absolute;
+    top: 7.5%;
+    left: 50%;
+    z-index: 100;
+    border: 0.25rem solid $dark;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: spinner-border 0.75s linear infinite;
   }
 }

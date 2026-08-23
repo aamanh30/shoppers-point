@@ -1,0 +1,42 @@
+@let productDetails = product();
+@if (productDetails) {
+  <div class="product-item bg-light p-4 mb-4">
+    <div class="product-img position-relative overflow-hidden">
+      <img
+        class="img-fluid"
+        src="{{ productDetails.image }}"
+        alt="{{ productDetails.title }}" />
+      <div class="product-action">
+        <a
+          class="btn btn-outline-dark btn-square"
+          (click)="onAddToCart(productDetails.id)"
+          ><i class="fa fa-shopping-cart"></i
+        ></a>
+        <a
+          class="btn btn-outline-dark btn-square"
+          (click)="onAddToWishlist(productDetails.id)"
+          ><i class="fa fa-solid fa-heart"></i
+        ></a>
+        <a
+          class="btn btn-outline-dark btn-square"
+          (click)="onViewProduct(productDetails.id)"
+          ><i class="fa fa-eye"></i
+        ></a>
+      </div>
+    </div>
+    <div class="text-center pt-4">
+      <p
+        class="h6 text-decoration-none text-truncate"
+        title="{{ productDetails.title }}">
+        {{ productDetails.title }}
+      </p>
+      <div class="d-flex align-items-center justify-content-center mt-2">
+        <h5>{{ productDetails.price | currency }}</h5>
+      </div>
+      <div class="d-flex align-items-center justify-content-center mb-1">
+        <shoppers-point-rating
+          [rating]="productDetails.rating"></shoppers-point-rating>
+      </div>
+    </div>
+  </div>
+}

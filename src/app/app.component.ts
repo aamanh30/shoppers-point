@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { UserSelectors, UserFeature } from './user-state';
+import { UserSelectors, UserFeature } from '@shoppers-point/user-state';
 import {
   EMPTY,
   Observable,
@@ -8,18 +8,28 @@ import {
   debounceTime,
   distinctUntilChanged,
   map,
-  takeUntil
+  takeUntil,
 } from 'rxjs';
-import { Product, User } from './shared/models';
-import { CartFeature, CartSelectors } from './cart-state';
-import { CartProduct } from './cart-state/models';
-import { CatalogueActions, CatalogueSelectors } from './catalogue-state';
+import { Product, User } from '@shoppers-point/shared-state';
+import {
+  CartFeature,
+  CartProduct,
+  CartSelectors,
+} from '@shoppers-point/cart-state';
+import {
+  CatalogueActions,
+  CatalogueSelectors,
+} from '@shoppers-point/catalogue-state';
 import { Router } from '@angular/router';
+import { AuthActions } from '@shoppers-point/auth-state';
+import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Eager,
+  standalone: false,
 })
 export class AppComponent implements OnDestroy {
   user$: Observable<User | undefined> = EMPTY;
@@ -44,6 +54,7 @@ export class AppComponent implements OnDestroy {
           (products ?? []).map(product => product.quantity)
         )
       );
+    this.store.dispatch(AuthActions.fetchUser());
 
     this.searchProducts$
       .pipe(
@@ -52,13 +63,22 @@ export class AppComponent implements OnDestroy {
         debounceTime(300)
       )
       .subscribe(search =>
-        this.store.dispatch(CatalogueActions.searchProducts({ search }))
+        this.store.dispatch(
+          CatalogueActions.searchProducts({
+            search,
+            progressActionType: ProgressType.Start,
+          })
+        )
       );
   }
 
   ngOnDestroy(): void {
     this.isDestroyed$.next();
     this.isDestroyed$.complete();
+  }
+
+  onSignOut(): void {
+    this.store.dispatch(AuthActions.signOut());
   }
 
   onSearch(search: string | undefined = ''): void {

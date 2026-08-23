@@ -131,7 +131,23 @@ dist
 
 
 #angular
-.angular
+.angular/
+.angular/cache/
+.angular/cache/**
+.angular/config.json
+.angular/cli/cache/
+.angular/cli/cache/**
+
+# Firebase / local app caches
+.firebase/
+.firesbase/
+
+# package manager / tooling caches
+.npm/
+.npmrc
+.yarn/
+.pnpm-store/
+.pnp.*
 
 #vscode
-.vscode
+.vscode/

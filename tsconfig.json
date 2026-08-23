@@ -3,6 +3,10 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "ignoreDeprecations": "6.0",
+    "skipLibCheck": true,
+    "rootDir": "./src",
+    "esModuleInterop": true,
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,17 +16,46 @@
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
-    "target": "ES2022",
-    "module": "es2020",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
-    "useDefineForClassFields": false
+    "target": "es2022",
+    "module": "esnext",
+    "useDefineForClassFields": false,
+    "paths": {
+      "@shoppers-point/environment": ["src/environments/environment.ts"],
+      "@shoppers-point/auth-state": ["src/app/features/auth/state/index.ts"],
+      "@shoppers-point/auth-ui": ["src/app/features/auth/ui/index.ts"],
+      "@shoppers-point/error-ui": ["src/app/features/error/ui/index.ts"],
+      "@shoppers-point/home-ui": ["src/app/features/home/ui/index.ts"],
+      "@shoppers-point/shared-state": ["src/app/shared/state/index.ts"],
+      "@shoppers-point/shared-ui": ["src/app/shared/ui/index.ts"],
+      "@shoppers-point/wishlist-ui": ["src/app/features/wishlist/ui/index.ts"],
+      "@shoppers-point/cart-state": ["src/app/features/cart/state/index.ts"],
+      "@shoppers-point/cart-ui": ["src/app/features/cart/ui/index.ts"],
+      "@shoppers-point/catalogue-state": [
+        "src/app/features/catalogue/state/index.ts"
+      ],
+      "@shoppers-point/catalogue-ui": [
+        "src/app/features/catalogue/ui/index.ts"
+      ],
+      "@shoppers-point/checkout-state": [
+        "src/app/features/checkout/state/index.ts"
+      ],
+      "@shoppers-point/checkout-ui": ["src/app/features/checkout/ui/index.ts"],
+      "@shoppers-point/contact-state": [
+        "src/app/features/contact/state/index.ts"
+      ],
+      "@shoppers-point/contact-ui": ["src/app/features/contact/ui/index.ts"],
+      "@shoppers-point/error-state": ["src/app/features/error/state/index.ts"],
+      "@shoppers-point/progress-state": [
+        "src/app/features/progress/state/index.ts"
+      ],
+      "@shoppers-point/user-state": ["src/app/features/user/state/index.ts"],
+      "@shoppers-point/product-details-ui": [
+        "src/app/features/product-details/ui/index.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

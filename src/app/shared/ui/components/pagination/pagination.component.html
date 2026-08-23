@@ -1,0 +1,33 @@
+@let currentPageNumber = currentPage();
+<nav>
+  <ul class="pagination justify-content-center">
+    <li
+      class="page-item"
+      [ngClass]="{
+        disabled: currentPageNumber === 1,
+      }">
+      <a class="page-link" (click)="onPageChanged(currentPageNumber - 1)"
+        >Previous</a
+      >
+    </li>
+    @let totalPages = pages();
+    @for (page of totalPages; track page) {
+      <li
+        class="page-item"
+        [ngClass]="{
+          active: page === currentPageNumber,
+        }">
+        <a class="page-link" (click)="onPageChanged(page)">{{ page }}</a>
+      </li>
+    }
+    <li
+      class="page-item"
+      [ngClass]="{
+        disabled: currentPageNumber === totalPages[totalPages.length - 1],
+      }">
+      <a class="page-link" (click)="onPageChanged(currentPageNumber + 1)"
+        >Next</a
+      >
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,36 @@
+import { inject, Service } from '@angular/core';
+import { Observable, from, of } from 'rxjs';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthForm } from '../models/auth-form';
+
+@Service()
+export class AuthService {
+  readonly #afAuth: AngularFireAuth = inject(AngularFireAuth);
+
+  signUp({ email, password }: AuthForm): Observable<any> {
+    return from(this.#afAuth.createUserWithEmailAndPassword(email, password));
+  }
+
+  signIn({ email, password }: Partial<AuthForm>): Observable<any> {
+    return from(
+      this.#afAuth.signInWithEmailAndPassword(<string>email, <string>password)
+    );
+  }
+
+  forgotPassword(): Observable<any> {
+    return of({});
+  }
+
+  resetPassword(): Observable<any> {
+    return of({});
+  }
+
+  signOut(): Observable<void> {
+    return from(this.#afAuth.signOut());
+  }
+
+  fetchUser(): Observable<any> {
+    // Using 'as any' to handle RxJS version mismatch between @angular/fire and project dependencies
+    return this.#afAuth.user as any;
+  }
+}
