@@ -2,11 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatMap, catchError, map } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { CatalogueActions } from './catalogue.actions';
-import { CatalogueService } from '../services/catalogue/catalogue.service';
-import { toSearchedProducts } from './catalogue.aux';
-
-const {
+import {
   fetchProducts,
   fetchError,
   fetchProductsSuccess,
