@@ -1,10 +1,9 @@
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import {
   Component,
-  EventEmitter,
-  Input,
-  Output,
   ChangeDetectionStrategy,
+  output,
+  input,
 } from '@angular/core';
 import { CartProduct } from '@shoppers-point/cart-state';
 
@@ -16,31 +15,32 @@ import { CartProduct } from '@shoppers-point/cart-state';
   imports: [CommonModule, CurrencyPipe],
 })
 export class ProductsTableComponent {
-  @Input() products: CartProduct[] = [];
-  @Output() productSelected: EventEmitter<number> = new EventEmitter<number>();
-  @Output() productRemoved: EventEmitter<number> = new EventEmitter<number>();
-  @Output() updateCartQuantity: EventEmitter<CartProduct> =
-    new EventEmitter<CartProduct>();
+  products = input<CartProduct[]>([]);
+  productSelected = output<number>();
+  productRemoved = output<number>();
+  updateCartQuantity = output<CartProduct>();
 
   onProductSelected(id: number): void {
     this.productSelected.emit(id);
   }
 
   onReduce(index: number): void {
-    this.updateCartQuantity.emit({
-      id: this.products[index].id,
-      quantity: this.products[index].quantity - 1,
-    });
+    this.#emitUpdateCartQuantityEvent(index, -1);
   }
 
   onAdd(index: number): void {
-    this.updateCartQuantity.emit({
-      id: this.products[index].id,
-      quantity: this.products[index].quantity + 1,
-    });
+    this.#emitUpdateCartQuantityEvent(index, 1);
   }
 
   onRemove(id: number): void {
     this.productRemoved.emit(id);
+  }
+
+  #emitUpdateCartQuantityEvent(index: number, increment: number): void {
+    const products = this.products();
+    this.updateCartQuantity.emit({
+      id: products[index].id,
+      quantity: products[index].quantity + increment,
+    });
   }
 }

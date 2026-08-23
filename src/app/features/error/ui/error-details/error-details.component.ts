@@ -13,7 +13,8 @@ import {
   ErrorActions,
   ErrorFeature,
   ErrorSelectors,
-} from 'src/app/features/error/state';
+  ErrorStateModule,
+} from '@shoppers-point/error-state';
 import { EMPTY, filter, Observable } from 'rxjs';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,7 +24,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './error-details.component.html',
   styleUrls: ['./error-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.Eager,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, ErrorStateModule],
 })
 export class ErrorDetailsComponent implements OnInit, OnDestroy {
   error$: Observable<CustomError | undefined> = EMPTY;
