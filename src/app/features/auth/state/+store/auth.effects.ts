@@ -1,6 +1,18 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { AuthActions } from './auth.actions';
+import {
+  signUp,
+  signUpSuccess,
+  signIn,
+  signInSuccess,
+  forgotPassword,
+  forgotPasswordSuccess,
+  resetPassword,
+  resetPasswordSuccess,
+  signOut,
+  fetchUser,
+  authError,
+} from './auth.actions';
 import { catchError, concatMap, map, of } from 'rxjs';
 import { AuthService } from './auth.service';
 import { UserActions } from '@shoppers-point/user-state';
@@ -8,26 +20,29 @@ import { ProgressType } from '@shoppers-point/progress-state';
 
 @Injectable()
 export class AuthEffects {
+  readonly #actions$: Actions = inject(Actions);
+  readonly #authService: AuthService = inject(AuthService);
+
   signUp$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.signUp),
+    this.#actions$.pipe(
+      ofType(signUp),
       concatMap(({ type: _, ...form }) =>
-        this.authService.signUp(form).pipe(
+        this.#authService.signUp(form).pipe(
           concatMap(user => [
             UserActions.fetchUserSuccess(
               JSON.parse(JSON.stringify(user.multiFactor.user))
             ),
-            AuthActions.signUpSuccess({
+            signUpSuccess({
               progressActionType: ProgressType.Stop,
-              triggerAction: AuthActions.signUp.type,
+              triggerAction: signUp.type,
             }),
           ]),
           catchError(error =>
             of(
-              AuthActions.authError({
+              authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.signUp.type,
+                triggerAction: signUp.type,
               })
             )
           )
@@ -37,35 +52,35 @@ export class AuthEffects {
   );
 
   signIn$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.signIn),
+    this.#actions$.pipe(
+      ofType(signIn),
       concatMap(({ email, password }) =>
         email && password
-          ? this.authService.signIn({ email, password }).pipe(
+          ? this.#authService.signIn({ email, password }).pipe(
               concatMap(({ user }) => [
                 UserActions.fetchUserSuccess(
                   structuredClone(user.multiFactor.user)
                 ),
-                AuthActions.signInSuccess({
+                signInSuccess({
                   progressActionType: ProgressType.Stop,
-                  triggerAction: AuthActions.signIn.type,
+                  triggerAction: signIn.type,
                 }),
               ]),
               catchError(error =>
                 of(
-                  AuthActions.authError({
+                  authError({
                     error,
                     progressActionType: ProgressType.Stop,
-                    triggerAction: AuthActions.signIn.type,
+                    triggerAction: signIn.type,
                   })
                 )
               )
             )
           : of(
-              AuthActions.authError({
+              authError({
                 error: new Error('Email and Password are mandatory'),
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.signIn.type,
+                triggerAction: signIn.type,
               })
             )
       )
@@ -73,17 +88,17 @@ export class AuthEffects {
   );
 
   forgotPassword$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.forgotPassword),
+    this.#actions$.pipe(
+      ofType(forgotPassword),
       concatMap(() =>
-        this.authService.forgotPassword().pipe(
-          map(() => AuthActions.forgotPasswordSuccess()),
+        this.#authService.forgotPassword().pipe(
+          map(() => forgotPasswordSuccess()),
           catchError(error =>
             of(
-              AuthActions.authError({
+              authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.forgotPassword.type,
+                triggerAction: forgotPassword.type,
               })
             )
           )
@@ -93,22 +108,22 @@ export class AuthEffects {
   );
 
   resetPassword$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.resetPassword),
+    this.#actions$.pipe(
+      ofType(resetPassword),
       concatMap(() =>
-        this.authService.resetPassword().pipe(
+        this.#authService.resetPassword().pipe(
           map(() =>
-            AuthActions.resetPasswordSuccess({
+            resetPasswordSuccess({
               progressActionType: ProgressType.Stop,
-              triggerAction: AuthActions.resetPassword.type,
+              triggerAction: resetPassword.type,
             })
           ),
           catchError(error =>
             of(
-              AuthActions.authError({
+              authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.resetPassword.type,
+                triggerAction: resetPassword.type,
               })
             )
           )
@@ -118,17 +133,17 @@ export class AuthEffects {
   );
 
   signOut$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.signOut),
+    this.#actions$.pipe(
+      ofType(signOut),
       concatMap(() =>
-        this.authService.signOut().pipe(
+        this.#authService.signOut().pipe(
           map(() => UserActions.clearUser()),
           catchError(error =>
             of(
-              AuthActions.authError({
+              authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.signOut.type,
+                triggerAction: signOut.type,
               })
             )
           )
@@ -138,10 +153,10 @@ export class AuthEffects {
   );
 
   fetchUser$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(AuthActions.fetchUser),
+    this.#actions$.pipe(
+      ofType(fetchUser),
       concatMap(() =>
-        this.authService.fetchUser().pipe(
+        this.#authService.fetchUser().pipe(
           concatMap(user =>
             user
               ? [
@@ -150,19 +165,19 @@ export class AuthEffects {
                   ),
                 ]
               : [
-                  AuthActions.authError({
+                  authError({
                     error: new Error('User Details not found'),
                     progressActionType: ProgressType.Stop,
-                    triggerAction: AuthActions.fetchUser.type,
+                    triggerAction: fetchUser.type,
                   }),
                 ]
           ),
           catchError(error =>
             of(
-              AuthActions.authError({
+              authError({
                 error,
                 progressActionType: ProgressType.Stop,
-                triggerAction: AuthActions.fetchUser.type,
+                triggerAction: fetchUser.type,
               })
             )
           )
@@ -170,9 +185,4 @@ export class AuthEffects {
       )
     )
   );
-
-  constructor(
-    private actions$: Actions,
-    private authService: AuthService
-  ) {}
 }

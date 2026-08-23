@@ -3,7 +3,19 @@ import { AuthForm } from '../models/auth-form';
 import { ProgressDecorators } from '@shoppers-point/progress-state';
 import { AUTH_FEATURE_KEY } from './index';
 
-export const AuthActions = createActionGroup({
+export const {
+  signUp,
+  signUpSuccess,
+  signIn,
+  signInSuccess,
+  forgotPassword,
+  forgotPasswordSuccess,
+  resetPassword,
+  resetPasswordSuccess,
+  signOut,
+  fetchUser,
+  authError,
+} = createActionGroup({
   source: AUTH_FEATURE_KEY,
   events: {
     signUp: props<AuthForm & ProgressDecorators>(),

@@ -3,7 +3,11 @@
 </h2>
 @if (refinedCategories().length) {
   <div class="row px-xl-5 pb-3">
-    @for (category of refinedCategories(); track category; let i = $index) {
+    @for (
+      category of refinedCategories();
+      track category.label;
+      let i = $index
+    ) {
       <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
         <a class="text-decoration-none" [routerLink]="['/shop']">
           <div class="cat-item d-flex align-items-center mb-4">
