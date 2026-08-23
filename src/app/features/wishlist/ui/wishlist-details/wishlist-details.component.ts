@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   inject,
   computed,
+  effect,
+  OnInit,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -15,10 +17,12 @@ import {
 } from '@shoppers-point/cart-state';
 import { Product } from '@shoppers-point/shared-state';
 import {
+  CatalogueActions,
   CatalogueFeature,
   CatalogueSelectors,
 } from '@shoppers-point/catalogue-state';
 import { CommonModule, CurrencyPipe } from '@angular/common';
+import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-wishlist-details',
@@ -27,7 +31,7 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, CartStateModule, CurrencyPipe],
 })
-export class WishlistDetailsComponent {
+export class WishlistDetailsComponent implements OnInit {
   wishlist = computed(() => {
     const productsLookUp = this.#allProductsLookUp();
     const productIds = this.#wishlist();
@@ -46,6 +50,14 @@ export class WishlistDetailsComponent {
     CatalogueSelectors.allProductsLookUp
   );
   readonly #wishlist = this.#store.selectSignal(CartSelectors.wishlist);
+
+  ngOnInit(): void {
+    this.#store.dispatch(
+      CatalogueActions.fetchProducts({
+        progressActionType: ProgressType.Start,
+      })
+    );
+  }
 
   onMoveToCart(productId: number): void {
     this.#store.dispatch(

@@ -5,7 +5,7 @@ import {
   inject,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable, combineLatest, map } from 'rxjs';
+import { EMPTY, Observable, combineLatest, map, tap } from 'rxjs';
 import {
   CartProduct,
   CartActions,
@@ -15,6 +15,7 @@ import {
 } from '@shoppers-point/cart-state';
 import { Router, RouterModule } from '@angular/router';
 import {
+  CatalogueActions,
   CatalogueFeature,
   CatalogueSelectors,
 } from '@shoppers-point/catalogue-state';
@@ -22,6 +23,7 @@ import { ProductsTableComponent } from '../products-table/products-table.compone
 import { CommonModule } from '@angular/common';
 import { UserStateModule } from '@shoppers-point/user-state';
 import { SummaryComponent } from '../summary/summary.component';
+import { ProgressType } from '@shoppers-point/progress-state';
 
 @Component({
   selector: 'shoppers-point-shopping-cart',
@@ -47,10 +49,18 @@ export class ShoppingCartComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    this.#store.dispatch(
+      CatalogueActions.fetchProducts({
+        progressActionType: ProgressType.Start,
+      })
+    );
     this.products$ = combineLatest([
       this.#store.select(CatalogueSelectors.allProductsLookUp),
       this.#store.select(CartSelectors.products),
     ]).pipe(
+      tap(([productsLookUp]) => {
+        console.log(productsLookUp);
+      }),
       map(([productsLookUp, cartProducts]) =>
         cartProducts.map((cartProduct: CartProduct) => ({
           ...cartProduct,
