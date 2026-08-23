@@ -1,27 +1,33 @@
 import { inject, Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
-import { concatMap, map, catchError } from 'rxjs/operators';
+import { concatMap, map, catchError, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import {
   fetchCart,
   fetchCartSuccess,
   fetchError,
+  setCartAndWishlist,
   updateCart,
   updateCartSuccess,
   updateWishlist,
   updateWishlistSuccess,
 } from './cart.actions';
 import { CartService } from './cart.service';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { UserFeature, UserSelectors } from '@shoppers-point/user-state';
 import { products } from './cart.selectors';
 import { CartAction } from '../models/cart-action.enum';
 import { CartProduct } from '../models/cart-product';
 import { wishlist } from './cart.selectors';
+import {
+  getItem,
+  setItem,
+  storageKeysLookup,
+} from '@shoppers-point/shared-state';
 
 @Injectable()
-export class CartEffects {
+export class CartEffects implements OnInitEffects {
   readonly #store: Store<UserFeature.UserPartialState> = inject(
     Store<UserFeature.UserPartialState>
   );
@@ -91,4 +97,50 @@ export class CartEffects {
       )
     )
   );
+
+  setCartAndWishlist$ = createEffect(() =>
+    this.#actions$.pipe(
+      ofType(setCartAndWishlist),
+      mergeMap(({ products, wishlist }) => [
+        updateCartSuccess({
+          products,
+        }),
+        updateWishlistSuccess({
+          wishlist,
+        }),
+      ])
+    )
+  );
+
+  setCart$ = createEffect(
+    () =>
+      this.#actions$.pipe(
+        ofType(updateCartSuccess),
+        tap(({ products }) => setItem(storageKeysLookup.cart, products))
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
+  setWishlist$ = createEffect(
+    () =>
+      this.#actions$.pipe(
+        ofType(updateWishlistSuccess),
+        tap(({ wishlist }) => setItem(storageKeysLookup.wishlist, wishlist))
+      ),
+    {
+      dispatch: false,
+    }
+  );
+
+  ngrxOnInitEffects(): Action {
+    const products = getItem<CartProduct[]>(storageKeysLookup.cart) ?? [];
+    const wishlist = getItem<number[]>(storageKeysLookup.wishlist) ?? [];
+
+    return setCartAndWishlist({
+      products,
+      wishlist,
+    });
+  }
 }

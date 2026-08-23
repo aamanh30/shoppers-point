@@ -13,6 +13,7 @@ export const {
   updateWishlist,
   updateWishlistSuccess,
   removeProduct,
+  setCartAndWishlist,
 } = createActionGroup({
   source: CART_FEATURE_KEY,
   events: {
@@ -29,5 +30,9 @@ export const {
     updateWishlist: props<{ productId: number }>(),
     updateWishlistSuccess: props<{ wishlist: number[] }>(),
     removeProduct: props<{ id: number }>(),
+    setCartAndWishlist: props<{
+      products: CartProduct[];
+      wishlist: number[];
+    }>(),
   },
 });

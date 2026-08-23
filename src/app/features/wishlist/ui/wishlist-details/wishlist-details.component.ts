@@ -1,12 +1,11 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  OnInit,
   inject,
+  computed,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { EMPTY, Observable, combineLatest, filter, map } from 'rxjs';
 import {
   CartActions,
   CartFeature,
@@ -28,28 +27,25 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.Eager,
   imports: [CommonModule, CartStateModule, CurrencyPipe],
 })
-export class WishlistDetailsComponent implements OnInit {
-  wishlist$: Observable<Product[] | undefined> = EMPTY;
+export class WishlistDetailsComponent {
+  wishlist = computed(() => {
+    const productsLookUp = this.#allProductsLookUp();
+    const productIds = this.#wishlist();
+
+    return productIds
+      .map(productId => productsLookUp[productId])
+      .filter((product): product is Product => Boolean(product));
+  });
   readonly #router: Router = inject(Router);
   readonly #store: Store<
     CatalogueFeature.CataloguePartialState & CartFeature.CartPartialState
   > = inject(
     Store<CatalogueFeature.CataloguePartialState & CartFeature.CartPartialState>
   );
-
-  ngOnInit(): void {
-    this.wishlist$ = combineLatest([
-      this.#store.select(CatalogueSelectors.allProductsLookUp),
-      this.#store.select(CartSelectors.wishlist),
-    ]).pipe(
-      map(([productsLookUp, productIds]): Product[] =>
-        productIds
-          .map(productId => productsLookUp[productId])
-          .filter((product): product is Product => Boolean(product))
-      ),
-      filter(wishlist => Boolean(wishlist.length))
-    );
-  }
+  readonly #allProductsLookUp = this.#store.selectSignal(
+    CatalogueSelectors.allProductsLookUp
+  );
+  readonly #wishlist = this.#store.selectSignal(CartSelectors.wishlist);
 
   onMoveToCart(productId: number): void {
     this.#store.dispatch(

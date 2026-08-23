@@ -9,3 +9,5 @@ export * from './models/select-option';
 export * from './models/sts-token-manager';
 export * from './models/user';
 export * from './models/user-meta-data';
+export * from './models/storage-key';
+export * from './models/storage.aux';

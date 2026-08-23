@@ -9,6 +9,8 @@ const catalogueFeatureState = createFeatureSelector<CatalogueState>(
 
 const { selectEntities, selectAll } = catalogueAdapter.getSelectors();
 
+export const allProducts = createSelector(catalogueFeatureState, selectAll);
+
 export const products = createSelector(catalogueFeatureState, state =>
   toFilteredProducts(selectAll(state), state.filters).slice(
     (state.page - 1) * state.productsPerPage,

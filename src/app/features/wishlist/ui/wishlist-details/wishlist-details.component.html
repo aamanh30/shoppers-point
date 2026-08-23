@@ -11,37 +11,35 @@
           </tr>
         </thead>
         <tbody class="align-middle">
-          @if (wishlist$ | async; as products) {
-            @for (product of products; track product) {
-              <tr>
-                <td class="text-start" (click)="onProductSlected(product.id)">
-                  <img
-                    [src]="product.image"
-                    [alt]="product.title"
-                    style="width: 50px" />
-                  {{ product.title | titlecase }}
-                </td>
-                <td class="align-middle">{{ product.price | currency }}</td>
-                <td class="align-middle">
-                  <div class="input-group-btn">
-                    <button
-                      class="btn btn-sm btn-primary btn-plus"
-                      title="Move to Cart"
-                      (click)="onMoveToCart(product.id)">
-                      <i class="fa fa-plus"></i>
-                    </button>
-                    <button
-                      class="btn btn-sm btn-danger ml-2"
-                      title="Remove from Wishlist"
-                      (click)="onRemoveWishlist(product.id)">
-                      <i class="fa fa-times"></i>
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            }
-          }
-          @if (!(wishlist$ | async)?.length) {
+          @let products = wishlist();
+          @for (product of products; track product.id) {
+            <tr>
+              <td class="text-start" (click)="onProductSlected(product.id)">
+                <img
+                  [src]="product.image"
+                  [alt]="product.title"
+                  style="width: 50px" />
+                {{ product.title | titlecase }}
+              </td>
+              <td class="align-middle">{{ product.price | currency }}</td>
+              <td class="align-middle">
+                <div class="input-group-btn">
+                  <button
+                    class="btn btn-sm btn-primary btn-plus"
+                    title="Move to Cart"
+                    (click)="onMoveToCart(product.id)">
+                    <i class="fa fa-plus"></i>
+                  </button>
+                  <button
+                    class="btn btn-sm btn-danger ml-2"
+                    title="Remove from Wishlist"
+                    (click)="onRemoveWishlist(product.id)">
+                    <i class="fa fa-times"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          } @empty {
             <tr>
               <td class="align-middle" [colSpan]="5">
                 No items added to wishlist
