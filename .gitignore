@@ -151,3 +151,9 @@ dist
 
 #vscode
 .vscode/
+
+
+# NX Files
+.nx/cache
+.nx/workspace-data
+.nx/migrate-runs

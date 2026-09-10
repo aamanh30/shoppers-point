@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "targetDefaults": {
+    "build": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "test": {
+      "cache": true,
+      "inputs": ["default", "^production", "{workspaceRoot}/karma.conf.js"]
+    },
+    "extract-i18n": {
+      "cache": true
+    }
+  },
+  "defaultBase": "develop",
+  "namedInputs": {
+    "sharedGlobals": [],
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/tsconfig.spec.json",
+      "!{projectRoot}/**/*.spec.[jt]s",
+      "!{projectRoot}/karma.conf.js"
+    ]
+  },
+  "nxCloudId": "6aa2fc0252a24f9b5e2a41d2",
+  "analytics": false
+}
